@@ -2,6 +2,7 @@ import React from 'react';
 import {Text, View, VStack} from 'native-base';
 import {Calendar} from 'react-native-calendars';
 import {StyleSheet, TouchableOpacity} from 'react-native';
+import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 
 export default function Panchang({navigation}) {
   return (
@@ -37,7 +38,7 @@ export default function Panchang({navigation}) {
                   <Text
                     style={{
                       textAlign: 'center',
-                      fontSize: 14,
+                      fontSize: RFValue(14),
                       fontWeight: 'bold',
                       color: state === 'disabled' ? 'gray' : '#5C1514',
                     }}>
@@ -55,7 +56,7 @@ export default function Panchang({navigation}) {
                     numberOfLines={2}
                     adjustsFontSizeToFit
                     style={{
-                      fontSize: 11,
+                      fontSize: RFValue(11),
                       lineHeight: 14,
                       fontWeight: 'bold',
                       color: state === 'disabled' ? 'gray' : '#5C1514',
@@ -182,7 +183,6 @@ const styles = StyleSheet.create({
   },
   dateblock: {
     backgroundColor: '#FADAC5',
-    padding: 0,
     paddingBottom: 10,
   },
   markedDate: {

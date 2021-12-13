@@ -18,6 +18,7 @@ import FontAwesome, {
   RegularIcons,
   BrandIcons,
 } from 'react-native-fontawesome';
+import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 
 export default function Contactus({navigation}) {
   return (
@@ -73,8 +74,8 @@ export default function Contactus({navigation}) {
                 </Text>
               </View>
               <VStack style={styles.InfoContainer}>
-                <Text style={{fontSize: 16, fontWeight: 'bold', color: '#000'}}>
-                  +91 2632 255874 Mob : 93742 55874
+                <Text style={{fontSize: RFValue(15), fontWeight: 'bold', color: '#000'}}>
+                  +91 2632 255874   Mob : 93742 55874
                 </Text>
               </VStack>
             </HStack>

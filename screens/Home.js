@@ -3,6 +3,7 @@ import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {SliderBox} from 'react-native-image-slider-box';
 import MarqueeText from 'react-native-marquee';
+import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 
 const Home = ({navigation}) => {
   const images = [
@@ -226,7 +227,7 @@ const styles = StyleSheet.create({
   },
   menuHeading: {
     marginTop: 10,
-    fontSize: 14,
+    fontSize: RFValue(13),
     fontWeight: 'bold',
     color: '#fff',
     fontFamily: 'Arial',
