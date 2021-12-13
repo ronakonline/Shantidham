@@ -89,7 +89,7 @@ export default function DayPanchang({navigation, route}) {
           style={{ marginBottom: 20 }} 
           data={daychogadiya}
           renderItem={({item,index}) => (
-            <View style={Object.assign({},styles.list,index%2 == 0 ?  { backgroundColor:'red'} : {backgroundColor:'green'})}>
+            <View style={Object.assign({},styles.list,index%2 == 0 ?  { backgroundColor:'#E98882'} : {backgroundColor:'#ACC397'})}>
               <Text style={styles.listText}>{item.name}</Text>
               <Text style={styles.listTextTime}>{item.start} - {item.end}</Text>
             </View>
@@ -108,7 +108,7 @@ export default function DayPanchang({navigation, route}) {
           
           data={nightchogadiya}
           renderItem={({item,index}) => (
-            <View style={Object.assign({},styles.list,index%2 == 0 ?  { backgroundColor:'red'} : {backgroundColor:'green'})}>
+            <View style={Object.assign({},styles.list,index%2 == 0 ?  { backgroundColor:'#E98882'} : {backgroundColor:'#ACC397'})}>
               <Text style={styles.listText}>{item.name}</Text>
               <Text style={styles.listTextTime}>{item.start} - {item.end}</Text>
             </View>
@@ -162,13 +162,11 @@ export default function DayPanchang({navigation, route}) {
               inputIndex === i ? 1 : 0.5,
             ),
           });
-          const color = index === i ? '#1f2937' : '#a1a1aa';
-          const borderColor = index === i ? 'cyan.500' : 'coolGray.200';
-
+          const backgroundColor = index === i ? '#F8C1A0' : '#F7E6DF';
           return (
             <Box
-              borderBottomWidth="3"
-              borderColor={borderColor}
+              backgroundColor={backgroundColor}
+              style={styles.tab}
               flex={1}
               alignItems="center"
               p="3"
@@ -178,7 +176,7 @@ export default function DayPanchang({navigation, route}) {
                   console.log(i);
                   setIndex(i);
                 }}>
-                <Animated.Text style={{color}}>{route.title}</Animated.Text>
+                <Animated.Text style={{color:'#000',fontWeight:'bold',fontSize:18}}>{route.title}</Animated.Text>
               </Pressable>
             </Box>
           );
@@ -188,34 +186,43 @@ export default function DayPanchang({navigation, route}) {
   };
   return (
     <View style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.headerText}>Panchang</Text>
+        <Text style={styles.headerText}>Mumbai</Text>
+      </View>
+      <View style={styles.subheader}>
+        <Text style={styles.subheaderText}>Veer Samvat 2547</Text>
+        <Text style={styles.subheaderText}>Aaso Kartak</Text>
+      </View>
       <CalendarStrip
-        style={{height: 150, paddingTop: 20, paddingBottom: 10}}
+        style={{height: 110, paddingTop: 0, paddingBottom: 0,margin:0,backgroundColor:'#F7E6DF'}}
         selectedDate={currentDate}
         startingDate={currentDate}
-        calendarHeaderStyle={{color: 'red', fontSize: 20}}
+        calendarHeaderStyle={{color: '#000', fontSize: 18 , fontWeight: '400'}}
         calendarHeaderFormat={'MMMM YYYY'}
-        scrollable={false}
-        numDaysInWeek={7}
+        dateNameStyle={{color: '#000', fontSize: 15 , fontWeight: 'bold'}}
+        dateNumberStyle={{color: '#000', fontSize: 15, fontWeight: 'bold'}}
+        highlightDateNameStyle={{color: '#000', fontSize: 15, fontWeight: 'bold'}}
+        highlightDateNumberStyle={{color: '#000', fontSize: 15, fontWeight: 'bold'}}
         //show only one day at a time
         daySelectionAnimation={{
           type: 'border',
           duration: 200,
           borderWidth: 1,
-          borderHighlightColor: 'red',
+          borderHighlightColor: 'maroon',
         }}
         onDateSelected={date => {
           date = date.toString();
           navigation.navigate('DayPanchang', {date: date});
         }}
       />
-      <Text>{date}</Text>
       <TabView
         navigationState={{index, routes}}
         renderScene={renderScene}
         renderTabBar={renderTabBar}
         onIndexChange={setIndex}
         initialLayout={initialLayout}
-        style={{marginTop: StatusBar.currentHeight , marginLeft: 10, marginRight: 10}}
+        style={styles.tabView}
       />
     </View>
   );
@@ -224,28 +231,34 @@ export default function DayPanchang({navigation, route}) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#F7E6DF',
   },
   list: {
     padding: 10,
-    backgroundColor: '#fff',
+    backgroundColor: '#F5DAC9',
     borderBottomWidth: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    borderBottomColor: 'black',
+    borderBottomColor: '#F1CBBC',
   },
   listText: {
     fontSize: 18,
+    fontWeight: 'bold',
+    color: '#000',
   },
   listTextTime: {
     fontSize: 18,
+    fontWeight: 'bold',
+    color: '#000',
   },
   panchangContainer: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#F7E6DF',
+    color: '#000',
   },
   chogadiyaheading: {
     padding: 10,
-    backgroundColor: '#fff',
+    backgroundColor: '#F7C8AA',
     borderBottomWidth: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -253,5 +266,47 @@ const styles = StyleSheet.create({
   },
   chogadiyaheadingText: {
     fontSize: 18,
+    fontWeight: 'bold',
+    color: '#000',
   },
+  header: {
+
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    padding: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: '#EAC5C0',
+
+  },
+  headerText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    fontFamily:'Arial',
+    color: '#000',
+  },
+  subheader: {
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 0,
+    paddingTop: 10,
+    margin: 0,
+    
+  },
+  subheaderText: {
+    fontSize: 18,
+    fontFamily:'Arial',
+    color: '#000',
+  },
+  tabView: {
+    flex: 1,
+    backgroundColor: '#F7E6DF',
+    marginHorizontal: 10,
+    borderWidth: 1,
+    borderColor: '#F1CBBC',
+  },
+  tab: {
+    borderWidth: 1,
+    borderColor: '#F1CBBC',
+  }
 });
