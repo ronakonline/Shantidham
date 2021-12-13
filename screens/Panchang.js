@@ -1,9 +1,9 @@
 import React from 'react';
 import {Text, View, VStack} from 'native-base';
 import {Calendar} from 'react-native-calendars';
-import {StyleSheet} from 'react-native';
+import {StyleSheet, TouchableOpacity} from 'react-native';
 
-export default function Panchang() {
+export default function Panchang({navigation}) {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -18,7 +18,10 @@ export default function Panchang() {
         style={styles.calendar}
         dayComponent={({date, state}) => {
           return (
-            <View
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate('DayPanchang',{date:date.dateString});
+              }}
               style={
                 date.dateString == '2021-12-17'
                   ? styles.markedDate
@@ -61,7 +64,7 @@ export default function Panchang() {
                   </Text>
                 </View>
               </VStack>
-            </View>
+            </TouchableOpacity>
           );
         }}
         // Specify theme properties to override specific styles for calendar parts. Default = {}

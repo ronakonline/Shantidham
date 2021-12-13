@@ -27,7 +27,7 @@ const Home = ({navigation}) => {
           </TouchableOpacity>
           <Box style={Object.assign({},styles.MenuBox,{backgroundColor:'#9e9ef7'})}>
             <Image source={require('../images/event.png')} style={styles.icon} alt="main-Image" />
-            <Text style={styles.menuHeading}>Donation</Text>
+            <Text style={styles.menuHeading}>Events</Text>
           </Box>
         </VStack>
         <VStack style={{flex: 2.6}}>
