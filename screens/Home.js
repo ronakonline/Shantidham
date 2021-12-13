@@ -2,6 +2,7 @@ import {Button, HStack, VStack, Box, InfoOutlineIcon, Image} from 'native-base';
 import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {SliderBox} from 'react-native-image-slider-box';
+import MarqueeText from 'react-native-marquee';
 
 const Home = ({navigation}) => {
   const images = [
@@ -89,7 +90,7 @@ const Home = ({navigation}) => {
                 images={images}
                 sliderBoxHeight='100%'
                 resizeMethod='scale'
-                resizeMode='stretch'
+                resizeMode='contain'
                 parentWidth={weight}
                 autoplay
                 circleLoop
@@ -99,7 +100,7 @@ const Home = ({navigation}) => {
           <Box
             style={Object.assign({}, styles.MenuBox)}
             style={{flex: 2, borderWidth: 1, borderColor: '#91980C'}}>
-            <Text>Home</Text>
+            <Image source={require('../images/quote.jpg')} resizeMethod='scale' resizeMode='stretch' alt="quote-img" style={{ height:'100%',width:'100%' }} />
           </Box>
         </VStack>
         <VStack style={{flex: 1}}>
@@ -172,7 +173,14 @@ const Home = ({navigation}) => {
           justifyContent: 'center',
           alignItems: 'center',
         }}>
-        <Text>Home</Text>
+        <MarqueeText
+          style={{ fontSize: 20,width: '100%', textAlign: 'center' }}
+          duration={5000}
+          marqueeOnStart
+          loop
+        >
+          Prerna Prakashan Trust,Valsad Shantidham Aradhana Kendra,Tithal Valsad 396001 Gujarat,India
+        </MarqueeText>
       </Box>
     </View>
   );

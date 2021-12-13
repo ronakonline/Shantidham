@@ -6510,6 +6510,11 @@
   "resolved" "https://registry.npmjs.org/react-native-linear-gradient/-/react-native-linear-gradient-2.5.6.tgz"
   "version" "2.5.6"
 
+"react-native-marquee@^0.3.2":
+  "integrity" "sha512-GfN97aOapOhrFc4La4N/SoXAjrgZwbB6Im9yJKhNLHx/SsY4Wqoh3OvYrLzznL2GASEDoO3zZXdufStg6NG8TA=="
+  "resolved" "https://registry.npmjs.org/react-native-marquee/-/react-native-marquee-0.3.2.tgz"
+  "version" "0.3.2"
+
 "react-native-pager-view@*", "react-native-pager-view@^5.4.9":
   "integrity" "sha512-D6tzxpwMGdl6CXgtskGWhKRc5cJakCazESRGt7PkqnpyiH3N35ft1KmR82pCSQetAFlytFiToeu3a/dG5CELvA=="
   "resolved" "https://registry.npmjs.org/react-native-pager-view/-/react-native-pager-view-5.4.9.tgz"
