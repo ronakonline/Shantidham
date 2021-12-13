@@ -20,7 +20,7 @@ export default function Panchang({navigation}) {
           return (
             <TouchableOpacity
               onPress={() => {
-                navigation.navigate('DayPanchang',{date:date.dateString});
+                navigation.navigate('DayPanchang', {date: date.dateString});
               }}
               style={
                 date.dateString == '2021-12-17'
@@ -60,7 +60,7 @@ export default function Panchang({navigation}) {
                       fontWeight: 'bold',
                       color: state === 'disabled' ? 'gray' : '#5C1514',
                     }}>
-                     {date.day%2 == 0 ? 'Shraavan Ved 10' : 'bhadaravo Ved 10'}
+                    {date.day % 2 == 0 ? 'Shraavan Ved 10' : 'bhadaravo Ved 10'}
                   </Text>
                 </View>
               </VStack>
@@ -141,6 +141,10 @@ export default function Panchang({navigation}) {
           textDayHeaderFontSize: 14,
         }}
       />
+      <View style={styles.footer}>
+        <Text style={styles.footerDot}>{'\u2B24'}</Text>
+        <Text style={styles.footerText}>Join Event</Text>
+      </View>
     </View>
   );
 }
@@ -173,7 +177,6 @@ const styles = StyleSheet.create({
   },
   calendar: {
     width: '100%',
-    height: '100%',
     backgroundColor: '#FADAC5',
     marginBottom: 10,
   },
@@ -196,8 +199,26 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#5C1514',
   },
-  container : {
+  container: {
     flex: 1,
     backgroundColor: '#FADAC5',
+  },
+  footer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 10,
+    height: 50,
+    backgroundColor: '#FADAC5',
+  },
+  footerDot: {
+    fontSize: 12,
+    fontWeight: 'bold',
+    color: '#5C1514',
+  },
+  footerText: {
+    fontSize: 15,
+    fontWeight: 'bold',
+    paddingLeft: 10,
+    color: '#5C1514',
   },
 });
