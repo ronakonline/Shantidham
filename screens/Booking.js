@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
   },
   Title: {
     fontSize: 38,
-    fontFamily: 'Ariel',
+    fontFamily: 'Arial',
     color: '#000000',
     padding: 20,
   },

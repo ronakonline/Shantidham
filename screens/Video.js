@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
   titleText: {
     fontSize: 20,
     fontWeight: 'bold',
-    fontFamily: 'Ariel',
+    fontFamily: 'Arial',
     color: '#000000',
   },
   video: {
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
   },
     description: {
         padding: 20,
-        fontFamily: 'Ariel',
+        fontFamily: 'Arial',
         color: '#000000',
         fontSize: 22,
 
