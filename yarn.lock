@@ -6505,6 +6505,11 @@
   dependencies:
     "react-native-snap-carousel" "latest"
 
+"react-native-image-viewing@^0.2.1":
+  "integrity" "sha512-A34hsGJk8utKGhWU6Y4i39E38K7ls0XvSC4irfr2guP47uehyU5OjXbWG3wvC4oFVJlTMj8x+N8TL09GHeIETw=="
+  "resolved" "https://registry.npmjs.org/react-native-image-viewing/-/react-native-image-viewing-0.2.1.tgz"
+  "version" "0.2.1"
+
 "react-native-linear-gradient@^2.5.6":
   "integrity" "sha512-HDwEaXcQIuXXCV70O+bK1rizFong3wj+5Q/jSyifKFLg0VWF95xh8XQgfzXwtq0NggL9vNjPKXa016KuFu+VFg=="
   "resolved" "https://registry.npmjs.org/react-native-linear-gradient/-/react-native-linear-gradient-2.5.6.tgz"
@@ -6574,7 +6579,7 @@
   dependencies:
     "events" "^3.2.0"
 
-"react-native@*", "react-native@>= 0.30.0", "react-native@>=0.50.0", "react-native@>=0.55", "react-native@>=0.60", "react-native@0.66.4":
+"react-native@*", "react-native@>= 0.30.0", "react-native@>=0.50.0", "react-native@>=0.55", "react-native@>=0.60", "react-native@>=0.61.3", "react-native@0.66.4":
   "integrity" "sha512-9vx5dlSfQlKbbDtr8+xMon6qsmSu7jvjdXWZpEKh3XVKpUidbbODv7048gwVKX8YAel1egeR7hN8vzSeI6ssTw=="
   "resolved" "https://registry.npmjs.org/react-native/-/react-native-0.66.4.tgz"
   "version" "0.66.4"
@@ -6634,7 +6639,7 @@
     "react-shallow-renderer" "^16.13.1"
     "scheduler" "^0.20.2"
 
-"react@*", "react@^16.0.0 || ^17.0.0", "react@^16.8.0 || ^17.0.0", "react@^16.8.0 || ^17.0.0-rc.1", "react@^17.0.0", "react@>= 15.2.1", "react@>=15.0.0", "react@>=16.8.6", "react@17.0.2":
+"react@*", "react@^16.0.0 || ^17.0.0", "react@^16.8.0 || ^17.0.0", "react@^16.8.0 || ^17.0.0-rc.1", "react@^17.0.0", "react@>= 15.2.1", "react@>=15.0.0", "react@>=16.11.0", "react@>=16.8.6", "react@17.0.2":
   "integrity" "sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA=="
   "resolved" "https://registry.npmjs.org/react/-/react-17.0.2.tgz"
   "version" "17.0.2"

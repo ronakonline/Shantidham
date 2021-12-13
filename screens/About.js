@@ -9,22 +9,27 @@ import {
   Text,
   Wrap,
 } from 'native-base';
-import React from 'react';
+import React, {useState} from 'react';
 import {StyleSheet, TouchableOpacity} from 'react-native';
+import ImageView from 'react-native-image-viewing';
 
 export default function About({navigation}) {
+  const [visible, setIsVisible] = useState(false);
+  const image = [require('../images/slide1.jpg')];
   return (
-   
-    <Wrap>
-        <HStack style={styles.container}>
-        <Image source={require('../images/god.jpg')} style={{ height:300, width:200 }} alt="abc" />
-        <Text style={{fontSize:20, fontWeight:'bold', marginTop:10}}>
-            God is the Creator of the universe.
-        </Text>
-        </HStack>
-    </Wrap>
-  
-  
+  <View style={styles.container}>
+    <TouchableOpacity onPress={() => setIsVisible(true)}>
+        <Image source={require('../images/slide2.png')} style={{ width: '100%', height: '100%' }} alt="about image" />
+        </TouchableOpacity>
+        <ImageView
+          images={image}
+          imageIndex={0}
+          visible={visible}
+          swipeToCloseEnabled={false}
+          doubleTapToZoomEnabled={true}
+          onRequestClose={() => setIsVisible(false)}
+        />
+  </View>
   );
 }
 
@@ -38,8 +43,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
   },
-  container:{
-    flex:1,
-    flexWrap:'wrap',
-  }
+  container: {
+    flex: 1,
+  },
 });
