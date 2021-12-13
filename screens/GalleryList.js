@@ -23,7 +23,7 @@ export default function GalleryList({navigation}) {
                   style={styles.videoImage}
                 />
                 <Box style={styles.videoContent}>
-                  <Text style={styles.videoTitle}>Lorem Text Demo</Text>
+                  <Text style={styles.videoTitle}>Gurudev</Text>
                 </Box>
               </HStack>
             </TouchableOpacity>
@@ -38,7 +38,7 @@ export default function GalleryList({navigation}) {
                   style={styles.videoImage}
                 />
                 <Box style={styles.videoContent}>
-                  <Text style={styles.videoTitle}>Lorem Text Demo</Text>
+                  <Text style={styles.videoTitle}>Derasar Ni Murti</Text>
                 </Box>
               </HStack>
             </TouchableOpacity>
@@ -53,7 +53,7 @@ export default function GalleryList({navigation}) {
                   style={styles.videoImage}
                 />
                 <Box style={styles.videoContent}>
-                  <Text style={styles.videoTitle}>Lorem Text Demo</Text>
+                  <Text style={styles.videoTitle}>Campus</Text>
                 </Box>
               </HStack>
             </TouchableOpacity>

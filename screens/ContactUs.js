@@ -13,6 +13,11 @@ import {
 } from 'native-base';
 import React from 'react';
 import {Text, StyleSheet, TouchableOpacity} from 'react-native';
+import FontAwesome, {
+  SolidIcons,
+  RegularIcons,
+  BrandIcons,
+} from 'react-native-fontawesome';
 
 export default function Contactus({navigation}) {
   return (
@@ -24,10 +29,13 @@ export default function Contactus({navigation}) {
           </Box>
 
           <VStack style={styles.content}>
-            <HStack style={styles.DetailContainer}>
+            <HStack style={styles.AddressDetailContainer}>
               <View style={styles.iconContainer}>
                 <Text style={styles.icon}>
-                  <CheckCircleIcon name="check-circle" />
+                  <FontAwesome
+                    icon={SolidIcons.locationArrow}
+                    style={{fontSize: 26}}
+                  />
                 </Text>
               </View>
               <VStack style={styles.InfoContainer}>
@@ -43,64 +51,69 @@ export default function Contactus({navigation}) {
             <HStack style={styles.DetailContainer}>
               <View style={styles.iconContainer}>
                 <Text style={styles.icon}>
-                  <CheckCircleIcon name="check-circle" />
+                  <FontAwesome icon={SolidIcons.user} style={{fontSize: 26}} />
                 </Text>
               </View>
               <VStack style={styles.InfoContainer}>
-                <Text style={styles.BoldText}>
-                  Bimal Shah
-                </Text>
-                
+                <Text style={styles.BoldText}>Bimal Shah</Text>
               </VStack>
             </HStack>
             <HStack style={styles.DetailContainer}>
               <View style={styles.iconContainer}>
                 <Text style={styles.icon}>
-                  <CheckCircleIcon name="check-circle" />
+                  <FontAwesome icon={SolidIcons.phone} style={{fontSize: 26}} />
                 </Text>
               </View>
               <VStack style={styles.InfoContainer}>
-                <Text style={{ fontSize:16,fontWeight:'bold',color:'#000' }}>
+                <Text style={{fontSize: 16, fontWeight: 'bold', color: '#000'}}>
                   +91 2632 255874 Mob : 93742 55874
                 </Text>
-                
               </VStack>
             </HStack>
             <HStack style={styles.DetailContainer}>
               <View style={styles.iconContainer}>
                 <Text style={styles.icon}>
-                  <CheckCircleIcon name="check-circle" />
+                  <FontAwesome
+                    icon={SolidIcons.envelope}
+                    style={{fontSize: 26}}
+                  />
                 </Text>
               </View>
               <VStack style={styles.InfoContainer}>
-                <Text style={{ fontSize:16,fontWeight:'bold',color:'#000' }}>
+                <Text style={{fontSize: 16, fontWeight: 'bold', color: '#000'}}>
                   jinjimaharaj@yahoo.co.in
                 </Text>
-                
               </VStack>
             </HStack>
             <HStack style={styles.DetailContainer}>
               <View style={styles.iconContainer}>
                 <Text style={styles.icon}>
-                  <CheckCircleIcon name="check-circle" />
+                  <FontAwesome icon={SolidIcons.clock} style={{fontSize: 26}} />
                 </Text>
               </View>
               <VStack style={styles.InfoContainer}>
-                <Text style={{ fontSize:16,fontWeight:'bold',color:'#000' }}>
-                  Mon-Sat 10 A.M to 5 P.M {"\n"}Sun 10 A.M to 1 P.M
+                <Text style={{fontSize: 16, fontWeight: 'bold', color: '#000'}}>
+                  Mon-Sat 10 A.M to 5 P.M {'\n'}Sun 10 A.M to 1 P.M
                 </Text>
-                
               </VStack>
             </HStack>
             <HStack style={styles.DetailContainer}>
-              <View style={{ paddingLeft:50 }}>
-                <Text style={{ fontSize:18,fontWeight:'bold',color:'#000' }}>
-                 Follow Us - 
+              <View style={{paddingLeft: 50, paddingRight: 20}}>
+                <Text style={{fontSize: 20, fontWeight: 'bold', color: '#000'}}>
+                  Follow Us -
                 </Text>
               </View>
               <VStack style={styles.InfoContainer}>
-                
-                
+                <HStack space={5}>
+                  <FontAwesome
+                    icon={BrandIcons.facebook}
+                    style={{fontSize: 28, color: '#000'}}
+                  />
+                  <FontAwesome
+                    icon={BrandIcons.instagram}
+                    style={{fontSize: 28, color: '#000'}}
+                  />
+                </HStack>
               </VStack>
             </HStack>
           </VStack>
@@ -131,6 +144,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#CAE7EF',
     padding: 10,
   },
+  AddressDetailContainer: {
+    height: 70,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   DetailContainer: {
     height: 70,
     justifyContent: 'center',
@@ -142,8 +160,10 @@ const styles = StyleSheet.create({
     width: '80%',
     justifyContent: 'center',
   },
-  BoldText:{
-    fontSize: 20, fontWeight: 'bold', color: '#000'
+  BoldText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#000',
   },
   iconContainer: {
     width: '20%',
