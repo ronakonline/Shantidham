@@ -175,11 +175,11 @@ const Home = ({navigation}) => {
         }}>
         <MarqueeText
           style={{ fontSize: 20,width: '100%', textAlign: 'center' }}
-          duration={5000}
+          duration={10000}
           marqueeOnStart
           loop
         >
-          Prerna Prakashan Trust,Valsad Shantidham Aradhana Kendra,Tithal Valsad 396001 Gujarat,India
+          Prerna Prakashan Trust, Valsad Shantidham Aradhana Kendra, Tithal Valsad 396001 Gujarat, India
         </MarqueeText>
       </Box>
     </View>
