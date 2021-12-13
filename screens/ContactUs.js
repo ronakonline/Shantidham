@@ -12,7 +12,7 @@ import {
   View,
 } from 'native-base';
 import React from 'react';
-import {Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
 import FontAwesome, {
   SolidIcons,
   RegularIcons,
@@ -27,21 +27,29 @@ export default function Contactus({navigation}) {
           <Box style={styles.heading}>
             <Text style={styles.titleText}>Contact Us</Text>
           </Box>
-
-          <VStack style={styles.content}>
+          <View
+            style={{
+              flex: 1,
+              width: '100%',
+              justifyContent: 'center',
+              alignItems: 'center',
+              marginTop: 20,
+            }}>
+            <Text style={{fontSize: 20, fontWeight: 'bold', color: '#000'}}>
+              Prerna Prakashan Trust, Valsad
+            </Text>
+          </View>
+          <View style={styles.content}>
             <HStack style={styles.AddressDetailContainer}>
               <View style={styles.iconContainer}>
                 <Text style={styles.icon}>
                   <FontAwesome
                     icon={SolidIcons.locationArrow}
-                    style={{fontSize: 26}}
+                    style={{fontSize: 24}}
                   />
                 </Text>
               </View>
               <VStack style={styles.InfoContainer}>
-                <Text style={styles.BoldText}>
-                  Prerna Prakashan Trust, Valsad
-                </Text>
                 <Text style={styles.text}>
                   Shantidham Aradhana Kendra, Tithal {'\n'} Valsad 396001
                   Gujarat, India
@@ -51,7 +59,7 @@ export default function Contactus({navigation}) {
             <HStack style={styles.DetailContainer}>
               <View style={styles.iconContainer}>
                 <Text style={styles.icon}>
-                  <FontAwesome icon={SolidIcons.user} style={{fontSize: 26}} />
+                  <FontAwesome icon={SolidIcons.user} style={{fontSize: 24}} />
                 </Text>
               </View>
               <VStack style={styles.InfoContainer}>
@@ -61,7 +69,7 @@ export default function Contactus({navigation}) {
             <HStack style={styles.DetailContainer}>
               <View style={styles.iconContainer}>
                 <Text style={styles.icon}>
-                  <FontAwesome icon={SolidIcons.phone} style={{fontSize: 26}} />
+                  <FontAwesome icon={SolidIcons.phone} style={{fontSize: 24}} />
                 </Text>
               </View>
               <VStack style={styles.InfoContainer}>
@@ -75,7 +83,7 @@ export default function Contactus({navigation}) {
                 <Text style={styles.icon}>
                   <FontAwesome
                     icon={SolidIcons.envelope}
-                    style={{fontSize: 26}}
+                    style={{fontSize: 24}}
                   />
                 </Text>
               </View>
@@ -88,18 +96,30 @@ export default function Contactus({navigation}) {
             <HStack style={styles.DetailContainer}>
               <View style={styles.iconContainer}>
                 <Text style={styles.icon}>
-                  <FontAwesome icon={SolidIcons.clock} style={{fontSize: 26}} />
+                  <FontAwesome icon={RegularIcons.clock} style={{fontSize: 24}} />
                 </Text>
               </View>
               <VStack style={styles.InfoContainer}>
-                <Text style={{fontSize: 16, fontWeight: 'bold', color: '#000'}}>
+                <Text
+                  style={{
+                    fontSize: 16,
+                    fontWeight: 'bold',
+                    fontFamily: 'Arial',
+                    color: '#000',
+                  }}>
                   Mon-Sat 10 A.M to 5 P.M {'\n'}Sun 10 A.M to 1 P.M
                 </Text>
               </VStack>
             </HStack>
             <HStack style={styles.DetailContainer}>
-              <View style={{paddingLeft: 50, paddingRight: 20}}>
-                <Text style={{fontSize: 20, fontWeight: 'bold', color: '#000'}}>
+              <View style={{paddingLeft: 50, paddingRight: 20, marginLeft: 42}}>
+                <Text
+                  style={{
+                    fontSize: 20,
+                    fontWeight: 'bold',
+                    fontFamily: 'Arial',
+                    color: '#000',
+                  }}>
                   Follow Us -
                 </Text>
               </View>
@@ -116,9 +136,17 @@ export default function Contactus({navigation}) {
                 </HStack>
               </VStack>
             </HStack>
-          </VStack>
+          </View>
         </VStack>
+        <View style={{flex: 1,height:200,width:'100%',paddingHorizontal:20,marginTop:20}}>
+          <Image
+            source={require('../images/map.png')}
+            style={{width: '100%', height: '100%'}}
+            alt="map"
+          />
+        </View>
       </ScrollView>
+      
     </>
   );
 }
@@ -131,7 +159,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#CAE7EF',
     borderBottomWidth: 1,
-    borderBottomColor: '#CBEED6',
+    borderBottomColor: '#BBE4DC',
     backgroundColor: '#CAE7EF',
   },
   titleText: {
@@ -145,32 +173,30 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   AddressDetailContainer: {
-    height: 70,
     justifyContent: 'center',
     alignItems: 'center',
   },
   DetailContainer: {
-    height: 70,
     justifyContent: 'center',
     alignItems: 'center',
+    marginVertical: 10,
   },
   InfoContainer: {
     paddingRight: 10,
-    height: 80,
     width: '80%',
     justifyContent: 'center',
   },
   BoldText: {
     fontSize: 20,
     fontWeight: 'bold',
+    fontFamily: 'Arial',
     color: '#000',
   },
   iconContainer: {
     width: '20%',
-    height: 80,
     justifyContent: 'center',
-    alignItems: 'center',
-    marginRight: 10,
+    alignItems: 'auto',
+    paddingRight: 20,
   },
   icon: {
     fontSize: 30,
@@ -178,6 +204,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 16,
+    fontFamily: 'Arial',
     color: '#000',
   },
 });
