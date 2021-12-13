@@ -139,17 +139,18 @@ const Home = ({navigation}) => {
             />
             <Text style={styles.menuHeading}>Video</Text>
           </TouchableOpacity>
-          <Box
+          <TouchableOpacity
             style={Object.assign({}, styles.MenuBox, {
               backgroundColor: '#7bc4d7',
-            })}>
+            })}
+            onPress={() => navigation.navigate('Contactus')}>
             <Image
               source={require('../images/contact.png')}
               style={styles.icon}
               alt="main-Image"
             />
             <Text style={styles.menuHeading}>Contact Us</Text>
-          </Box>
+          </TouchableOpacity>
           <TouchableOpacity
             style={Object.assign({}, styles.MenuBox, {
               backgroundColor: '#9e9ef7',

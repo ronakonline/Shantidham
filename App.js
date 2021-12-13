@@ -16,6 +16,7 @@ import AboutusScreen from './screens/Aboutus';
 import About from './screens/About';
 import PanchangScreen from './screens/Panchang';
 import DayPanchangScreen from './screens/DayPanchang';
+import ContactusScreen from './screens/ContactUs';
 
 const Stack = createNativeStackNavigator();
 
@@ -64,6 +65,7 @@ export default function App() {
           <Stack.Screen name="About" component={About} />
           <Stack.Screen name="Panchang" component={PanchangScreen} />
           <Stack.Screen name="DayPanchang" component={DayPanchangScreen} />
+          <Stack.Screen name="Contactus" component={ContactusScreen} />
         </Stack.Navigator>
       </NativeBaseProvider>
     </NavigationContainer>

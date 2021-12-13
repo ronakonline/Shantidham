@@ -6498,6 +6498,11 @@
     "jscodeshift" "^0.11.0"
     "nullthrows" "^1.1.1"
 
+"react-native-fontawesome@^7.0.0":
+  "integrity" "sha512-UBZXyTLO8rK2NMf7Eomzb70b6cpL5JlBI4xwJGnRroRofrIXUxPelmm0Ojs6OcMs4ucAyPidCOxbJDJlmb2vdA=="
+  "resolved" "https://registry.npmjs.org/react-native-fontawesome/-/react-native-fontawesome-7.0.0.tgz"
+  "version" "7.0.0"
+
 "react-native-image-slider-box@^1.1.12":
   "integrity" "sha512-PpGR0IHs/vnMC99UVHYVfRsUpCbjJBBbNNFdukdOj0qbpBuu6x3/UPVMXtEBxGvX88Bb8Lu3iBu8IM4aygyx3w=="
   "resolved" "https://registry.npmjs.org/react-native-image-slider-box/-/react-native-image-slider-box-1.1.12.tgz"
