@@ -1,5 +1,5 @@
 import React from 'react';
-import {NativeBaseProvider, Text, Box} from 'native-base';
+import {NativeBaseProvider, Text, Box,Image} from 'native-base';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {TouchableOpacity} from 'react-native';
@@ -38,12 +38,12 @@ export default function App() {
               <TouchableOpacity
                 style={{marginLeft: 10}}
                 onPress={() => navigation.navigate('Home')}>
-                <Text>Left</Text>
+                <Image source={require('./images/home.png')} alt="Home" height={8} width={8} />
               </TouchableOpacity>
             ),
             headerRight: () => (
               <Box style={{marginRight: 10}}>
-                <Text>Right</Text>
+                <Image source={require('./images/notification.png')} alt="Search" height={8} width={8} />
               </Box>
             ),
             //set header background color to blue
