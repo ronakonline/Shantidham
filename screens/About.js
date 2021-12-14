@@ -13,23 +13,43 @@ import React, {useState} from 'react';
 import {StyleSheet, TouchableOpacity} from 'react-native';
 import ImageView from 'react-native-image-viewing';
 
-export default function About({navigation}) {
+export default function About({navigation, route}) {
   const [visible, setIsVisible] = useState(false);
-  const image = [require('../images/slide1.jpg')];
+  const img = route.params.img;
   return (
-  <View style={styles.container}>
-    <TouchableOpacity onPress={() => setIsVisible(true)}>
-        <Image source={require('../images/slide2.png')} style={{ width: '100%', height: '100%' }} alt="about image" />
+    <>
+      <HStack style={styles.header}>
+        <TouchableOpacity
+          style={{position: 'absolute'}}
+          onPress={() => navigation.goBack()}>
+          <ArrowBackIcon />
+        </TouchableOpacity>
+        <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+          <Text style={styles.text}>About</Text>
+        </View>
+      </HStack>
+      <View style={styles.container}>
+        <TouchableOpacity
+          onPress={() => setIsVisible(true)}
+          style={{height: '100%', width: '100%'}}>
+          <Image
+            resizeMethod="resize"
+            resizeMode="contain"
+            source={{uri: img}}
+            style={{width: '100%', height: '100%'}}
+            alt="about image"
+          />
         </TouchableOpacity>
         <ImageView
-          images={image}
+          images={[{uri: img}]}
           imageIndex={0}
           visible={visible}
           swipeToCloseEnabled={false}
           doubleTapToZoomEnabled={true}
           onRequestClose={() => setIsVisible(false)}
         />
-  </View>
+      </View>
+    </>
   );
 }
 
