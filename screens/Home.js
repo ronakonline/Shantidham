@@ -1,17 +1,41 @@
 import {Button, HStack, VStack, Box, InfoOutlineIcon, Image} from 'native-base';
 import React from 'react';
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  ActivityIndicator,
+  Linking,
+} from 'react-native';
 import {SliderBox} from 'react-native-image-slider-box';
 import MarqueeText from 'react-native-marquee';
-import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
+import {RFValue} from 'react-native-responsive-fontsize';
 
 const Home = ({navigation}) => {
-  const images = [
-    require('../images/slide1.jpg'),
-    require('../images/slide2.png'),
-    require('../images/slide3.png'),
-  ];
-  const [weight , setWeight] = React.useState(0);
+  const [weight, setWeight] = React.useState(0);
+  const [data, setData] = React.useState([]);
+  const [loading, setLoading] = React.useState(true);
+  const img_url = 'https://app.jinjimaharaj.com/uploads/dash_slider/';
+
+  React.useEffect(() => {
+    async function fetchData() {
+      fetch('https://app.jinjimaharaj.com/api/dashboard')
+        .then(response => response.json())
+        .then(responseJson => {
+          setData(responseJson);
+          setLoading(false);
+        })
+        .catch(error => console.log(error));
+    }
+    fetchData();
+  }, []);
+
+  const openLink = () =>{
+    Linking.openURL(data.button_link);
+  }
+
+
   return (
     <View style={styles.container}>
       <HStack style={{flex: 1}}>
@@ -75,33 +99,58 @@ const Home = ({navigation}) => {
           </Box>
         </VStack>
         <VStack style={{flex: 2.6}}>
-          <View style={styles.ImageBox} onLayout={(event)=>{
-                const {x, y, width, height} = event.nativeEvent.layout;
-                setWeight(width);
-              }}>
-           
-              {/* <Image
+          <View
+            style={styles.ImageBox}
+            onLayout={event => {
+              const {x, y, width, height} = event.nativeEvent.layout;
+              setWeight(width);
+            }}>
+            {/* <Image
                 source={require('../images/slide3.png')}
                 resizeMode="contain"
                 style={{flex:1,width: '100%', height: null}}
                 alt="main-Image"
               /> */}
-             
+            {loading ? (
+              <ActivityIndicator size="large" color="#0000ff" />
+            ) : (
               <SliderBox
-                images={images}
-                sliderBoxHeight='100%'
-                resizeMethod='scale'
-                resizeMode='contain'
+                images={[
+                  img_url + data.slider1,
+                  img_url + data.slider2,
+                  img_url + data.slider3,
+                ]}
+                sliderBoxHeight="100%"
+                resizeMethod="scale"
+                resizeMode="contain"
                 parentWidth={weight}
                 autoplay
                 circleLoop
-                />
-             
+              />
+            )}
           </View>
           <Box
             style={Object.assign({}, styles.MenuBox)}
-            style={{flex: 2, borderWidth: 1, borderColor: '#91980C'}}>
-            <Image source={require('../images/quote.jpg')} resizeMethod='scale' resizeMode='stretch' alt="quote-img" style={{ height:'100%',width:'100%' }} />
+            style={{flex: 2, borderWidth: 1, borderColor: '#91980C',alignItems:'center',justifyContent:'center'}}>
+            {loading ? (
+              <ActivityIndicator size="large" color="#0000ff" />
+            ) : data.is_quote_img == 1 ? (
+              <Image
+                source={{uri: img_url + data.quote_img}}
+                resizeMethod="scale"
+                resizeMode="stretch"
+                alt="quote-img"
+                style={{height: '100%', width: '100%'}}
+              />
+            ) : data.is_text == 1 && data.is_button == 0 ? (
+              <Text style={{ fontSize:RFValue(18), fontWeight:'bold'}}>{data.slider_text}</Text>
+            ) : (
+              <>
+              <Text  numberOfLines={8}
+                    adjustsFontSizeToFit style={{ fontSize:RFValue(18), fontWeight:'bold'}}>{data.slider_text}</Text>
+              <Button style={{width:'80%',marginLeft:20, marginRight:20, marginTop:10}} onPress={() => openLink()}><Text style={{ fontSize:RFValue(18), fontWeight:'bold', color:'#fff' }}>{data.button_name}</Text></Button>
+              </>
+            )}
           </Box>
         </VStack>
         <VStack style={{flex: 1}}>
@@ -176,14 +225,22 @@ const Home = ({navigation}) => {
           justifyContent: 'center',
           alignItems: 'center',
         }}>
-        <MarqueeText
-          style={{ fontSize: 20,width: '100%', textAlign: 'center' }}
-          duration={10000}
-          marqueeOnStart
-          loop
-        >
-          Prerna Prakashan Trust, Valsad Shantidham Aradhana Kendra, Tithal Valsad 396001 Gujarat, India
-        </MarqueeText>
+        {loading ? (
+          <ActivityIndicator size="large" color="#91980C" />
+        ) : (
+          <MarqueeText
+            style={{
+              fontSize: 20,
+              width: '100%',
+              textAlign: 'center',
+              paddingLeft: 10,
+            }}
+            duration={15000}
+            marqueeOnStart
+            loop>
+            {data.footer_text}
+          </MarqueeText>
+        )}
       </Box>
     </View>
   );
