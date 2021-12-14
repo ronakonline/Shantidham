@@ -1,8 +1,30 @@
-import {VStack, Box, HStack, ScrollView, Button, View} from 'native-base';
+import {VStack, Box, HStack, ScrollView} from 'native-base';
 import React from 'react';
-import {Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
+import {
+  Text,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  ActivityIndicator,
+} from 'react-native';
 
 export default function GalleryList({navigation}) {
+  const img_url = 'https://app.jinjimaharaj.com/uploads/gallery/';
+  const [data, setData] = React.useState([]);
+  const [loading, setLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    fetch('https://app.jinjimaharaj.com/api/img_categories')
+      .then(response => response.json())
+      .then(responseJson => {
+        setData(responseJson);
+        setLoading(false);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }, []);
+
   return (
     <>
       <ScrollView style={{flex: 1, backgroundColor: '#D4F1DD'}}>
@@ -12,51 +34,30 @@ export default function GalleryList({navigation}) {
           </Box>
 
           <VStack style={styles.content} space={3}>
-            <TouchableOpacity
-              onPress={() => {
-                navigation.navigate('Gallery');
-              }}>
-              <HStack style={styles.video} shadow={7}>
-                <Image
-                  source={{uri: 'https://picsum.photos/200/300'}}
-                  alt="text"
-                  style={styles.videoImage}
-                />
-                <Box style={styles.videoContent}>
-                  <Text style={styles.videoTitle}>Gurudev</Text>
-                </Box>
-              </HStack>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => {
-                navigation.navigate('Video');
-              }}>
-              <HStack style={styles.video} shadow={7}>
-                <Image
-                  source={{uri: 'https://picsum.photos/200/300'}}
-                  alt="text"
-                  style={styles.videoImage}
-                />
-                <Box style={styles.videoContent}>
-                  <Text style={styles.videoTitle}>Derasar Ni Murti</Text>
-                </Box>
-              </HStack>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => {
-                navigation.navigate('Video');
-              }}>
-              <HStack style={styles.video} shadow={7}>
-                <Image
-                  source={{uri: 'https://picsum.photos/200/300'}}
-                  alt="text"
-                  style={styles.videoImage}
-                />
-                <Box style={styles.videoContent}>
-                  <Text style={styles.videoTitle}>Campus</Text>
-                </Box>
-              </HStack>
-            </TouchableOpacity>
+            {loading ? (
+              <ActivityIndicator size="large" color="#0000ff" />
+            ) : (
+              data.map((item, index) => (
+                <TouchableOpacity
+                  onPress={() => {
+                    navigation.navigate('Gallery');
+                  }}
+                  key={index}>
+                  <HStack style={styles.video} shadow={7}>
+                    <Image
+                      resizeMethod='resize'
+                      resizeMode='cover'
+                      source={{uri: img_url + item.cat_img}}
+                      alt="text"
+                      style={styles.videoImage}
+                    />
+                    <Box style={styles.videoContent}>
+                      <Text style={styles.videoTitle}>{item.title}</Text>
+                    </Box>
+                  </HStack>
+                </TouchableOpacity>
+              ))
+            )}
           </VStack>
         </VStack>
       </ScrollView>
@@ -88,7 +89,7 @@ const styles = StyleSheet.create({
   },
   video: {
     width: '100%',
-    height: 120,
+    height: 125,
     borderRadius: 4,
     backgroundColor: '#c3eccf',
   },
@@ -108,6 +109,7 @@ const styles = StyleSheet.create({
   videoImage: {
     flex: 2,
     height: '100%',
+    width: '100%',
     borderRadius: 4,
   },
 });

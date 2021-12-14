@@ -54,6 +54,9 @@ const styles = StyleSheet.create({
     height: 55,
     alignItems: 'center',
     borderBottomWidth: 1,
+    backgroundColor: '#FDD8DD',
+    borderBottomColor: '#F0BCC0',
+
   },
   text: {
     fontSize: 20,
@@ -61,5 +64,6 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
+    backgroundColor:'#FDD8DD'
   },
 });

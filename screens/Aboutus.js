@@ -43,7 +43,9 @@ export default function Aboutus({navigation}) {
                 <TouchableOpacity
                   onPress={() => {
                     navigation.navigate('About',{img : img_url + item.image});
-                  }}>
+                  }}
+                  key={index}
+                  >
                   <VStack style={styles.video} shadow={7}>
                     <Image
                       resizeMode="cover"
