@@ -6,89 +6,95 @@ import {
   ScrollView,
   TextArea,
   Input,
-  Button
+  Button,
+  View,
+  HStack,
+  ArrowBackIcon
 } from 'native-base';
 import React from 'react';
-import {Text, StyleSheet,  TouchableOpacity} from 'react-native';
+import {Text, StyleSheet, TouchableOpacity} from 'react-native';
 
 export default function Donation({navigation}) {
   return (
     <>
-      <ScrollView style={{flex: 1, backgroundColor: '#CAE7EF'}}>
-        <VStack style={{flex: 1, backgroundColor: '#CAE7EF'}}>
-          <Box style={styles.heading}>
-            <Text style={styles.titleText}>Donation</Text>
-          </Box>
-
-          <VStack style={styles.content} space={3}>
-            <Select
-              minWidth="200"
-              accessibilityLabel="Select"
-              placeholder="Select"
-              _selectedItem={{
-                bg: '#DCEFF5',
-                backgroundColor: '#DCEFF5',
-                endIcon: <CheckIcon size="5" />,
-              }}
-              mt={1}
-              style={styles.input}
-             >
-              <Select.Item label="UX Research" value="ux" />
-              <Select.Item label="Web Development" value="web" />
-              <Select.Item label="Cross Platform Development" value="cross" />
-              <Select.Item label="UI Designing" value="ui" />
-              <Select.Item label="Backend Development" value="backend" />
-            </Select>
-            <TextArea style={styles.input} placeholder='Description'></TextArea>
-            <Input style={styles.input} placeholder='Name'></Input>
-            <Input style={styles.input} placeholder='Email'></Input>
-            <Input style={styles.input} placeholder='Phone'></Input>
-            <Input style={styles.input} placeholder='Amount'></Input>
-            <Input style={styles.input} placeholder='Pan no'></Input>
-            <Input style={styles.input} placeholder='Aadhar no'></Input>
-            <Button style={styles.button}><Text style={styles.buttonText}>Submit</Text></Button>
-          </VStack>
-        </VStack>
-      </ScrollView>
-    </>
+    <HStack style={styles.header}>
+      <TouchableOpacity
+        style={{position: 'absolute'}}
+        onPress={() => navigation.goBack()}>
+        <ArrowBackIcon />
+      </TouchableOpacity>
+      <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+        <Text style={styles.text}>Donation</Text>
+      </View>
+    </HStack>
+    <View style={styles.container}>
+      <Text style={styles.Title}>Coming Soon</Text>
+      <Button style={styles.btn} onPress={() => navigation.navigate('Home')}>
+        <Text style={styles.btnText}>Back</Text>
+      </Button>
+    </View>
+  </>
   );
 }
 
 const styles = StyleSheet.create({
-  heading: {
-    height: 50,
-    flexDirection: 'row',
+  header: {
+    height:55,
     alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#CAE7EF',
+    backgroundColor: '#cecefb',
     borderBottomWidth: 1,
-    borderBottomColor: '#CBEED6',
-    backgroundColor: '#CAE7EF',
+    borderBottomColor: '#A8C4E5',
   },
-  titleText: {
+  text: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#000',
   },
-  content: {
+  container: {
     flex: 1,
-    backgroundColor: '#CAE7EF',
-    padding: 10,
-    paddingTop: 15,
+    backgroundColor: '#cecefb',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+    paddingBottom:60
   },
-  input: {
-    
-    borderRadius: 0,
-    padding: 10,
-    fontSize: 15,
-    backgroundColor: '#DCEFF5',
+  Title: {
+    fontSize: 38,
+    fontFamily: 'Arial',
+    color: '#000000',
+    padding: 20,
+    marginBottom:60
   },
-    button: {
-        width:150,
-        backgroundColor:'#7BC4D7'
-    },
-    buttonText: {
-        fontSize: 18,
-        color: '#fff',
-    },
+  btn: {
+    backgroundColor: 'purple',
+    width: 150,
+    height: 50,
+    borderColor:'#A8C4E5',
+    borderWidth: 2,
+    backgroundColor:'#9E9EF8',
+  },
+  btnText: {
+    fontSize: 20,
+    color: '#ffffff',
+  },
 });
+
+// content: {
+//   flex: 1,
+//   backgroundColor: '#CAE7EF',
+//   padding: 10,
+//   paddingTop: 15,
+// },
+// input: {
+//   borderRadius: 0,
+//   padding: 10,
+//   fontSize: 15,
+//   backgroundColor: '#DCEFF5',
+// },
+// button: {
+//   width: 150,
+//   backgroundColor: '#7BC4D7',
+// },
+// buttonText: {
+//   fontSize: 18,
+//   color: '#fff',
+// },

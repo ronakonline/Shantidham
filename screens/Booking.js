@@ -6,7 +6,7 @@ import {
   Button,
 } from 'native-base';
 import React from 'react';
-import {StyleSheet, SafeAreaView, TouchableOpacity} from 'react-native';
+import {StyleSheet, TouchableOpacity} from 'react-native';
 
 export default function Booking({navigation}) {
   return (
@@ -33,8 +33,7 @@ export default function Booking({navigation}) {
 
 const styles = StyleSheet.create({
   header: {
-    flex: 0.8,
-    flexDirection: 'row',
+    height:55,
     alignItems: 'center',
     backgroundColor: '#cecefb',
     borderBottomWidth: 1,
@@ -45,17 +44,19 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   container: {
-    flex: 9,
+    flex: 1,
     backgroundColor: '#cecefb',
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
+    paddingBottom:60
   },
   Title: {
     fontSize: 38,
     fontFamily: 'Arial',
     color: '#000000',
     padding: 20,
+    marginBottom:60
   },
   btn: {
     backgroundColor: 'purple',
