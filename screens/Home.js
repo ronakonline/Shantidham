@@ -147,7 +147,7 @@ const Home = ({navigation}) => {
             ) : (
               <>
               <Text  numberOfLines={8}
-                    adjustsFontSizeToFit style={{ fontSize:RFValue(18), fontWeight:'bold'}}>{data.slider_text}</Text>
+                    adjustsFontSizeToFit style={{ fontSize:RFValue(18), fontWeight:'bold',color:'#000'}}>{data.slider_text}</Text>
               <Button style={{width:'80%',marginLeft:20, marginRight:20, marginTop:10, backgroundColor:'#f6828c'}} onPress={() => openLink()}><Text style={{ fontSize:RFValue(18), fontWeight:'bold', color:'#fff' }}>{data.button_name}</Text></Button>
               </>
             )}
@@ -234,6 +234,7 @@ const Home = ({navigation}) => {
               width: '100%',
               textAlign: 'center',
               paddingLeft: 10,
+              color:'#000'
             }}
             duration={15000}
             marqueeOnStart

@@ -35,6 +35,7 @@ export default function App() {
               color: '#640003',
               fontSize: 24,
               fontWeight: 'bold',
+              fontFamily:'Arial'
             },
             headerLeft: () => (
               <TouchableOpacity
