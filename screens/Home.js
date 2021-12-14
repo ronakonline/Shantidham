@@ -148,7 +148,7 @@ const Home = ({navigation}) => {
               <>
               <Text  numberOfLines={8}
                     adjustsFontSizeToFit style={{ fontSize:RFValue(18), fontWeight:'bold'}}>{data.slider_text}</Text>
-              <Button style={{width:'80%',marginLeft:20, marginRight:20, marginTop:10}} onPress={() => openLink()}><Text style={{ fontSize:RFValue(18), fontWeight:'bold', color:'#fff' }}>{data.button_name}</Text></Button>
+              <Button style={{width:'80%',marginLeft:20, marginRight:20, marginTop:10, backgroundColor:'#f6828c'}} onPress={() => openLink()}><Text style={{ fontSize:RFValue(18), fontWeight:'bold', color:'#fff' }}>{data.button_name}</Text></Button>
               </>
             )}
           </Box>
