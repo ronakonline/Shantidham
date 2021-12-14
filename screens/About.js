@@ -1,13 +1,9 @@
 import {
-  VStack,
-  Box,
   HStack,
   ArrowBackIcon,
-  ScrollView,
   View,
   Image,
   Text,
-  Wrap,
 } from 'native-base';
 import React, {useState} from 'react';
 import {StyleSheet, TouchableOpacity} from 'react-native';
