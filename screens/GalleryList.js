@@ -40,7 +40,7 @@ export default function GalleryList({navigation}) {
               data.map((item, index) => (
                 <TouchableOpacity
                   onPress={() => {
-                    navigation.navigate('Gallery');
+                    navigation.navigate('Gallery',{cat_id: item.id});
                   }}
                   key={index}>
                   <HStack style={styles.video} shadow={7}>
