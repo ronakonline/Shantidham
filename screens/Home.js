@@ -117,17 +117,18 @@ const Home = ({navigation}) => {
             />
             <Text style={styles.menuHeading}>Article</Text>
           </TouchableOpacity>
-          <Box
+          <TouchableOpacity
             style={Object.assign({}, styles.MenuBox, {
               backgroundColor: '#f6c29f',
-            })}>
+            })}
+            onPress={() => navigation.navigate('Pachchhkan')}>
             <Image
               source={require('../images/pray.png')}
               style={styles.icon}
               alt="main-Image"
             />
             <Text style={styles.menuHeading}>Pachchhkan</Text>
-          </Box>
+          </TouchableOpacity>
           <TouchableOpacity
             style={Object.assign({}, styles.MenuBox, {
               backgroundColor: '#92dca8',
