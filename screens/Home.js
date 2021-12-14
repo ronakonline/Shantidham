@@ -158,7 +158,7 @@ const Home = ({navigation}) => {
             style={Object.assign({}, styles.MenuBox, {
               backgroundColor: '#f6828c',
             })}
-            onPress={() => navigation.navigate('ArticleList')}>
+            onPress={() => navigation.navigate('Article')}>
             <Image
               source={require('../images/copywriting.png')}
               style={styles.icon}

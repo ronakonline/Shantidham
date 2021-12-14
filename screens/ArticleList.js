@@ -1,16 +1,30 @@
-import {VStack, Box, HStack, ScrollView, Button, View} from 'native-base';
+import {
+  VStack,
+  Box,
+  HStack,
+  ScrollView,
+  Button,
+  View,
+  ArrowBackIcon,
+} from 'native-base';
 import React from 'react';
 import {Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
 
 export default function ArticleList({navigation}) {
   return (
     <>
+      <HStack style={styles.header}>
+        <TouchableOpacity
+          style={{position: 'absolute'}}
+          onPress={() => navigation.goBack()}>
+          <ArrowBackIcon />
+        </TouchableOpacity>
+        <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+          <Text style={styles.text}>Articles</Text>
+        </View>
+      </HStack>
       <ScrollView style={{flex: 1, backgroundColor: '#FDD8DD'}}>
         <VStack style={{flex: 1, backgroundColor: '#FDD8DD'}}>
-          <Box style={styles.heading}>
-            <Text style={styles.titleText}>Article</Text>
-          </Box>
-
           <VStack style={styles.content} space={3}>
             <TouchableOpacity
               onPress={() => {
@@ -24,10 +38,10 @@ export default function ArticleList({navigation}) {
                 />
                 <Box style={styles.videoContent}>
                   <Text style={styles.videoTitle}>Lorem Text Demo</Text>
-                    <Text style={styles.videoDescription}>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Pellentesque euismod
-                    </Text>
+                  <Text style={styles.videoDescription}>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Pellentesque euismod
+                  </Text>
                 </Box>
               </HStack>
             </TouchableOpacity>
@@ -43,10 +57,10 @@ export default function ArticleList({navigation}) {
                 />
                 <Box style={styles.videoContent}>
                   <Text style={styles.videoTitle}>Lorem Text Demo</Text>
-                    <Text style={styles.videoDescription}>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Pellentesque euismod
-                    </Text>
+                  <Text style={styles.videoDescription}>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Pellentesque euismod
+                  </Text>
                 </Box>
               </HStack>
             </TouchableOpacity>
@@ -62,14 +76,13 @@ export default function ArticleList({navigation}) {
                 />
                 <Box style={styles.videoContent}>
                   <Text style={styles.videoTitle}>Lorem Text Demo</Text>
-                    <Text style={styles.videoDescription}>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Pellentesque euismod
-                    </Text>
+                  <Text style={styles.videoDescription}>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Pellentesque euismod
+                  </Text>
                 </Box>
               </HStack>
             </TouchableOpacity>
-            
           </VStack>
         </VStack>
       </ScrollView>
@@ -78,6 +91,17 @@ export default function ArticleList({navigation}) {
 }
 
 const styles = StyleSheet.create({
+  header: {
+    height:55,
+    alignItems: 'center',
+    backgroundColor: '#FDD8DD',
+    borderBottomWidth: 1,
+    borderBottomColor: '#F0BCC0',
+  },
+  text: {
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
   heading: {
     height: 50,
     flexDirection: 'row',
@@ -121,10 +145,10 @@ const styles = StyleSheet.create({
     height: '100%',
     borderRadius: 4,
   },
-    videoDescription: {
-        fontSize: 15,
-        marginLeft: 10,
-        marginTop: 10,
-        color: '#000',
-    },
+  videoDescription: {
+    fontSize: 15,
+    marginLeft: 10,
+    marginTop: 10,
+    color: '#000',
+  },
 });
