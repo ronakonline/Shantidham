@@ -21,10 +21,10 @@ export default function Article({navigation}) {
                     </VStack>
                 </Box>
             </TouchableOpacity>
-            <TouchableOpacity style={{ flex:1 }}>
+            <TouchableOpacity style={{ flex:1 }} onPress={() => navigation.navigate('QuoteGallery')} >
                 <Box style={{ height:140,width:'100%' }}>
                     <VStack style={{ flex:1,justifyContent:'center',alignItems:'center' }}>
-                    <Image source={require('../images/copywriting.png')} style={{ height:'100%', width:150 }} />
+                    <Image source={require('../images/quotes.png')} style={{ height:'100%', width:150 }} />
                     <Text style={{ fontSize:RFValue(22), fontWeight:'bold', color:'#000' }}>Quotes</Text>
                     </VStack>
                 </Box>

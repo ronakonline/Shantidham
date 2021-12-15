@@ -1,6 +1,4 @@
 import {
-  VStack,
-  Box,
   HStack,
   ScrollView,
   View,
@@ -15,7 +13,6 @@ import {
   ActivityIndicator,
   Dimensions,
 } from 'react-native';
-import {RFValue} from 'react-native-responsive-fontsize';
 import ImageView from 'react-native-image-viewing';
 
 export default function ArticleDetail({navigation, route}) {
