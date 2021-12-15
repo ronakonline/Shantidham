@@ -167,6 +167,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FDD8DD',
     borderBottomWidth: 1,
     borderBottomColor: '#F0BCC0',
+    alignItems: 'center',
   },
   subheadertext: {
     fontSize: RFValue(16),
