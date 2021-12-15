@@ -86,7 +86,8 @@ const Home = ({navigation}) => {
             />
             <Text style={styles.menuHeading}>Donation</Text>
           </TouchableOpacity>
-          <Box
+          <TouchableOpacity
+            onPress={() => navigation.navigate('Events')}
             style={Object.assign({}, styles.MenuBox, {
               backgroundColor: '#9e9ef7',
             })}>
@@ -96,7 +97,7 @@ const Home = ({navigation}) => {
               alt="main-Image"
             />
             <Text style={styles.menuHeading}>Events</Text>
-          </Box>
+          </TouchableOpacity>
         </VStack>
         <VStack style={{flex: 2.6}}>
           <View

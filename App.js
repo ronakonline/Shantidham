@@ -22,6 +22,9 @@ import ArticleScreen from './screens/Article';
 import ArticleDetailScreen from './screens/ArticleDetail';
 import QuoteGalleryScreen from './screens/QuoteGallery';
 import PachchhkanLisScreen from './screens/PachchhkanList';
+import EventsScreen from './screens/Events';
+import ScheduleEventsScreen from './screens/ScheduleEvents';
+import LiveEventScreen from './screens/LiveEvents';
 
 
 const Stack = createNativeStackNavigator();
@@ -78,6 +81,9 @@ export default function App() {
           <Stack.Screen name="ArticleDetail" component={ArticleDetailScreen} />
           <Stack.Screen name="QuoteGallery" component={QuoteGalleryScreen} />
           <Stack.Screen name="PachchhkanList" component={PachchhkanLisScreen} />
+          <Stack.Screen name="Events" component={EventsScreen} />
+          <Stack.Screen name="ScheduleEvents" component={ScheduleEventsScreen} />
+          <Stack.Screen name="LiveEvent" component={LiveEventScreen} />
         </Stack.Navigator>
       </NativeBaseProvider>
     </NavigationContainer>
