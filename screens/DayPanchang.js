@@ -129,66 +129,40 @@ export default function DayPanchang({navigation, route}) {
   );
 
   const SecondRoute = () => (
-    <FlatList
-    nestedScrollEnabled
-    ListHeaderComponent={
-      <View styles={styles.panchangContainer}>
+    <>
+      <ScrollView style={{flex: 1}}>
         <View style={styles.chogadiyaheading}>
-          <Text style={styles.chogadiyaheadingText}>Day time Choghadiya</Text>
+          <Text style={styles.chogadiyaheadingText}>Day Choghdiya</Text>
         </View>
         {loading ? (
           <Text>Fetching data...</Text>
         ) : daychogadiya.length > 0 ? (
-          <FlatList
-            style={{marginBottom: 20}}
-            data={daychogadiya}
-            renderItem={({item, index}) => (
-              <View
-                style={Object.assign({}, styles.list, {
-                  backgroundColor: item.colorcode,
-                })}>
-                <Text style={styles.listText}>{item.name}</Text>
-                <Text style={styles.listTextTime}>{item.time}</Text>
-              </View>
-            )}
-            keyExtractor={(item, index) => index.toString()}
-            nestedScrollEnabled
-          />
+          daychogadiya.map((item, index) => (
+            <View style={Object.assign({}, styles.chogadiyadata,{ backgroundColor: item.colorcode })} key={index}>
+              <Text style={styles.chogadiyaheadingText}>{item.name}</Text>
+              <Text style={styles.chogadiyaheadingText}>{item.time}</Text>
+            </View>
+          ))
         ) : (
-          <Text>No Chogadiya Found!</Text>
+          <Text>No Day Choghdiya Found!</Text>
         )}
-
-        <View style={styles.chogadiyaheading}>
-          <Text style={styles.chogadiyaheadingText}>Night time Choghadiya</Text>
+         <View style={Object.assign({},styles.chogadiyaheading,{marginTop:20})}>
+          <Text style={styles.chogadiyaheadingText}>Night Choghdiya</Text>
         </View>
         {loading ? (
           <Text>Fetching data...</Text>
         ) : nightchogadiya.length > 0 ? (
-          <FlatList
-            data={nightchogadiya}
-            renderItem={({item, index}) => (
-              <View
-                style={Object.assign(
-                  {},
-                  styles.list,
-                  index % 2 == 0
-                    ? {backgroundColor: '#E98882'}
-                    : {backgroundColor: '#ACC397'},
-                )}>
-                <Text style={styles.listText}>{item.name}</Text>
-                <Text style={styles.listTextTime}>
-                  {item.start} - {item.end}
-                </Text>
-              </View>
-            )}
-            keyExtractor={(item, index) => index.toString()}
-            nestedScrollEnabled
-          />
+          nightchogadiya.map((item, index) => (
+            <View style={Object.assign({}, styles.chogadiyadata,{ backgroundColor: item.colorcode })} key={index}>
+              <Text style={styles.chogadiyaheadingText}>{item.name}</Text>
+              <Text style={styles.chogadiyaheadingText}>{item.time}</Text>
+            </View>
+          ))
         ) : (
-          <Text>No Chogadiya Found!</Text>
+          <Text>No Day Choghdiya Found!</Text>
         )}
-      </View>
-    }/>
+      </ScrollView>
+    </>
   );
 
   const ThirdRoute = () => (
@@ -346,6 +320,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     borderBottomColor: 'black',
+  },
+  chogadiyadata: {
+    padding: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   chogadiyaheadingText: {
     fontSize: 18,
