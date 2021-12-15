@@ -1,5 +1,13 @@
 import React from 'react';
-import {Text, View, HStack, ArrowBackIcon, Button} from 'native-base';
+import {
+  Text,
+  View,
+  HStack,
+  ArrowBackIcon,
+  Button,
+  Image,
+  Center,
+} from 'native-base';
 import {StyleSheet, TouchableOpacity} from 'react-native';
 import {RFValue} from 'react-native-responsive-fontsize';
 import FontAwesome, {
@@ -10,37 +18,40 @@ import FontAwesome, {
 
 import Sound from 'react-native-sound';
 
-Sound.setCategory('Playback');
+export default function Pachchhkan({navigation, route}) {
+  const pachkhan = route.params.pachkhan;
 
-// const soundFile = require('../audios/test.mp3');
-const soundFile =
-  'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3';
-var totalduration = 0;
+  const mp3_url = 'https://app.jinjimaharaj.com/uploads/pachkhan/';
+  const img_url = 'https://app.jinjimaharaj.com/uploads/pachkhan/';
 
-var audio = new Sound(soundFile, null, error => {
-  if (error) {
-    console.log('failed to load the sound', error);
-  } else {
-    audio.play(); // have to put the call to play() in the onload callback
-    audio.stop();
-    totalduration = audio.getDuration();
-  }
-});
-export default function Pachchhkan({navigation}) {
+  Sound.setCategory('Playback');
+
+  const soundFile = mp3_url + pachkhan.audiofile;
+  var totalduration = 0;
+
   const [playing, setPlaying] = React.useState();
   const [duration, setDuration] = React.useState(totalduration);
   const [mute, setMute] = React.useState(false);
-  React.useEffect(() => {
-    var audio = new Sound(soundFile, null, error => {
+  const [audio, setAudio] = React.useState(
+    new Sound(soundFile, error => {
       if (error) {
         console.log('failed to load the sound', error);
       } else {
-        audio.play(); // have to put the call to play() in the onload callback
-        audio.stop();
-        totalduration = audio.getDuration();
-      
       }
-    });
+    }),
+  );
+  React.useEffect(() => {
+    setAudio(
+      new Sound(soundFile, null, error => {
+        if (error) {
+          console.log('failed to load the sound', error);
+        } else {
+          audio.play();
+          audio.stop();
+          totalduration = audio.getDuration();
+        }
+      }),
+    );
     audio.setVolume(1);
     return () => {
       audio.release();
@@ -76,15 +87,13 @@ export default function Pachchhkan({navigation}) {
     }
   };
 
-
   const stopPlayer = () => {
     audio.stop();
     setPlaying(false);
     setMute(false);
     audio.setVolume(1);
+    audio.release();
   };
-
-  
 
   return (
     <View style={{flex: 1}}>
@@ -98,25 +107,43 @@ export default function Pachchhkan({navigation}) {
           <ArrowBackIcon />
         </TouchableOpacity>
         <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-          <Text style={styles.text}>Booking</Text>
+          <Text style={styles.text}>Pachchhkan</Text>
         </View>
       </HStack>
       <View style={styles.subheader}>
-        <Text style={styles.subheadertext}>Pachchhkan</Text>
+        <Text style={styles.subheadertext}>{pachkhan.title}</Text>
       </View>
-      <View style={styles.audioplayer}>
-        {/* Button to toggle between play and pause */}
-        <TouchableOpacity onPress={playPause}>
-          <FontAwesome icon={playing ?   SolidIcons.pause : SolidIcons.play} style={{fontSize: 24}} />
-        </TouchableOpacity>
-        {/* shot total duration of the audio in min and sec format (min:sec) */}
-        <Text>
-          {/* seconds to min convert */}
-         {Math.floor(duration / 60)}:{Math.floor(duration % 60)}
-        </Text>
-        <TouchableOpacity onPress={muteUnmute}>
-          <FontAwesome icon={mute ? SolidIcons.volumeMute : SolidIcons.volumeUp} style={{fontSize: 24}} />
-        </TouchableOpacity>
+      <View style={{flex: 1, backgroundColor: '#FDD8DD',paddingTop:20}}>
+        <View style={{height: 250, width: '100%',backgroundColor: '#FDD8DD'}}>
+          {console.log(img_url + pachkhan.image)}
+          <Image
+            source={{uri: img_url + pachkhan.image}}
+            resizeMethod="resize"
+            resizeMode="cover"
+            style={{ height: 250, width: '100%' }}
+            alt="img"
+          />
+        </View>
+        <View style={styles.audioplayer}>
+          {/* Button to toggle between play and pause */}
+          <TouchableOpacity onPress={playPause}>
+            <FontAwesome
+              icon={playing ? SolidIcons.pause : SolidIcons.play}
+              style={{fontSize: 24}}
+            />
+          </TouchableOpacity>
+          {/* shot total duration of the audio in min and sec format (min:sec) */}
+          <Text>
+            {/* seconds to min convert */}
+            {Math.floor(duration / 60)}:{Math.floor(duration % 60)}
+          </Text>
+          <TouchableOpacity onPress={muteUnmute}>
+            <FontAwesome
+              icon={mute ? SolidIcons.volumeMute : SolidIcons.volumeUp}
+              style={{fontSize: 24}}
+            />
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
@@ -126,9 +153,9 @@ const styles = StyleSheet.create({
   header: {
     height: 60,
     alignItems: 'center',
-    backgroundColor: '#cecefb',
+    backgroundColor: '#FDD8DD',
     borderBottomWidth: 1,
-    borderBottomColor: '#A8C4E5',
+    borderBottomColor: '#F0BCC0',
   },
   text: {
     fontSize: 20,
@@ -137,9 +164,9 @@ const styles = StyleSheet.create({
   subheader: {
     height: 40,
     justifyContent: 'center',
-    backgroundColor: '#cecefb',
+    backgroundColor: '#FDD8DD',
     borderBottomWidth: 1,
-    borderBottomColor: '#A8C4E5',
+    borderBottomColor: '#F0BCC0',
   },
   subheadertext: {
     fontSize: RFValue(16),
@@ -150,10 +177,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: '#cecefb',
+    backgroundColor: '#FDD8DD',
     marginHorizontal: 20,
     borderRadius: 50,
     marginTop: 50,
     paddingHorizontal: 40,
+    borderWidth: 1,
   },
 });

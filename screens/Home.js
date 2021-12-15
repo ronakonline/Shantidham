@@ -170,7 +170,7 @@ const Home = ({navigation}) => {
             style={Object.assign({}, styles.MenuBox, {
               backgroundColor: '#f6c29f',
             })}
-            onPress={() => navigation.navigate('Pachchhkan')}>
+            onPress={() => navigation.navigate('PachchhkanList')}>
             <Image
               source={require('../images/pray.png')}
               style={styles.icon}

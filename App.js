@@ -21,6 +21,7 @@ import PachchhkanScreen from './screens/Pachchhkan';
 import ArticleScreen from './screens/Article';
 import ArticleDetailScreen from './screens/ArticleDetail';
 import QuoteGalleryScreen from './screens/QuoteGallery';
+import PachchhkanLisScreen from './screens/PachchhkanList';
 
 
 const Stack = createNativeStackNavigator();
@@ -76,6 +77,7 @@ export default function App() {
           <Stack.Screen name="Article" component={ArticleScreen} />
           <Stack.Screen name="ArticleDetail" component={ArticleDetailScreen} />
           <Stack.Screen name="QuoteGallery" component={QuoteGalleryScreen} />
+          <Stack.Screen name="PachchhkanList" component={PachchhkanLisScreen} />
         </Stack.Navigator>
       </NativeBaseProvider>
     </NavigationContainer>
