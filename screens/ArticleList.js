@@ -3,7 +3,6 @@ import {
   Box,
   HStack,
   ScrollView,
-  Button,
   View,
   ArrowBackIcon,
 } from 'native-base';
@@ -55,12 +54,12 @@ export default function ArticleList({navigation}) {
             <VStack style={styles.content} key={index} space={3}>
               <TouchableOpacity
                 onPress={() => {
-                  navigation.navigate('Gallery');
+                  navigation.navigate('ArticleDetail',{article_id : item.id});
                 }}>
                 <HStack style={styles.video} shadow={7}>
                   <VStack style={{ flex:1.6, width:'100%', borderRightWidth:1 , padding:5, justifyContent:'center' , alignItems:'center' }}>
                   <Image
-                    source={require('../images/copywriting.png')}
+                    source={require('../images/article.png')}
                     alt="text"
                     style={{ width: 80, height:80 }}
                   />
@@ -68,9 +67,9 @@ export default function ArticleList({navigation}) {
                   </VStack>
                   <Box style={styles.videoContent}>
                     <Text style={styles.videoTitle} adjustsFontSizeToFit numberOfLines={2} >{item.title}</Text>
-                    <Text style={styles.videoDescription} adjustsFontSizeToFit numberOfLines={2.8}>
+                    {/* <Text style={styles.videoDescription} adjustsFontSizeToFit numberOfLines={2.8}>
                       {item.mini_desc}
-                    </Text>
+                    </Text> */}
                   </Box>
                 </HStack>
               </TouchableOpacity>
