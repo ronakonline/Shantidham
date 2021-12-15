@@ -51,11 +51,11 @@ export default function ScheduleEvents({navigation}) {
             }}>
             <Text
               style={{
-                fontSize: RFValue(20),
+                fontSize: RFValue(16),
                 fontWeight: 'bold',
                 color: '#1A374D',
               }}>
-              No Live Event
+              No live streams available for a while
             </Text>
           </View>
         ) : (

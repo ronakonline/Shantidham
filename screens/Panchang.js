@@ -86,7 +86,7 @@ export default function Panchang({navigation}) {
             return (
               <TouchableOpacity
                 onPress={() => {
-                  navigation.navigate('DayPanchang', {date: date.dateString});
+                  navigation.navigate('DayPanchang', {date: date.dateString,data:data});
                 }}
                 
                 style={ dayContent.highlight ? styles.markedDate : styles.dateblock}>
@@ -207,7 +207,7 @@ export default function Panchang({navigation}) {
       )}
       <View style={styles.footer}>
         <Text style={styles.footerDot}>{'\u2B24'}</Text>
-        <Text style={styles.footerText}>Join Event</Text>
+        <Text style={styles.footerText}>Jain Event</Text>
       </View>
     </View>
   );

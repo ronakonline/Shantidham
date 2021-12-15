@@ -1,16 +1,14 @@
-import {View, Text} from 'native-base';
+import {View, Text, ScrollView} from 'native-base';
 import React from 'react';
 import {
   StyleSheet,
   Dimensions,
-  StatusBar,
-  TouchableOpacity,
   Animated,
   Pressable,
   FlatList,
 } from 'react-native';
 import {TabView, SceneMap} from 'react-native-tab-view';
-import {NativeBaseProvider, Box, Center} from 'native-base';
+import {Box} from 'native-base';
 import CalendarStrip from 'react-native-calendar-strip';
 import moment from 'moment';
 
@@ -23,42 +21,97 @@ export default function DayPanchang({navigation, route}) {
     {key: 'second', title: 'Chogadiya'},
     {key: 'third', title: 'Events'},
   ]);
-  const [panchang, setPanchang] = React.useState([
-    { key: '1', name: 'Sri Ramakrishna', date: '2020-01-01', time: '10:00' },
-    { key: '2', name: 'Sri Ramakrishna', date: '2020-01-01', time: '10:00' },
-    { key: '3', name: 'Sri Ramakrishna', date: '2020-01-01', time: '10:00' },
-    { key: '4', name: 'Sri Ramakrishna', date: '2020-01-01', time: '10:00' },
-    { key: '5', name: 'Sri Ramakrishna', date: '2020-01-01', time: '10:00' },
-    { key: '6', name: 'Sri Ramakrishna', date: '2020-01-01', time: '10:00' },
-    { key: '7', name: 'Sri Ramakrishna', date: '2020-01-01', time: '10:00' },
-    { key: '8', name: 'Sri Ramakrishna', date: '2020-01-01', time: '10:00' },
-    { key: '9', name: 'Sri Ramakrishna', date: '2020-01-01', time: '10:00' },
-    { key: '10', name: 'Sri Ramakrishna', date: '2020-01-01', time: '10:00' },
-    { key: '11', name: 'Sri Ramakrishna', date: '2020-01-01', time: '10:00' },
-    { key: '12', name: 'Sri Ramakrishna', date: '2020-01-01', time: '10:00' },
-    { key: '13', name: 'Sri Ramakrishna', date: '2020-01-01', time: '10:00' },
-    { key: '14', name: 'Sri Ramakrishna', date: '2020-01-01', time: '10:00' },
-    { key: '15', name: 'Sri Ramakrishna', date: '2020-01-01', time: '10:00' },
-  ]);
+  const [panchang, setPanchang] = React.useState([]);
 
   const [daychogadiya, setDaychogadiya] = React.useState([
-    { key: '1', name: 'Sri Ramakrishna', date: '2020-01-01', start: '10:00', end: '12:00' },
-    { key: '2', name: 'Sri Ramakrishna', date: '2020-01-01', start: '10:00', end: '12:00' },
-    { key: '3', name: 'Sri Ramakrishna', date: '2020-01-01', start: '10:00', end: '12:00' },
+    {
+      key: '1',
+      name: 'Sri Ramakrishna',
+      date: '2020-01-01',
+      start: '10:00',
+      end: '12:00',
+    },
+    {
+      key: '2',
+      name: 'Sri Ramakrishna',
+      date: '2020-01-01',
+      start: '10:00',
+      end: '12:00',
+    },
+    {
+      key: '3',
+      name: 'Sri Ramakrishna',
+      date: '2020-01-01',
+      start: '10:00',
+      end: '12:00',
+    },
   ]);
 
   const [nightchogadiya, setNightchogadiya] = React.useState([
-    { key: '1', name: 'Sri Ramakrishna', date: '2020-01-01', start: '10:00', end: '12:00' },
-    { key: '2', name: 'Sri Ramakrishna', date: '2020-01-01', start: '10:00', end: '12:00' },
+    {
+      key: '1',
+      name: 'Sri Ramakrishna',
+      date: '2020-01-01',
+      start: '10:00',
+      end: '12:00',
+    },
+    {
+      key: '2',
+      name: 'Sri Ramakrishna',
+      date: '2020-01-01',
+      start: '10:00',
+      end: '12:00',
+    },
   ]);
 
-  const [events, setEvents] = React.useState([
-    { key: '1', name: 'Sri Ramakrishna', date: '2020-01-01', start: '10:00', end: '12:00' },
-  ]);
+  const [heading, setHeading] = React.useState('');
+  const [heading2, setHeading2] = React.useState('');
+
+  const [events, setEvents] = React.useState('');
+  const [currentdd, setCurrentdd] = React.useState(moment(date).format('DD'));
+  const [currentmm, setCurrentmm] = React.useState(moment(date).format('MM'));
+  const [currentyy, setCurrentyy] = React.useState(moment(date).format('YYYY'));
+
+  const [loading, setLoading] = React.useState(true);
+  var data = 0;
+
+  React.useEffect(() => {
+    getdata(currentdd, currentmm, currentyy);
+  }, []);
+
+  const getdata = async (dd, mm, yy) => {
+    if (dd.charAt(0) == '0') {
+      dd = dd.substring(1);
+    }
+    if (mm.charAt(0) == '0') {
+      mm = mm.substring(1);
+    }
+    fetch(
+      'https://app.jinjimaharaj.com/api/get_day_data/' +
+        dd +
+        '/' +
+        mm +
+        '/' +
+        yy,
+    )
+      .then(response => response.json())
+      .then(json => {
+        data = json;
+        setPanchang(json.panchang);
+        setDaychogadiya(json.chogdiyaDay);
+        setNightchogadiya(json.chogdiyaNight);
+        setEvents(json.eventsContent);
+        setHeading(json.heading2);
+        setHeading2(json.heading3);
+        setLoading(false);
+      });
+  };
 
   const FirstRoute = () => (
     <View styles={styles.panchangContainer}>
-      {panchang.length > 0 ? (
+      {loading ? (
+        <Text>Fetching data...</Text>
+      ) : panchang.length > 0 ? (
         <FlatList
           data={panchang}
           renderItem={({item}) => (
@@ -69,74 +122,83 @@ export default function DayPanchang({navigation, route}) {
           )}
           keyExtractor={(item, index) => index.toString()}
         />
-            
-
       ) : (
-        
         <Text>No Panchang Found!</Text>
-      
       )}
     </View>
   );
- 
+
   const SecondRoute = () => (
-    <View styles={styles.panchangContainer}>
-      <View style={styles.chogadiyaheading}>
-      <Text style={styles.chogadiyaheadingText}>Day time Choghadiya</Text>
-      </View>
-      {daychogadiya.length > 0 ? (
-        <FlatList
-          style={{ marginBottom: 20 }} 
-          data={daychogadiya}
-          renderItem={({item,index}) => (
-            <View style={Object.assign({},styles.list,index%2 == 0 ?  { backgroundColor:'#E98882'} : {backgroundColor:'#ACC397'})}>
-              <Text style={styles.listText}>{item.name}</Text>
-              <Text style={styles.listTextTime}>{item.start} - {item.end}</Text>
-            </View>
-          )}
-          keyExtractor={(item, index) => index.toString()}
-        />
-      ) : (
-        <Text>No Chogadiya Found!</Text>
-      )}
+    <FlatList
+    nestedScrollEnabled
+    ListHeaderComponent={
+      <View styles={styles.panchangContainer}>
+        <View style={styles.chogadiyaheading}>
+          <Text style={styles.chogadiyaheadingText}>Day time Choghadiya</Text>
+        </View>
+        {loading ? (
+          <Text>Fetching data...</Text>
+        ) : daychogadiya.length > 0 ? (
+          <FlatList
+            style={{marginBottom: 20}}
+            data={daychogadiya}
+            renderItem={({item, index}) => (
+              <View
+                style={Object.assign({}, styles.list, {
+                  backgroundColor: item.colorcode,
+                })}>
+                <Text style={styles.listText}>{item.name}</Text>
+                <Text style={styles.listTextTime}>{item.time}</Text>
+              </View>
+            )}
+            keyExtractor={(item, index) => index.toString()}
+            nestedScrollEnabled
+          />
+        ) : (
+          <Text>No Chogadiya Found!</Text>
+        )}
 
-      <View style={styles.chogadiyaheading}>
-        <Text style={styles.chogadiyaheadingText}>Night time Choghadiya</Text>
+        <View style={styles.chogadiyaheading}>
+          <Text style={styles.chogadiyaheadingText}>Night time Choghadiya</Text>
+        </View>
+        {loading ? (
+          <Text>Fetching data...</Text>
+        ) : nightchogadiya.length > 0 ? (
+          <FlatList
+            data={nightchogadiya}
+            renderItem={({item, index}) => (
+              <View
+                style={Object.assign(
+                  {},
+                  styles.list,
+                  index % 2 == 0
+                    ? {backgroundColor: '#E98882'}
+                    : {backgroundColor: '#ACC397'},
+                )}>
+                <Text style={styles.listText}>{item.name}</Text>
+                <Text style={styles.listTextTime}>
+                  {item.start} - {item.end}
+                </Text>
+              </View>
+            )}
+            keyExtractor={(item, index) => index.toString()}
+            nestedScrollEnabled
+          />
+        ) : (
+          <Text>No Chogadiya Found!</Text>
+        )}
       </View>
-      {nightchogadiya.length > 0 ? (
-        <FlatList
-          
-          data={nightchogadiya}
-          renderItem={({item,index}) => (
-            <View style={Object.assign({},styles.list,index%2 == 0 ?  { backgroundColor:'#E98882'} : {backgroundColor:'#ACC397'})}>
-              <Text style={styles.listText}>{item.name}</Text>
-              <Text style={styles.listTextTime}>{item.start} - {item.end}</Text>
-            </View>
-          )}
-          keyExtractor={(item, index) => index.toString()}
-        />
-      ) : (
-        <Text>No Chogadiya Found!</Text>
-      )}
-
-    </View>
+    }/>
   );
 
   const ThirdRoute = () => (
     <View styles={styles.panchangContainer}>
-      
-      {events.length > 0 ? (
-        <FlatList
-
-          data={events}
-          renderItem={({item,index}) => ( 
-            <View style={Object.assign({},styles.list)}>
-              <Text style={styles.listText}>{item.name}</Text>
-              <Text style={styles.listTextTime}>{item.start} - {item.end}</Text>
-            </View>
-          )}
-          keyExtractor={(item, index) => index.toString()}
-        />
+      {loading ? (
+        <Text>Fetching data...</Text>
+      ) : events.length > 0 ? (
+        <View style={Object.assign({}, styles.list)}>
+          <Text style={styles.listText}>{events}</Text>
+        </View>
       ) : (
         <Text>No Events Found!</Text>
       )}
@@ -176,7 +238,10 @@ export default function DayPanchang({navigation, route}) {
                   console.log(i);
                   setIndex(i);
                 }}>
-                <Animated.Text style={{color:'#000',fontWeight:'bold',fontSize:18}}>{route.title}</Animated.Text>
+                <Animated.Text
+                  style={{color: '#000', fontWeight: 'bold', fontSize: 18}}>
+                  {route.title}
+                </Animated.Text>
               </Pressable>
             </Box>
           );
@@ -191,19 +256,33 @@ export default function DayPanchang({navigation, route}) {
         <Text style={styles.headerText}>Mumbai</Text>
       </View>
       <View style={styles.subheader}>
-        <Text style={styles.subheaderText}>Veer Samvat 2547</Text>
-        <Text style={styles.subheaderText}>Aaso Kartak</Text>
+        <Text style={styles.subheaderText}>{heading}</Text>
+        <Text style={styles.subheaderText}>{heading2}</Text>
       </View>
       <CalendarStrip
-        style={{height: 110, paddingTop: 0, paddingBottom: 0,margin:0,backgroundColor:'#F7E6DF'}}
+        style={{
+          height: 110,
+          paddingTop: 0,
+          paddingBottom: 0,
+          margin: 0,
+          backgroundColor: '#F7E6DF',
+        }}
         selectedDate={currentDate}
         startingDate={currentDate}
-        calendarHeaderStyle={{color: '#000', fontSize: 18 , fontWeight: '400'}}
+        calendarHeaderStyle={{color: '#000', fontSize: 18, fontWeight: '400'}}
         calendarHeaderFormat={'MMMM YYYY'}
-        dateNameStyle={{color: '#000', fontSize: 15 , fontWeight: 'bold'}}
+        dateNameStyle={{color: '#000', fontSize: 15, fontWeight: 'bold'}}
         dateNumberStyle={{color: '#000', fontSize: 15, fontWeight: 'bold'}}
-        highlightDateNameStyle={{color: '#000', fontSize: 15, fontWeight: 'bold'}}
-        highlightDateNumberStyle={{color: '#000', fontSize: 15, fontWeight: 'bold'}}
+        highlightDateNameStyle={{
+          color: '#000',
+          fontSize: 15,
+          fontWeight: 'bold',
+        }}
+        highlightDateNumberStyle={{
+          color: '#000',
+          fontSize: 15,
+          fontWeight: 'bold',
+        }}
         //show only one day at a time
         daySelectionAnimation={{
           type: 'border',
@@ -212,8 +291,12 @@ export default function DayPanchang({navigation, route}) {
           borderHighlightColor: 'maroon',
         }}
         onDateSelected={date => {
-          date = date.toString();
-          navigation.navigate('DayPanchang', {date: date});
+          setLoading(true);
+          getdata(
+            moment(date).format('DD'),
+            moment(date).format('MM'),
+            moment(date).format('YYYY'),
+          );
         }}
       />
       <TabView
@@ -270,18 +353,16 @@ const styles = StyleSheet.create({
     color: '#000',
   },
   header: {
-
     flexDirection: 'row',
     justifyContent: 'space-between',
     padding: 10,
     borderBottomWidth: 1,
     borderBottomColor: '#EAC5C0',
-
   },
   headerText: {
     fontSize: 20,
     fontWeight: 'bold',
-    fontFamily:'Arial',
+    fontFamily: 'Arial',
     color: '#000',
   },
   subheader: {
@@ -291,11 +372,10 @@ const styles = StyleSheet.create({
     padding: 0,
     paddingTop: 10,
     margin: 0,
-    
   },
   subheaderText: {
     fontSize: 18,
-    fontFamily:'Arial',
+    fontFamily: 'Arial',
     color: '#000',
   },
   tabView: {
@@ -308,5 +388,5 @@ const styles = StyleSheet.create({
   tab: {
     borderWidth: 1,
     borderColor: '#F1CBBC',
-  }
+  },
 });

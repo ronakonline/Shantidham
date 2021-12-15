@@ -1,9 +1,39 @@
-import {Button, Center, Heading, Input, Stack,Image} from 'native-base';
+import {Button, Center, Heading, Input, Stack, Image} from 'native-base';
 import React from 'react';
-import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
+import {StyleSheet, View, Text} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 const Register = ({navigation}) => {
+  const [name, setName] = React.useState(null);
+  const [phone, setPhone] = React.useState(null);
+  const submitform = async () => {
+    if (name === '') {
+      alert('Enter Name');
+    } else if (phone === '') {
+      alert('Enter Phone');
+    }
+
+    await fetch(
+      'https://app.jinjimaharaj.com/api/register_user/' + name + '/' + phone,
+    ).then(() => {
+      const random = Math.floor(Math.random() * 100);
+      AsyncStorage.setItem('user_id', random.toString());
+      navigation.navigate('Home');
+    });
+  };
+
+  React.useEffect(() => {
+    async function check_user() {
+      const value = await AsyncStorage.getItem('user_id');
+      if (value !== null) {
+        navigation.navigate('Home');
+      }
+    }
+    check_user();
+  }, []);
+
   return (
     <>
       <LinearGradient
@@ -11,17 +41,39 @@ const Register = ({navigation}) => {
         style={styles.container}>
         <Stack space={4} alignItems="center">
           <Center>
-            <Image source={require('../images/logo.png')} style={{ width:200, height:200 }} alt="logo" />
+            <Image
+              source={require('../images/logo.png')}
+              style={{width: 200, height: 200}}
+              alt="logo"
+            />
           </Center>
           <Center>
             <Heading style={styles.Loginheading} size="xl">
               Registration
             </Heading>
           </Center>
-          <Input placeholder="Name" w="100%" size="lg" style={styles.Input} />
-          <Input placeholder="Phone" w="100%" size="lg" style={styles.Input} />
+          <Input
+            value={name}
+            placeholder="Name"
+            w="100%"
+            size="lg"
+            style={styles.Input}
+            onChangeText={text => setName(text)}
+          />
+          <Input
+            placeholder="Phone"
+            w="100%"
+            size="lg"
+            style={styles.Input}
+            value={phone}
+            onChangeText={text => setPhone(text)}
+          />
           <View style={styles.LoginbtnContainer}>
-            <Button style={styles.Loginbtn} onPress={()=>{navigation.navigate('Home')}}>
+            <Button
+              style={styles.Loginbtn}
+              onPress={() => {
+                submitform();
+              }}>
               <Text style={styles.LoginbtnText}>Submit</Text>
             </Button>
           </View>
@@ -41,7 +93,7 @@ const styles = StyleSheet.create({
   },
   Loginheading: {
     marginBottom: 20,
-    color:'#640003'
+    color: '#640003',
   },
   Input: {
     borderColor: 'gray',
@@ -59,8 +111,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 18,
     color: '#FFFFFF',
-  }
-
+  },
 });
 
 export default Register;
