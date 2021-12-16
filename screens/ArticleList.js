@@ -66,7 +66,7 @@ export default function ArticleList({navigation}) {
                   <Text style={{ fontSize:RFValue(16), fontWeight:'bold', color:'#000' }}>Article {index+1}</Text>
                   </VStack>
                   <Box style={styles.videoContent}>
-                    <Text style={styles.videoTitle} adjustsFontSizeToFit numberOfLines={2} >{item.title}</Text>
+                    <Text style={styles.videoTitle} adjustsFontSizeToFit numberOfLines={3} >{item.title}</Text>
                     {/* <Text style={styles.videoDescription} adjustsFontSizeToFit numberOfLines={2.8}>
                       {item.mini_desc}
                     </Text> */}
