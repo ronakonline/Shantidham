@@ -17,6 +17,7 @@ import ImageView from 'react-native-image-viewing';
 
 export default function ArticleDetail({navigation, route}) {
   const article_id = route.params.article_id;
+  const article_index = route.params.article_index;
   const img_url = 'https://app.jinjimaharaj.com/public/uploads/articles/';
   const [data, setData] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
@@ -42,7 +43,6 @@ export default function ArticleDetail({navigation, route}) {
             uri: img_url + item.image,
           })),
         );
-        console.log(images);
         setLoading(false);
       })
       .catch(error => {
@@ -59,7 +59,7 @@ export default function ArticleDetail({navigation, route}) {
           <ArrowBackIcon />
         </TouchableOpacity>
         <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-          <Text style={styles.text}>Article</Text>
+          <Text style={styles.text}>Article {article_index}</Text>
         </View>
       </HStack>
       <ScrollView style={{backgroundColor: '#FDD8DD'}}>

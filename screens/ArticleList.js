@@ -54,7 +54,7 @@ export default function ArticleList({navigation}) {
             <VStack style={styles.content} key={index} space={3}>
               <TouchableOpacity
                 onPress={() => {
-                  navigation.navigate('ArticleDetail',{article_id : item.id});
+                  navigation.navigate('ArticleDetail',{article_id : item.id,article_index : index+1});
                 }}>
                 <HStack style={styles.video} shadow={7}>
                   <VStack style={{ flex:1.6, width:'100%', borderRightWidth:1 , padding:5, justifyContent:'center' , alignItems:'center' }}>
