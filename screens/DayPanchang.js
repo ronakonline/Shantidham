@@ -325,6 +325,8 @@ const styles = StyleSheet.create({
     padding: 10,
     flexDirection: 'row',
     justifyContent: 'space-between',
+    borderBottomWidth: 1,
+    borderBottomColor: '#F7E6DF',
   },
   chogadiyaheadingText: {
     fontSize: 18,
