@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, View, VStack} from 'native-base';
+import {ScrollView, Text, View, VStack} from 'native-base';
 import {Calendar} from 'react-native-calendars';
 import {ActivityIndicator, StyleSheet, TouchableOpacity} from 'react-native';
 import {RFPercentage, RFValue} from 'react-native-responsive-fontsize';
@@ -74,7 +74,7 @@ export default function Panchang({navigation}) {
       {loading ? (
         <ActivityIndicator size="large" color="#0000ff" />
       ) : (
-        <>
+        <ScrollView>
           <Calendar
             style={styles.calendar}
             dayComponent={({date, state}) => {
@@ -212,7 +212,7 @@ export default function Panchang({navigation}) {
             <Text style={styles.footerDot}>{'\u2B24'}</Text>
             <Text style={styles.footerText}>Jain Event</Text>
           </View>
-        </>
+        </ScrollView>
       )}
     </View>
   );
