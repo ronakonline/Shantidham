@@ -14,7 +14,7 @@ export default function Article({navigation}) {
 
           <HStack style={styles.content} space={3}>
             <TouchableOpacity style={{ flex:1 }} onPress={() => navigation.navigate('ArticleList')} >
-                <Box style={{ height:140,width:'100%' }}>
+                <Box style={{ height:140,width:'100%',padding:5 }}>
                     <VStack style={{ flex:1,justifyContent:'center',alignItems:'center' }}>
                     <Image source={require('../images/article.png')} style={{ height:'100%', width:150 }} />
                     <Text style={{ fontSize:RFValue(22), fontWeight:'bold', color:'#000' }}>Articles</Text>
@@ -22,7 +22,7 @@ export default function Article({navigation}) {
                 </Box>
             </TouchableOpacity>
             <TouchableOpacity style={{ flex:1 }} onPress={() => navigation.navigate('QuoteGallery')} >
-                <Box style={{ height:140,width:'100%' }}>
+                <Box style={{ height:140,width:'100%',padding:5 }}>
                     <VStack style={{ flex:1,justifyContent:'center',alignItems:'center' }}>
                     <Image source={require('../images/quotes.png')} style={{ height:'100%', width:150 }} />
                     <Text style={{ fontSize:RFValue(22), fontWeight:'bold', color:'#000' }}>Quotes</Text>
