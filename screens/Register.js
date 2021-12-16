@@ -9,26 +9,33 @@ const Register = ({navigation}) => {
   const [name, setName] = React.useState(null);
   const [phone, setPhone] = React.useState(null);
   const submitform = async () => {
-    if (name === '') {
-      alert('Enter Name');
-    } else if (phone === '') {
-      alert('Enter Phone');
-    }
-
-    await fetch(
-      'https://app.jinjimaharaj.com/api/register_user/' + name + '/' + phone,
-    ).then(() => {
-      const random = Math.floor(Math.random() * 100);
-      AsyncStorage.setItem('user_id', random.toString());
-      navigation.navigate('Home');
-    });
+    console.log('name', name);
+    console.log('phone', phone);
+    if (name == null || phone == null) {
+      alert('Enter Details');
+    } 
+    else {
+      await fetch(
+        'https://app.jinjimaharaj.com/api/register_user/' + name + '/' + phone,
+      ).then(() => {
+        const random = Math.floor(Math.random() * 100);
+        AsyncStorage.setItem('user_id', random.toString());
+        navigation.reset({
+          index: 0,
+          routes: [{name: 'Home'}],
+        });
+      });
+     }
   };
 
   React.useEffect(() => {
     async function check_user() {
       const value = await AsyncStorage.getItem('user_id');
       if (value !== null) {
-        navigation.navigate('Home');
+        navigation.reset({
+          index: 0,
+          routes: [{name: 'Home'}],
+        });
       }
     }
     check_user();
