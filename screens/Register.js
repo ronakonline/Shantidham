@@ -2,6 +2,7 @@ import {Button, Center, Heading, Input, Stack, Image} from 'native-base';
 import React from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import {RFValue} from 'react-native-responsive-fontsize';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -13,8 +14,7 @@ const Register = ({navigation}) => {
     console.log('phone', phone);
     if (name == null || phone == null) {
       alert('Enter Details');
-    } 
-    else {
+    } else {
       await fetch(
         'https://app.jinjimaharaj.com/api/register_user/' + name + '/' + phone,
       ).then(() => {
@@ -25,7 +25,7 @@ const Register = ({navigation}) => {
           routes: [{name: 'Home'}],
         });
       });
-     }
+    }
   };
 
   React.useEffect(() => {
@@ -43,6 +43,24 @@ const Register = ({navigation}) => {
 
   return (
     <>
+      <View
+        style={{
+          height: 60,
+          widht: '100%',
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: '#fff',
+        }}>
+        <Text
+          style={{
+            fontSize: RFValue(26),
+            fontWeight: 'bold',
+            fontFamily: 'Arial',
+            color: '#640003',
+          }}>
+          SHANTIDHAM
+        </Text>
+      </View>
       <LinearGradient
         colors={['#FFFFFF', '#E4F6EA', '#D4F1DD']}
         style={styles.container}>

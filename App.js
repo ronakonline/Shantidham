@@ -66,7 +66,7 @@ export default function App() {
               backgroundColor: '#fff',
             },
           })}>
-          <Stack.Screen name="Register" component={RegisterScreen} />
+          <Stack.Screen name="Register" component={RegisterScreen} options={{headerShown: false}} />
           <Stack.Screen name="Home" component={HomeScreen} />
           <Stack.Screen name="Booking" component={BookingScreen} />
           <Stack.Screen name="VideoList" component={VideoListScreen} />
