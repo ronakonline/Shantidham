@@ -51,7 +51,12 @@ export default function Contactus({navigation}) {
                 </Text>
               </View>
               <VStack style={styles.InfoContainer}>
-                <Text style={styles.text}>
+                <Text
+                  style={{
+                    fontSize: RFValue(16),
+                    fontWeight: 'bold',
+                    color: '#000',
+                  }}>
                   Shantidham Aradhana Kendra, Tithal {'\n'}Valsad 396001
                   Gujarat, India
                 </Text>
@@ -88,6 +93,22 @@ export default function Contactus({navigation}) {
                 <Text style={{fontSize: 16, fontWeight: 'bold', color: '#000'}}>
                   jinjimaharaj@yahoo.co.in
                 </Text>
+              </VStack>
+            </HStack>
+            <HStack style={styles.DetailContainer}>
+              <View style={styles.iconContainer}>
+                <Text style={styles.icon}>
+                  <FontAwesome icon={SolidIcons.globe} style={{fontSize: 24}} />
+                </Text>
+              </View>
+              <VStack style={styles.InfoContainer}>
+                <TouchableOpacity
+                  onPress={() => Linking.openURL('https://jinjimaharaj.com/')}>
+                  <Text
+                    style={{fontSize: 16, fontWeight: 'bold', color: '#000'}}>
+                    https://jinjimaharaj.com/
+                  </Text>
+                </TouchableOpacity>
               </VStack>
             </HStack>
             <HStack style={styles.DetailContainer}>

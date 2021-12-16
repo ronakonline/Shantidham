@@ -31,10 +31,9 @@ const Home = ({navigation}) => {
     fetchData();
   }, []);
 
-  const openLink = () =>{
+  const openLink = () => {
     Linking.openURL(data.button_link);
-  }
-
+  };
 
   return (
     <View style={styles.container}>
@@ -132,7 +131,13 @@ const Home = ({navigation}) => {
           </View>
           <Box
             style={Object.assign({}, styles.MenuBox)}
-            style={{flex: 2, borderWidth: 1, borderColor: '#91980C',alignItems:'center',justifyContent:'center'}}>
+            style={{
+              flex: 2,
+              borderWidth: 1,
+              borderColor: '#91980C',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
             {loading ? (
               <ActivityIndicator size="large" color="#0000ff" />
             ) : data.is_quote_img == 1 ? (
@@ -144,12 +149,41 @@ const Home = ({navigation}) => {
                 style={{height: '100%', width: '100%'}}
               />
             ) : data.is_text == 1 && data.is_button == 0 ? (
-              <Text style={{ fontSize:RFValue(18), fontWeight:'bold'}}>{data.slider_text}</Text>
+              <Text style={{fontSize: RFValue(18), fontWeight: 'bold'}}>
+                {data.slider_text}
+              </Text>
             ) : (
               <>
-              <Text  numberOfLines={8}
-                    adjustsFontSizeToFit style={{ fontSize:RFValue(18), fontWeight:'bold',color:'#000'}}>{data.slider_text}</Text>
-              <Button style={{width:'80%',marginLeft:20, marginRight:20, marginTop:10, backgroundColor:'#f6828c'}} onPress={() => openLink()}><Text style={{ fontSize:RFValue(18), fontWeight:'bold', color:'#fff' }}>{data.button_name}</Text></Button>
+                <Text
+                  numberOfLines={8}
+                  adjustsFontSizeToFit
+                  style={{
+                    fontSize: RFValue(18),
+                    fontWeight: 'bold',
+                    color: '#640003',
+                    paddingHorizontal: 10,
+                  }}>
+                  {data.slider_text}
+                </Text>
+                <Button
+                  style={{
+                    width: '80%',
+                    height: 60,
+                    marginLeft: 20,
+                    marginRight: 20,
+                    marginTop: 10,
+                    backgroundColor: '#f6828c',
+                  }}
+                  onPress={() => openLink()}>
+                  <Text
+                    style={{
+                      fontSize: RFValue(30),
+                      fontWeight: 'bold',
+                      color: '#fff',
+                    }}>
+                    {data.button_name}
+                  </Text>
+                </Button>
               </>
             )}
           </Box>
@@ -235,7 +269,7 @@ const Home = ({navigation}) => {
               width: '100%',
               textAlign: 'center',
               paddingLeft: 10,
-              color:'#000'
+              color: '#640003',
             }}
             duration={15000}
             marqueeOnStart
