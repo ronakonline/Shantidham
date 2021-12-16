@@ -115,11 +115,10 @@ export default function Pachchhkan({navigation, route}) {
       </View>
       <View style={{flex: 1, backgroundColor: '#FDD8DD',paddingTop:20}}>
         <View style={{height: 250, width: '100%',backgroundColor: '#FDD8DD'}}>
-          {console.log(img_url + pachkhan.image)}
           <Image
             source={{uri: img_url + pachkhan.image}}
             resizeMethod="resize"
-            resizeMode="cover"
+            resizeMode="contain"
             style={{ height: 250, width: '100%' }}
             alt="img"
           />

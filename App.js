@@ -80,7 +80,7 @@ export default function App() {
           <Stack.Screen name="Panchang" component={PanchangScreen} />
           <Stack.Screen name="DayPanchang" component={DayPanchangScreen} />
           <Stack.Screen name="Contactus" component={ContactusScreen} />
-          <Stack.Screen name="Pachchhkan" component={PachchhkanScreen} />
+          <Stack.Screen name="Pachchhkan" component={PachchhkanScreen} options={{headerShown: false}} />
           <Stack.Screen name="Article" component={ArticleScreen} />
           <Stack.Screen name="ArticleDetail" component={ArticleDetailScreen} />
           <Stack.Screen name="QuoteGallery" component={QuoteGalleryScreen} />
