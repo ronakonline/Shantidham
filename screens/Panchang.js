@@ -93,7 +93,7 @@ export default function Panchang({navigation}) {
                     dayContent.highlight ? styles.markedDate : styles.dateblock
                   }>
                   <VStack
-                    style={{width: 48, overflow: 'hidden', alignSelf: 'center'}}
+                    style={{width: 48, overflow: 'hidden', alignSelf: 'center',backgroundColor:'#FADAC5'}}
                     space={2}>
                     <View style={styles.dateText}>
                       <Text style={styles.dateMark}>
@@ -141,12 +141,14 @@ export default function Panchang({navigation}) {
                   borderWidth: 1,
                   flex: 1,
                   padding: 0,
+                  backgroundColor:'#FADAC5',
                 },
                 emptyDayContainer: {
                   borderColor: '#DFCBBE',
                   borderWidth: 1,
                   flex: 1,
                   padding: 10,
+                  backgroundColor:'#FADAC5',
                 },
                 week: {
                   marginTop: 0,
