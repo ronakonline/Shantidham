@@ -33,7 +33,7 @@ export default function Panchang({navigation}) {
     });
     if (foundData) {
       thithiString =
-        foundData.tithi1 + ' ' + foundData.tithi2 + ' ' + foundData.tithi3;
+        foundData.tithi1 + '\n' + foundData.tithi2 + ' ' + foundData.tithi3;
       dayContent = {
         thithi: thithiString,
         highlight: foundData.highlight == 'Y' ? true : false,
@@ -93,7 +93,11 @@ export default function Panchang({navigation}) {
                     dayContent.highlight ? styles.markedDate : styles.dateblock
                   }>
                   <VStack
-                    style={{width: 48, overflow: 'hidden', alignSelf: 'center',backgroundColor:'#FADAC5'}}
+                    style={
+                      dayContent.highlight
+                        ? styles.markedVstack
+                        : styles.unmarkedVstack
+                    }
                     space={2}>
                     <View style={styles.dateText}>
                       <Text style={styles.dateMark}>
@@ -113,8 +117,6 @@ export default function Panchang({navigation}) {
                     <View
                       style={{
                         flexDirection: 'row',
-                        justifyContent: 'center',
-                        alignItems: 'center',
                       }}>
                       <Text
                         numberOfLines={2}
@@ -125,7 +127,6 @@ export default function Panchang({navigation}) {
                           fontWeight: 'bold',
                           color: state === 'disabled' ? 'gray' : '#5C1514',
                         }}>
-                        {console.log(date)}
                         {dayContent.thithi}
                       </Text>
                     </View>
@@ -141,14 +142,13 @@ export default function Panchang({navigation}) {
                   borderWidth: 1,
                   flex: 1,
                   padding: 0,
-                  backgroundColor:'#FADAC5',
                 },
                 emptyDayContainer: {
                   borderColor: '#DFCBBE',
                   borderWidth: 1,
                   flex: 1,
                   padding: 10,
-                  backgroundColor:'#FADAC5',
+                  backgroundColor: '#FADAC5',
                 },
                 week: {
                   marginTop: 0,
@@ -288,5 +288,17 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     paddingLeft: 10,
     color: '#5C1514',
+  },
+  markedVstack: {
+    width: 48,
+    overflow: 'hidden',
+    alignSelf: 'center',
+    backgroundColor: '#E9C7AE',
+  },
+  unmarkedVstack: {
+    width: 48,
+    overflow: 'hidden',
+    alignSelf: 'center',
+    backgroundColor: '#FADAC5',
   },
 });
