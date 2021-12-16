@@ -25,11 +25,15 @@ import PachchhkanLisScreen from './screens/PachchhkanList';
 import EventsScreen from './screens/Events';
 import ScheduleEventsScreen from './screens/ScheduleEvents';
 import LiveEventScreen from './screens/LiveEvents';
+import SplashScreen from 'react-native-splash-screen';
 
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+  React.useEffect(() => {
+    SplashScreen.hide();
+  }, [])
   return (
     <NavigationContainer>
       <NativeBaseProvider>
