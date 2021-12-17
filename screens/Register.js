@@ -1,9 +1,19 @@
-import {Button, Center, Heading, Input, Stack, Image} from 'native-base';
+import {
+  Button,
+  Center,
+  Heading,
+  Input,
+  Stack,
+  Image,
+  Container,
+  Box,
+  Text,
+} from 'native-base';
 import React from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {RFValue} from 'react-native-responsive-fontsize';
-
+import {SafeAreaView} from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Register = ({navigation}) => {
@@ -42,7 +52,7 @@ const Register = ({navigation}) => {
   }, []);
 
   return (
-    <>
+    <SafeAreaView style={{backgroundColor: 'red', flex: 1}}>
       <View
         style={{
           height: 60,
@@ -52,11 +62,12 @@ const Register = ({navigation}) => {
           backgroundColor: '#fff',
         }}>
         <Text
+          bold
           style={{
             fontSize: RFValue(26),
-            fontWeight: 'bold',
             fontFamily: 'Arial',
             color: '#640003',
+            padding: 10,
           }}>
           SHANTIDHAM
         </Text>
@@ -103,8 +114,31 @@ const Register = ({navigation}) => {
             </Button>
           </View>
         </Stack>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate('Home');
+          }}>
+          <Box
+            style={{
+              width: '100%',
+              top: 40,
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+            <Text
+              underline
+              bold
+              style={{
+                fontSize: RFValue(17),
+                fontFamily: 'Arial',
+                color: '#000',
+              }}>
+              Skip
+            </Text>
+          </Box>
+        </TouchableOpacity>
       </LinearGradient>
-    </>
+    </SafeAreaView>
   );
 };
 

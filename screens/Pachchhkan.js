@@ -4,9 +4,7 @@ import {
   View,
   HStack,
   ArrowBackIcon,
-  Button,
   Image,
-  Center,
 } from 'native-base';
 import {StyleSheet, TouchableOpacity} from 'react-native';
 import {RFValue} from 'react-native-responsive-fontsize';
@@ -17,6 +15,7 @@ import FontAwesome, {
 } from 'react-native-fontawesome';
 
 import Sound from 'react-native-sound';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function Pachchhkan({navigation, route}) {
   const pachkhan = route.params.pachkhan;
@@ -96,6 +95,7 @@ export default function Pachchhkan({navigation, route}) {
   };
 
   return (
+    <SafeAreaView style={{ flex:1 }}>
     <View style={{flex: 1}}>
       <HStack style={styles.header}>
         <TouchableOpacity
@@ -145,6 +145,7 @@ export default function Pachchhkan({navigation, route}) {
         </View>
       </View>
     </View>
+    </SafeAreaView>
   );
 }
 
