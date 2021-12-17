@@ -8,6 +8,7 @@ import {
   Container,
   Box,
   Text,
+  KeyboardAvoidingView,
 } from 'native-base';
 import React from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
@@ -75,45 +76,47 @@ const Register = ({navigation}) => {
       <LinearGradient
         colors={['#FFFFFF', '#E4F6EA', '#D4F1DD']}
         style={styles.container}>
-        <Stack space={4} alignItems="center">
-          <Center>
-            <Image
-              source={require('../images/logo.png')}
-              style={{width: 200, height: 200}}
-              alt="logo"
+        <KeyboardAvoidingView>
+          <Stack space={4} alignItems="center">
+            <Center>
+              <Image
+                source={require('../images/logo.png')}
+                style={{width: 200, height: 200}}
+                alt="logo"
+              />
+            </Center>
+            <Center>
+              <Heading style={styles.Loginheading} size="xl">
+                Registration
+              </Heading>
+            </Center>
+            <Input
+              value={name}
+              placeholder="Name"
+              w="100%"
+              size="lg"
+              style={styles.Input}
+              onChangeText={text => setName(text)}
             />
-          </Center>
-          <Center>
-            <Heading style={styles.Loginheading} size="xl">
-              Registration
-            </Heading>
-          </Center>
-          <Input
-            value={name}
-            placeholder="Name"
-            w="100%"
-            size="lg"
-            style={styles.Input}
-            onChangeText={text => setName(text)}
-          />
-          <Input
-            placeholder="Phone"
-            w="100%"
-            size="lg"
-            style={styles.Input}
-            value={phone}
-            onChangeText={text => setPhone(text)}
-          />
-          <View style={styles.LoginbtnContainer}>
-            <Button
-              style={styles.Loginbtn}
-              onPress={() => {
-                submitform();
-              }}>
-              <Text style={styles.LoginbtnText}>Submit</Text>
-            </Button>
-          </View>
-        </Stack>
+            <Input
+              placeholder="Phone"
+              w="100%"
+              size="lg"
+              style={styles.Input}
+              value={phone}
+              onChangeText={text => setPhone(text)}
+            />
+            <View style={styles.LoginbtnContainer}>
+              <Button
+                style={styles.Loginbtn}
+                onPress={() => {
+                  submitform();
+                }}>
+                <Text style={styles.LoginbtnText}>Submit</Text>
+              </Button>
+            </View>
+          </Stack>
+        </KeyboardAvoidingView>
         <TouchableOpacity
           onPress={() => {
             navigation.navigate('Home');
