@@ -1,4 +1,4 @@
-import {Button, HStack, VStack, Box, InfoOutlineIcon, Image} from 'native-base';
+import {Button, HStack, VStack, Box, Image} from 'native-base';
 import React from 'react';
 import {
   View,
@@ -47,7 +47,7 @@ const Home = ({navigation}) => {
               style={styles.icon}
               alt="main-Image"
             />
-            <Text style={styles.menuHeading}>About Us</Text>
+            <Text adjustsFontSizeToFit numberOfLines={1} style={styles.menuHeading}>About Us</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={Object.assign({}, styles.MenuBox, {
@@ -59,7 +59,7 @@ const Home = ({navigation}) => {
               style={styles.icon}
               alt="main-Image"
             />
-            <Text style={styles.menuHeading}>Panchang</Text>
+            <Text adjustsFontSizeToFit numberOfLines={1} style={styles.menuHeading}>Panchang</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={Object.assign({}, styles.MenuBox, {
@@ -71,7 +71,7 @@ const Home = ({navigation}) => {
               style={styles.icon}
               alt="main-Image"
             />
-            <Text style={styles.menuHeading}>Gallery</Text>
+            <Text adjustsFontSizeToFit numberOfLines={1} style={styles.menuHeading}>Gallery</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={Object.assign({}, styles.MenuBox, {
@@ -83,7 +83,7 @@ const Home = ({navigation}) => {
               style={styles.icon}
               alt="main-Image"
             />
-            <Text style={styles.menuHeading}>Donation</Text>
+            <Text adjustsFontSizeToFit numberOfLines={1} style={styles.menuHeading}>Donation</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => navigation.navigate('Events')}
@@ -211,7 +211,7 @@ const Home = ({navigation}) => {
               style={styles.icon}
               alt="main-Image"
             />
-            <Text style={styles.menuHeading}>Pachchhkan</Text>
+            <Text adjustsFontSizeToFit numberOfLines={1} style={styles.menuHeading}>Pachchhkan</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={Object.assign({}, styles.MenuBox, {
@@ -235,7 +235,7 @@ const Home = ({navigation}) => {
               style={styles.icon}
               alt="main-Image"
             />
-            <Text style={styles.menuHeading}>Contact Us</Text>
+            <Text adjustsFontSizeToFit numberOfLines={1} style={styles.menuHeading}>Contact Us</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={Object.assign({}, styles.MenuBox, {
