@@ -186,19 +186,21 @@ export default function Contactus({navigation}) {
                     onPress={() =>
                       Linking.openURL('https://www.facebook.com/Jinchandraji/')
                     }>
-                    <FontAwesome
-                      icon={BrandIcons.facebook}
-                      style={{fontSize: 42, color: '#4267B2'}}
-                    />
+                    <Image
+                    source={require('../images/icons/facebook.png')}
+                    style={{width: 48, height:48}}
+                    alt="map"
+                  />
                   </TouchableOpacity>
                   <TouchableOpacity
                     onPress={() =>
                       Linking.openURL('https://www.instagram.com/jinjimaharaj/')
                     }>
-                    <FontAwesome
-                      icon={BrandIcons.instagram}
-                      style={{fontSize: 42, color: '#E1306C'}}
-                    />
+                    <Image
+                    source={require('../images/icons/instagram.png')}
+                    style={{width: 48, height:48}}
+                    alt="map"
+                  />
                   </TouchableOpacity>
                   <TouchableOpacity
                     onPress={() =>
@@ -206,10 +208,11 @@ export default function Contactus({navigation}) {
                         'https://www.youtube.com/channel/UCTWUaWuTK7GJyJiWbUofm3g',
                       )
                     }>
-                    <FontAwesome
-                      icon={BrandIcons.youtube}
-                      style={{fontSize: 44, color: '#FF0000'}}
-                    />
+                    <Image
+                    source={require('../images/icons/youtube.png')}
+                    style={{width: 48, height:48}}
+                    alt="map"
+                  />
                   </TouchableOpacity>
                 </HStack>
               </VStack>
@@ -223,6 +226,7 @@ export default function Contactus({navigation}) {
             width: '100%',
             paddingHorizontal: 20,
             marginTop: 20,
+            marginBottom:20
           }}>
           <TouchableOpacity
             onPress={() =>
