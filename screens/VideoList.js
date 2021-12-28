@@ -39,7 +39,7 @@ export default function VideoList({navigation}) {
                     <Box style={styles.videoContent}>
                       <Text style={styles.videoTitle} adjustsFontSizeToFit numberOfLines={2} >{item.title}</Text>
                       <Text style={styles.videoDescription} adjustsFontSizeToFit numberOfLines={2}>
-                        {item.short_desc.substring(0, 30)}...
+                        {item.short_desc.substring(0, 45)}...
                       </Text>
                     </Box>
                     <Image
@@ -47,6 +47,8 @@ export default function VideoList({navigation}) {
                       source={{uri: img_url + item.img_outer}}
                       alt="text"
                       style={styles.videoImage}
+                      resizeMode='contain'
+                      resizeMethod='resize'
                     />
                   </HStack>
                 </TouchableOpacity>
