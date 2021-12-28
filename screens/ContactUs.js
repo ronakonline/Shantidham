@@ -105,7 +105,7 @@ export default function Contactus({navigation}) {
                   />
               </View>
               <VStack style={styles.InfoContainer}>
-                <Text style={{fontSize: 16, fontWeight: 'bold', color: '#000'}}>
+                <Text style={{fontSize: 16, fontWeight: 'bold', color: '#3030f0',textDecorationLine:'underline'}}>
                   jinjimaharaj@yahoo.co.in
                 </Text>
               </VStack>
@@ -125,7 +125,7 @@ export default function Contactus({navigation}) {
                 <TouchableOpacity
                   onPress={() => Linking.openURL('https://jinjimaharaj.com/')}>
                   <Text
-                    style={{fontSize: 16, fontWeight: 'bold', color: '#000'}}>
+                    style={{fontSize: 16, fontWeight: 'bold', color: '#3030f0',textDecorationLine:'underline'}}>
                     https://jinjimaharaj.com/
                   </Text>
                 </TouchableOpacity>
