@@ -43,12 +43,17 @@ export default function Contactus({navigation}) {
           <View style={styles.content}>
             <HStack style={styles.DetailContainer}>
               <View style={styles.iconContainer}>
-                <Text style={styles.icon}>
+                {/* <Text style={styles.icon}>
                   <FontAwesome
                     icon={SolidIcons.locationArrow}
                     style={{fontSize: 24}}
                   />
-                </Text>
+                </Text> */}
+                <Image
+                    source={require('../images/icons/location.png')}
+                    style={{width: 32, height:32}}
+                    alt="map"
+                  />
               </View>
               <VStack style={styles.InfoContainer}>
                 <Text
@@ -65,9 +70,14 @@ export default function Contactus({navigation}) {
 
             <HStack style={styles.DetailContainer}>
               <View style={styles.iconContainer}>
-                <Text style={styles.icon}>
-                  <FontAwesome icon={SolidIcons.phone} style={{fontSize: 24}} />
-                </Text>
+              
+                  {/* <FontAwesome icon={SolidIcons.phone} style={{fontSize: 24}} /> */}
+                  <Image
+                    source={require('../images/icons/phone.png')}
+                    style={{width: 32, height:32}}
+                    alt="map"
+                  />
+              
               </View>
               <VStack style={styles.InfoContainer}>
                 <Text
@@ -82,12 +92,17 @@ export default function Contactus({navigation}) {
             </HStack>
             <HStack style={styles.DetailContainer}>
               <View style={styles.iconContainer}>
-                <Text style={styles.icon}>
+                {/* <Text style={styles.icon}>
                   <FontAwesome
                     icon={SolidIcons.envelope}
                     style={{fontSize: 24}}
                   />
-                </Text>
+                </Text> */}
+                 <Image
+                    source={require('../images/icons/mail.png')}
+                    style={{width: 32, height:32}}
+                    alt="map"
+                  />
               </View>
               <VStack style={styles.InfoContainer}>
                 <Text style={{fontSize: 16, fontWeight: 'bold', color: '#000'}}>
@@ -97,9 +112,14 @@ export default function Contactus({navigation}) {
             </HStack>
             <HStack style={styles.DetailContainer}>
               <View style={styles.iconContainer}>
-                <Text style={styles.icon}>
+                {/* <Text style={styles.icon}>
                   <FontAwesome icon={SolidIcons.globe} style={{fontSize: 24}} />
-                </Text>
+                </Text> */}
+                 <Image
+                    source={require('../images/icons/globe.png')}
+                    style={{width: 32, height:32}}
+                    alt="map"
+                  />
               </View>
               <VStack style={styles.InfoContainer}>
                 <TouchableOpacity
@@ -113,12 +133,17 @@ export default function Contactus({navigation}) {
             </HStack>
             <HStack style={styles.DetailContainer}>
               <View style={styles.iconContainer}>
-                <Text style={styles.icon}>
+                {/* <Text style={styles.icon}>
                   <FontAwesome
                     icon={RegularIcons.clock}
                     style={{fontSize: 24}}
                   />
-                </Text>
+                </Text> */}
+                 <Image
+                    source={require('../images/icons/clock.png')}
+                    style={{width: 32, height:32}}
+                    alt="map"
+                  />
               </View>
               <VStack style={styles.InfoContainer}>
                 <HStack>
