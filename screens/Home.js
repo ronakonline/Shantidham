@@ -1,4 +1,4 @@
-import {Button, HStack, VStack, Box, InfoOutlineIcon, Image} from 'native-base';
+import {Button, HStack, VStack, Box, Image} from 'native-base';
 import React from 'react';
 import {
   View,
@@ -9,7 +9,6 @@ import {
   Linking,
 } from 'react-native';
 import {SliderBox} from 'react-native-image-slider-box';
-import MarqueeText from 'react-native-marquee';
 import {RFValue} from 'react-native-responsive-fontsize';
 
 const Home = ({navigation}) => {
@@ -47,7 +46,12 @@ const Home = ({navigation}) => {
               style={styles.icon}
               alt="main-Image"
             />
-            <Text style={styles.menuHeading}>About Us</Text>
+            <Text
+              adjustsFontSizeToFit
+              numberOfLines={1}
+              style={styles.menuHeading}>
+              About Us
+            </Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={Object.assign({}, styles.MenuBox, {
@@ -59,7 +63,12 @@ const Home = ({navigation}) => {
               style={styles.icon}
               alt="main-Image"
             />
-            <Text style={styles.menuHeading}>Panchang</Text>
+            <Text
+              adjustsFontSizeToFit
+              numberOfLines={1}
+              style={styles.menuHeading}>
+              Panchang
+            </Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={Object.assign({}, styles.MenuBox, {
@@ -71,7 +80,12 @@ const Home = ({navigation}) => {
               style={styles.icon}
               alt="main-Image"
             />
-            <Text style={styles.menuHeading}>Gallery</Text>
+            <Text
+              adjustsFontSizeToFit
+              numberOfLines={1}
+              style={styles.menuHeading}>
+              Gallery
+            </Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={Object.assign({}, styles.MenuBox, {
@@ -83,7 +97,12 @@ const Home = ({navigation}) => {
               style={styles.icon}
               alt="main-Image"
             />
-            <Text style={styles.menuHeading}>Donation</Text>
+            <Text
+              adjustsFontSizeToFit
+              numberOfLines={1}
+              style={styles.menuHeading}>
+              Donation
+            </Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => navigation.navigate('Events')}
@@ -211,7 +230,12 @@ const Home = ({navigation}) => {
               style={styles.icon}
               alt="main-Image"
             />
-            <Text style={styles.menuHeading}>Pachchhkan</Text>
+            <Text
+              adjustsFontSizeToFit
+              numberOfLines={1}
+              style={styles.menuHeading}>
+              Pachchhkan
+            </Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={Object.assign({}, styles.MenuBox, {
@@ -235,7 +259,12 @@ const Home = ({navigation}) => {
               style={styles.icon}
               alt="main-Image"
             />
-            <Text style={styles.menuHeading}>Contact Us</Text>
+            <Text
+              adjustsFontSizeToFit
+              numberOfLines={1}
+              style={styles.menuHeading}>
+              Contact Us
+            </Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={Object.assign({}, styles.MenuBox, {
@@ -263,19 +292,31 @@ const Home = ({navigation}) => {
         {loading ? (
           <ActivityIndicator size="large" color="#91980C" />
         ) : (
-          <MarqueeText
+          // <MarqueeText
+          //   style={{
+          //     fontSize: 20,
+          //     width: '100%',
+          //     textAlign: 'center',
+          //     paddingLeft: 10,
+          //     color: '#640003',
+          //   }}
+          //   duration={15000}
+          //   marqueeOnStart
+          //   loop>
+          //   {data.footer_text}
+          // </MarqueeText>
+          <Text
+            adjustsFontSizeToFit
+            numberOfLines={2}
             style={{
-              fontSize: 20,
+              fontSize: RFValue(20),
               width: '100%',
               textAlign: 'center',
               paddingLeft: 10,
               color: '#640003',
-            }}
-            duration={15000}
-            marqueeOnStart
-            loop>
+            }}>
             {data.footer_text}
-          </MarqueeText>
+          </Text>
         )}
       </Box>
     </View>

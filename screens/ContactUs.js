@@ -43,12 +43,17 @@ export default function Contactus({navigation}) {
           <View style={styles.content}>
             <HStack style={styles.DetailContainer}>
               <View style={styles.iconContainer}>
-                <Text style={styles.icon}>
+                {/* <Text style={styles.icon}>
                   <FontAwesome
                     icon={SolidIcons.locationArrow}
                     style={{fontSize: 24}}
                   />
-                </Text>
+                </Text> */}
+                <Image
+                    source={require('../images/icons/location.png')}
+                    style={{width: 32, height:32}}
+                    alt="map"
+                  />
               </View>
               <VStack style={styles.InfoContainer}>
                 <Text
@@ -65,9 +70,14 @@ export default function Contactus({navigation}) {
 
             <HStack style={styles.DetailContainer}>
               <View style={styles.iconContainer}>
-                <Text style={styles.icon}>
-                  <FontAwesome icon={SolidIcons.phone} style={{fontSize: 24}} />
-                </Text>
+              
+                  {/* <FontAwesome icon={SolidIcons.phone} style={{fontSize: 24}} /> */}
+                  <Image
+                    source={require('../images/icons/phone.png')}
+                    style={{width: 32, height:32}}
+                    alt="map"
+                  />
+              
               </View>
               <VStack style={styles.InfoContainer}>
                 <Text
@@ -82,30 +92,40 @@ export default function Contactus({navigation}) {
             </HStack>
             <HStack style={styles.DetailContainer}>
               <View style={styles.iconContainer}>
-                <Text style={styles.icon}>
+                {/* <Text style={styles.icon}>
                   <FontAwesome
                     icon={SolidIcons.envelope}
                     style={{fontSize: 24}}
                   />
-                </Text>
+                </Text> */}
+                 <Image
+                    source={require('../images/icons/mail.png')}
+                    style={{width: 32, height:32}}
+                    alt="map"
+                  />
               </View>
               <VStack style={styles.InfoContainer}>
-                <Text style={{fontSize: 16, fontWeight: 'bold', color: '#000'}}>
+                <Text style={{fontSize: 16, fontWeight: 'bold', color: '#3030f0',textDecorationLine:'underline'}}>
                   jinjimaharaj@yahoo.co.in
                 </Text>
               </VStack>
             </HStack>
             <HStack style={styles.DetailContainer}>
               <View style={styles.iconContainer}>
-                <Text style={styles.icon}>
+                {/* <Text style={styles.icon}>
                   <FontAwesome icon={SolidIcons.globe} style={{fontSize: 24}} />
-                </Text>
+                </Text> */}
+                 <Image
+                    source={require('../images/icons/globe.png')}
+                    style={{width: 32, height:32}}
+                    alt="map"
+                  />
               </View>
               <VStack style={styles.InfoContainer}>
                 <TouchableOpacity
                   onPress={() => Linking.openURL('https://jinjimaharaj.com/')}>
                   <Text
-                    style={{fontSize: 16, fontWeight: 'bold', color: '#000'}}>
+                    style={{fontSize: 16, fontWeight: 'bold', color: '#3030f0',textDecorationLine:'underline'}}>
                     https://jinjimaharaj.com/
                   </Text>
                 </TouchableOpacity>
@@ -113,12 +133,17 @@ export default function Contactus({navigation}) {
             </HStack>
             <HStack style={styles.DetailContainer}>
               <View style={styles.iconContainer}>
-                <Text style={styles.icon}>
+                {/* <Text style={styles.icon}>
                   <FontAwesome
                     icon={RegularIcons.clock}
                     style={{fontSize: 24}}
                   />
-                </Text>
+                </Text> */}
+                 <Image
+                    source={require('../images/icons/clock.png')}
+                    style={{width: 32, height:32}}
+                    alt="map"
+                  />
               </View>
               <VStack style={styles.InfoContainer}>
                 <HStack>
@@ -161,19 +186,21 @@ export default function Contactus({navigation}) {
                     onPress={() =>
                       Linking.openURL('https://www.facebook.com/Jinchandraji/')
                     }>
-                    <FontAwesome
-                      icon={BrandIcons.facebook}
-                      style={{fontSize: 42, color: '#4267B2'}}
-                    />
+                    <Image
+                    source={require('../images/icons/facebook.png')}
+                    style={{width: 48, height:48}}
+                    alt="map"
+                  />
                   </TouchableOpacity>
                   <TouchableOpacity
                     onPress={() =>
                       Linking.openURL('https://www.instagram.com/jinjimaharaj/')
                     }>
-                    <FontAwesome
-                      icon={BrandIcons.instagram}
-                      style={{fontSize: 42, color: '#E1306C'}}
-                    />
+                    <Image
+                    source={require('../images/icons/instagram.png')}
+                    style={{width: 48, height:48}}
+                    alt="map"
+                  />
                   </TouchableOpacity>
                   <TouchableOpacity
                     onPress={() =>
@@ -181,10 +208,11 @@ export default function Contactus({navigation}) {
                         'https://www.youtube.com/channel/UCTWUaWuTK7GJyJiWbUofm3g',
                       )
                     }>
-                    <FontAwesome
-                      icon={BrandIcons.youtube}
-                      style={{fontSize: 44, color: '#FF0000'}}
-                    />
+                    <Image
+                    source={require('../images/icons/youtube.png')}
+                    style={{width: 48, height:48}}
+                    alt="map"
+                  />
                   </TouchableOpacity>
                 </HStack>
               </VStack>
@@ -198,6 +226,7 @@ export default function Contactus({navigation}) {
             width: '100%',
             paddingHorizontal: 20,
             marginTop: 20,
+            marginBottom:20
           }}>
           <TouchableOpacity
             onPress={() =>

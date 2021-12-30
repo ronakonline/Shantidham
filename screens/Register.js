@@ -1,9 +1,20 @@
-import {Button, Center, Heading, Input, Stack, Image} from 'native-base';
+import {
+  Button,
+  Center,
+  Heading,
+  Input,
+  Stack,
+  Image,
+  Container,
+  Box,
+  Text,
+  KeyboardAvoidingView,
+} from 'native-base';
 import React from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {RFValue} from 'react-native-responsive-fontsize';
-
+import {SafeAreaView} from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Register = ({navigation}) => {
@@ -42,7 +53,7 @@ const Register = ({navigation}) => {
   }, []);
 
   return (
-    <>
+    <SafeAreaView style={{backgroundColor: 'red', flex: 1}}>
       <View
         style={{
           height: 60,
@@ -52,11 +63,12 @@ const Register = ({navigation}) => {
           backgroundColor: '#fff',
         }}>
         <Text
+          bold
           style={{
             fontSize: RFValue(26),
-            fontWeight: 'bold',
             fontFamily: 'Arial',
             color: '#640003',
+            padding: 10,
           }}>
           SHANTIDHAM
         </Text>
@@ -64,47 +76,72 @@ const Register = ({navigation}) => {
       <LinearGradient
         colors={['#FFFFFF', '#E4F6EA', '#D4F1DD']}
         style={styles.container}>
-        <Stack space={4} alignItems="center">
-          <Center>
-            <Image
-              source={require('../images/logo.png')}
-              style={{width: 200, height: 200}}
-              alt="logo"
+        <KeyboardAvoidingView>
+          <Stack space={4} alignItems="center">
+            <Center>
+              <Image
+                source={require('../images/logo.png')}
+                style={{width: 200, height: 200}}
+                alt="logo"
+              />
+            </Center>
+            <Center>
+              <Heading style={styles.Loginheading} size="xl">
+                Registration
+              </Heading>
+            </Center>
+            <Input
+              value={name}
+              placeholder="Name"
+              w="100%"
+              size="lg"
+              style={styles.Input}
+              onChangeText={text => setName(text)}
             />
-          </Center>
-          <Center>
-            <Heading style={styles.Loginheading} size="xl">
-              Registration
-            </Heading>
-          </Center>
-          <Input
-            value={name}
-            placeholder="Name"
-            w="100%"
-            size="lg"
-            style={styles.Input}
-            onChangeText={text => setName(text)}
-          />
-          <Input
-            placeholder="Phone"
-            w="100%"
-            size="lg"
-            style={styles.Input}
-            value={phone}
-            onChangeText={text => setPhone(text)}
-          />
-          <View style={styles.LoginbtnContainer}>
-            <Button
-              style={styles.Loginbtn}
-              onPress={() => {
-                submitform();
+            <Input
+              placeholder="Phone"
+              w="100%"
+              size="lg"
+              style={styles.Input}
+              value={phone}
+              onChangeText={text => setPhone(text)}
+            />
+            <View style={styles.LoginbtnContainer}>
+              <Button
+                style={styles.Loginbtn}
+                onPress={() => {
+                  submitform();
+                }}>
+                <Text style={styles.LoginbtnText}>Submit</Text>
+              </Button>
+            </View>
+          </Stack>
+        </KeyboardAvoidingView>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate('Home');
+          }}>
+          <Box
+            style={{
+              width: '100%',
+              top: 40,
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+            <Text
+              underline
+              bold
+              style={{
+                fontSize: RFValue(17),
+                fontFamily: 'Arial',
+                color: '#000',
               }}>
-              <Text style={styles.LoginbtnText}>Submit</Text>
-            </Button>
-          </View>
-        </Stack>
+              Skip
+            </Text>
+          </Box>
+        </TouchableOpacity>
       </LinearGradient>
-    </>
+    </SafeAreaView>
   );
 };
 

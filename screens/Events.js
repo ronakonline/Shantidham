@@ -12,58 +12,66 @@ export default function Events({navigation}) {
             <Text style={styles.titleText}>Events</Text>
           </Box>
 
-          <HStack style={styles.content} space={3}>
+          <VStack style={styles.content} space={3}>
             <TouchableOpacity
               style={{flex: 1}}
               onPress={() => navigation.navigate('ScheduleEvents')}>
-              <Box style={{height: 150, width: '100%'}}>
-                <VStack
-                  style={{
-                    flex: 1,
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                  }}>
+              <Box
+                style={{
+                  height: 100,
+                  width: '100%',
+                  padding: 5,
+                  backgroundColor: '#afafed',
+                  borderWidth: 1,
+                  borderColor: '#A8C4E5',
+                }}>
+                <HStack style={{flex: 1, alignItems: 'center', marginLeft: 20}}>
                   <Image
                     source={require('../images/calendar.png')}
-                    style={{height: '100%', width: 150}}
+                    style={{height: 85, width: 85}}
                   />
-                  <Text
+                 <Text
                     style={{
                       fontSize: RFValue(22),
                       fontWeight: 'bold',
                       color: '#000',
+                      marginLeft: 50,
                     }}>
                     Schedule Events
                   </Text>
-                </VStack>
+                </HStack>
               </Box>
             </TouchableOpacity>
             <TouchableOpacity
               style={{flex: 1}}
               onPress={() => navigation.navigate('LiveEvent')}>
-              <Box style={{height: 150, width: '100%'}}>
-                <VStack
-                  style={{
-                    flex: 1,
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                  }}>
+              <Box
+                style={{
+                  height: 100,
+                  width: '100%',
+                  padding: 5,
+                  backgroundColor: '#afafed',
+                  borderWidth: 1,
+                  borderColor: '#A8C4E5',
+                }}>
+                <HStack style={{flex: 1, alignItems: 'center', marginLeft: 20}}>
                   <Image
                     source={require('../images/live_event.png')}
-                    style={{height: '100%', width: 150}}
+                    style={{height: 85, width: 85}}
                   />
                   <Text
                     style={{
                       fontSize: RFValue(22),
                       fontWeight: 'bold',
                       color: '#000',
+                      marginLeft: 50,
                     }}>
                     Live Events
                   </Text>
-                </VStack>
+                </HStack>
               </Box>
             </TouchableOpacity>
-          </HStack>
+          </VStack>
         </VStack>
       </ScrollView>
     </>

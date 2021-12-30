@@ -12,24 +12,66 @@ export default function Article({navigation}) {
             <Text style={styles.titleText}>Article</Text>
           </Box>
 
-          <HStack style={styles.content} space={3}>
-            <TouchableOpacity style={{ flex:1 }} onPress={() => navigation.navigate('ArticleList')} >
-                <Box style={{ height:140,width:'100%',padding:5 }}>
-                    <VStack style={{ flex:1,justifyContent:'center',alignItems:'center' }}>
-                    <Image source={require('../images/article.png')} style={{ height:'100%', width:150 }} />
-                    <Text style={{ fontSize:RFValue(22), fontWeight:'bold', color:'#000' }}>Articles</Text>
-                    </VStack>
-                </Box>
+          <VStack style={styles.content} space={3}>
+            <TouchableOpacity
+              style={{flex: 1}}
+              onPress={() => navigation.navigate('ArticleList')}>
+              <Box
+                style={{
+                  height: 100,
+                  width: '100%',
+                  padding: 5,
+                  backgroundColor: '#FDD3D7',
+                  borderWidth: 1,
+                  borderColor: '#F0BCC0',
+                }}>
+                <HStack style={{flex: 1, alignItems: 'center', marginLeft: 20}}>
+                  <Image
+                    source={require('../images/article.png')}
+                    style={{height: 85, width: 85}}
+                  />
+                  <Text
+                    style={{
+                      fontSize: RFValue(22),
+                      fontWeight: 'bold',
+                      color: '#000',
+                      marginLeft: 50,
+                    }}>
+                    Articles
+                  </Text>
+                </HStack>
+              </Box>
             </TouchableOpacity>
-            <TouchableOpacity style={{ flex:1 }} onPress={() => navigation.navigate('QuoteGallery')} >
-                <Box style={{ height:140,width:'100%',padding:5 }}>
-                    <VStack style={{ flex:1,justifyContent:'center',alignItems:'center' }}>
-                    <Image source={require('../images/quotes.png')} style={{ height:'100%', width:150 }} />
-                    <Text style={{ fontSize:RFValue(22), fontWeight:'bold', color:'#000' }}>Quotes</Text>
-                    </VStack>
-                </Box>
+            <TouchableOpacity
+              style={{flex: 1}}
+              onPress={() => navigation.navigate('QuoteGallery')}>
+              <Box
+                style={{
+                  height: 100,
+                  width: '100%',
+                  padding: 5,
+                  backgroundColor: '#FDD3D7',
+                  borderWidth: 1,
+                  borderColor: '#F0BCC0',
+                }}>
+                <HStack style={{flex: 1, alignItems: 'center', marginLeft: 20}}>
+                  <Image
+                    source={require('../images/quotes.png')}
+                    style={{height: 85, width: 85}}
+                  />
+                  <Text
+                    style={{
+                      fontSize: RFValue(22),
+                      fontWeight: 'bold',
+                      color: '#000',
+                      marginLeft: 50,
+                    }}>
+                    Quotes
+                  </Text>
+                </HStack>
+              </Box>
             </TouchableOpacity>
-          </HStack>
+          </VStack>
         </VStack>
       </ScrollView>
     </>
@@ -80,10 +122,10 @@ const styles = StyleSheet.create({
     height: '100%',
     borderRadius: 4,
   },
-    videoDescription: {
-        fontSize: 15,
-        marginLeft: 10,
-        marginTop: 10,
-        color: '#000',
-    },
+  videoDescription: {
+    fontSize: 15,
+    marginLeft: 10,
+    marginTop: 10,
+    color: '#000',
+  },
 });
