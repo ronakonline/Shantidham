@@ -9,6 +9,7 @@ import TrackPlayer, {
 } from 'react-native-track-player';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useFocusEffect} from '@react-navigation/native';
+import ImageColors from 'react-native-image-colors';
 
 export default function Pachchhkan({navigation, route}) {
   const pachkhan = route.params.pachkhan;
@@ -22,9 +23,23 @@ export default function Pachchhkan({navigation, route}) {
   const [playing, setPlaying] = React.useState();
   const [duration, setDuration] = React.useState(totalduration);
   const [mute, setMute] = React.useState(false);
+  const [PageColor , setPageColor] = React.useState('#FDD8DD');
   const progress = useProgress();
 
   React.useEffect(() => {
+    const fetchColors = async () => {
+      const result = await ImageColors.getColors(img_url + pachkhan.image);
+      switch (result.platform) {
+        case 'ios': 
+          setPageColor(result.primary);
+          break;
+        case 'android':
+          setPageColor(result.average);
+          break;
+      }
+      console.log(PageColor);
+      console.log(result);
+    };
     TrackPlayer.setupPlayer().then(() => {
       TrackPlayer.updateOptions({
         stopWithApp: false,
@@ -54,6 +69,8 @@ export default function Pachchhkan({navigation, route}) {
       'hardwareBackPress',
       backAction,
     );
+
+    fetchColors();
 
     return () => backHandler.remove();
   }, []);
@@ -101,7 +118,7 @@ export default function Pachchhkan({navigation, route}) {
   return (
     <SafeAreaView style={{flex: 1}}>
       <View style={{flex: 1}}>
-        <HStack style={styles.header}>
+        <HStack style={Object.assign({},styles.header,{backgroundColor:PageColor,borderBottomColor:PageColor})}>
           <TouchableOpacity
             style={{position: 'absolute'}}
             onPress={() => {
@@ -115,12 +132,12 @@ export default function Pachchhkan({navigation, route}) {
             <Text style={styles.text}>Pachchhkan</Text>
           </View>
         </HStack>
-        <View style={styles.subheader}>
+        <View style={Object.assign({},styles.subheader,{backgroundColor:PageColor,borderBottomColor:PageColor})}>
           <Text style={styles.subheadertext}>{pachkhan.title}</Text>
         </View>
-        <View style={{flex: 1, backgroundColor: '#FDD8DD', paddingTop: 20}}>
+        <View style={{flex: 1, backgroundColor: PageColor, paddingTop: 20}}>
           <View
-            style={{height: 250, width: '100%', backgroundColor: '#FDD8DD'}}>
+            style={{height: 250, width: '100%', backgroundColor: PageColor}}>
             <Image
               source={{uri: img_url + pachkhan.image}}
               resizeMethod="resize"
@@ -129,7 +146,7 @@ export default function Pachchhkan({navigation, route}) {
               alt="img"
             />
           </View>
-          <View style={styles.audioplayer}>
+          <View style={Object.assign({},styles.audioplayer,{backgroundColor:PageColor})}>
             {/* Button to toggle between play and pause */}
             <TouchableOpacity onPress={playPause}>
               <Image
