@@ -1,14 +1,14 @@
 import React from 'react';
-import {Text, View, HStack, ArrowBackIcon, Image} from 'native-base';
-import {StyleSheet, TouchableOpacity, BackHandler} from 'react-native';
+import {Text, View, HStack, ArrowBackIcon} from 'native-base';
+import {StyleSheet, TouchableOpacity, BackHandler, Image} from 'react-native';
 import {RFValue} from 'react-native-responsive-fontsize';
-import FontAwesome, {
-  SolidIcons,
-  RegularIcons,
-  BrandIcons,
-} from 'react-native-fontawesome';
-import TrackPlayer from 'react-native-track-player';
+import TrackPlayer, {
+  Event,
+  useProgress,
+  useTrackPlayerEvents,
+} from 'react-native-track-player';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import {useFocusEffect} from '@react-navigation/native';
 
 export default function Pachchhkan({navigation, route}) {
   const pachkhan = route.params.pachkhan;
@@ -22,19 +22,18 @@ export default function Pachchhkan({navigation, route}) {
   const [playing, setPlaying] = React.useState();
   const [duration, setDuration] = React.useState(totalduration);
   const [mute, setMute] = React.useState(false);
+  const progress = useProgress();
 
   React.useEffect(() => {
     TrackPlayer.setupPlayer().then(() => {
-
-
-     TrackPlayer.updateOptions({
-         stopWithApp: true,
-     });
+      TrackPlayer.updateOptions({
+        stopWithApp: false,
+      });
 
       TrackPlayer.add({
         id: 'pachkhan',
         url: soundFile,
-        title: 'Pachchhkan',
+        title: pachkhan.title,
         artist: 'Jinji Maharaj',
         artwork: img_url + pachkhan.image,
       });
@@ -52,13 +51,32 @@ export default function Pachchhkan({navigation, route}) {
     };
 
     const backHandler = BackHandler.addEventListener(
-        'hardwareBackPress',
-        backAction,
+      'hardwareBackPress',
+      backAction,
     );
 
     return () => backHandler.remove();
-    
   }, []);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      // Do something when the screen is focused
+
+      return () => {
+        // Do something when the screen is unfocused
+        // Useful for cleanup functions
+        TrackPlayer.reset();
+      };
+    }, []),
+  );
+
+  useTrackPlayerEvents([Event.PlaybackState], e => {
+    if (e.state === 1) {
+      setPlaying(false);
+      TrackPlayer.seekTo(0);
+      TrackPlayer.pause();
+    }
+  });
 
   const playPause = () => {
     if (playing) {
@@ -114,20 +132,30 @@ export default function Pachchhkan({navigation, route}) {
           <View style={styles.audioplayer}>
             {/* Button to toggle between play and pause */}
             <TouchableOpacity onPress={playPause}>
-              <FontAwesome
-                icon={playing ? SolidIcons.pause : SolidIcons.play}
-                style={{fontSize: 24}}
+              <Image
+                source={
+                  playing
+                    ? require('../images/icons/pause.png')
+                    : require('../images/icons/play.png')
+                }
+                style={{height: 30, width: 30}}
               />
             </TouchableOpacity>
             {/* shot total duration of the audio in min and sec format (min:sec) */}
             <Text>
               {/* seconds to min convert */}
-              {Math.floor(duration / 60)}:{Math.floor(duration % 60)}
+              {/* {Math.floor(duration / 60)}:{Math.floor(duration % 60)} */}
+              {Math.floor(progress.position / 60)}:
+              {Math.floor(progress.position % 60)}/{duration}
             </Text>
             <TouchableOpacity onPress={muteUnmute}>
-              <FontAwesome
-                icon={mute ? SolidIcons.volumeMute : SolidIcons.volumeUp}
-                style={{fontSize: 24}}
+              <Image
+                source={
+                  mute
+                    ? require('../images/icons/mute.png')
+                    : require('../images/icons/sound.png')
+                }
+                style={{height: 30, width: 30}}
               />
             </TouchableOpacity>
           </View>

@@ -98,7 +98,6 @@ export default function App() {
             <Stack.Screen
               name="Pachchhkan"
               component={PachchhkanScreen}
-              options={{headerShown: false}}
             />
             <Stack.Screen name="Article" component={ArticleScreen} />
             <Stack.Screen
