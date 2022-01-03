@@ -243,7 +243,7 @@ export default function DayPanchang({navigation, route}) {
         }}
         selectedDate={currentDate}
         startingDate={currentDate}
-        calendarHeaderStyle={{color: '#000', fontSize: 18, fontWeight: '400'}}
+        calendarHeaderStyle={{color: '#000', fontSize: 18, fontWeight: 'bold'}}
         calendarHeaderFormat={'MMMM YYYY'}
         dateNameStyle={{color: '#000', fontSize: 15, fontWeight: 'bold'}}
         dateNumberStyle={{color: '#000', fontSize: 15, fontWeight: 'bold'}}
@@ -347,10 +347,10 @@ const styles = StyleSheet.create({
     color: '#000',
   },
   subheader: {
-    flexDirection: 'column',
-    justifyContent: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
-    padding: 0,
+    padding: 10,
     paddingTop: 10,
     margin: 0,
   },
@@ -358,6 +358,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontFamily: 'Arial',
     color: '#000',
+    fontWeight: 'bold',
   },
   tabView: {
     flex: 1,

@@ -9,20 +9,47 @@ export default function Panchang({navigation}) {
   const [loading, setLoading] = React.useState(true);
   const [header1, setHeader1] = React.useState('');
   const [header2, setHeader2] = React.useState('');
+  var TodayMonth = new Date().getMonth() + 1;
+  if (TodayMonth < 10) {
+    TodayMonth = '0' + TodayMonth;
+  }
+  var TodayDate = new Date().getDate();
+  if (TodayDate < 10) {
+    TodayDate = '0' + TodayDate;
+  }
+  var TodayYear = new Date().getFullYear();
+  const [currentMonth, setCurrentMonth] = React.useState(
+    TodayYear + '-' + TodayMonth + '-' + TodayDate,
+  );
+  var CurrentDate = TodayYear + '-' + TodayMonth + '-' + TodayDate;
   var foundData = 0;
   var thithiString = '';
   var dayContent = {};
 
-  React.useEffect(() => {
-    fetch('https://app.jinjimaharaj.com/api/panchangs')
+  const FetchMonthData = (month, year) => {
+    var url =
+      'https://app.jinjimaharaj.com/api/get_month_data/' + month + '/' + year;
+    fetch(url)
       .then(response => response.json())
       .then(responseJson => {
         setData(responseJson);
+        setHeader1(responseJson[0].heading2);
+        setHeader2(responseJson[0].heading3);
         setLoading(false);
       })
       .catch(error => {
         console.error(error);
       });
+  };
+
+  React.useEffect(() => {
+    var Month = TodayMonth;
+    //if month starts with 0, remove 0
+    if (Month.charAt(0) == '0') {
+      Month = Month.substring(1);
+    }
+    setCurrentMonth(TodayYear + '-' + TodayMonth + '-' + TodayDate);
+    FetchMonthData(Month, TodayYear);
   }, []);
 
   const getdateinfo = (dd, mm, yyyy) => {
@@ -77,11 +104,62 @@ export default function Panchang({navigation}) {
         <ScrollView>
           <Calendar
             style={styles.calendar}
+            current={currentMonth}
             dayComponent={({date, state}) => {
               {
                 getdateinfo(date.day, date.month, date.year);
               }
-              return (
+              return date.dateString == CurrentDate ? (
+                <TouchableOpacity
+                  onPress={() => {
+                    navigation.navigate('DayPanchang', {
+                      date: date.dateString,
+                      data: data,
+                    });
+                  }}
+                  style={
+                    Object.assign({},dayContent.highlight ? styles.markedDate : styles.dateblock,{borderWidth:2,borderColor:'red'})
+                  }>
+                  <VStack
+                    style={
+                      Object.assign({},dayContent.highlight? styles.markedVstack : styles.unmarkedVstack)
+                    }
+                    space={2}>
+                    <View style={styles.dateText}>
+                      <Text style={styles.dateMark}>
+                        {dayContent.event ? '\u2B24' : ''}
+                      </Text>
+                      <Text
+                        style={{
+                          textAlign: 'center',
+                          fontSize: RFValue(14),
+                          fontWeight: 'bolder',
+                          color: state === 'disabled' ? 'gray' : '#5C1514',
+                        }}>
+                        {date.day}
+                      </Text>
+                    </View>
+
+                    <View
+                      style={{
+                        flexDirection: 'row',
+                        justifyContent: 'center',
+                      }}>
+                      <Text
+                        numberOfLines={2}
+                        adjustsFontSizeToFit
+                        style={{
+                          fontSize: RFValue(14),
+                          lineHeight: RFValue(16),
+                          fontWeight: '600',
+                          color: state === 'disabled' ? 'gray' : '#5C1514',
+                        }}>
+                        {dayContent.thithi}
+                      </Text>
+                    </View>
+                  </VStack>
+                </TouchableOpacity>
+              ) : (
                 <TouchableOpacity
                   onPress={() => {
                     navigation.navigate('DayPanchang', {
@@ -107,7 +185,7 @@ export default function Panchang({navigation}) {
                         style={{
                           textAlign: 'center',
                           fontSize: RFValue(14),
-                          fontWeight: 'bold',
+                          fontWeight: 'bolder',
                           color: state === 'disabled' ? 'gray' : '#5C1514',
                         }}>
                         {date.day}
@@ -117,14 +195,15 @@ export default function Panchang({navigation}) {
                     <View
                       style={{
                         flexDirection: 'row',
+                        justifyContent: 'center',
                       }}>
                       <Text
                         numberOfLines={2}
                         adjustsFontSizeToFit
                         style={{
-                          fontSize: RFValue(10),
-                          lineHeight: 14,
-                          fontWeight: 'bold',
+                          fontSize: RFValue(14),
+                          lineHeight: RFValue(16),
+                          fontWeight: '600',
                           color: state === 'disabled' ? 'gray' : '#5C1514',
                         }}>
                         {dayContent.thithi}
@@ -133,6 +212,17 @@ export default function Panchang({navigation}) {
                   </VStack>
                 </TouchableOpacity>
               );
+            }}
+            onMonthChange={month => {
+              if (month.month < 10) {
+                setCurrentMonth(month.year + '-0' + month.month + '-01');
+              } else {
+                setCurrentMonth(month.year + '-' + month.month + '-01');
+              }
+              setLoading(true);
+              FetchMonthData(month.month, month.year);
+              setHeader1('');
+              setHeader2('');
             }}
             // Specify theme properties to override specific styles for calendar parts. Default = {}
             theme={{
@@ -161,34 +251,39 @@ export default function Panchang({navigation}) {
               'stylesheet.calendar.header': {
                 dayTextAtIndex0: {
                   color: '#5C1514',
+                  fontSize: RFValue(15),
                 },
                 dayTextAtIndex1: {
                   color: '#5C1514',
+                  fontSize: RFValue(15),
                 },
                 dayTextAtIndex2: {
                   color: '#5C1514',
+                  fontSize: RFValue(15),
                 },
                 dayTextAtIndex3: {
                   color: '#5C1514',
+                  fontSize: RFValue(15),
                 },
                 dayTextAtIndex4: {
                   color: '#5C1514',
+                  fontSize: RFValue(15),
                 },
                 dayTextAtIndex5: {
                   color: '#5C1514',
+                  fontSize: RFValue(15),
                 },
                 dayTextAtIndex6: {
                   color: '#5C1514',
+                  fontSize: RFValue(15),
                 },
               },
+              backgroundColor: '#FADAC5',
+              calendarBackground: '#FADAC5',
               textSectionTitleColor: '#b6c1cd',
               textSectionTitleDisabledColor: '#5C1514',
-              selectedDayBackgroundColor: '#5C1514',
-              selectedDayTextColor: '#5C1514',
               dayTextColor: '#5C1514',
               textDisabledColor: '#d9e1e8',
-              dotColor: '#00adf5',
-              selectedDotColor: '#FADAC5',
               arrowColor: 'black',
               disabledArrowColor: '#d9e1e8',
               monthTextColor: '#000',
@@ -202,10 +297,11 @@ export default function Panchang({navigation}) {
               textDayFontSize: 14,
               textMonthFontSize: 16,
               textDayHeaderFontWeight: 'bold',
-              textDayStyle: {
-                color: '#5C1514',
-              },
-              textDayHeaderFontSize: 14,
+              todayBackgroundColor: 'red',
+              todayTextColor: 'blue',
+              selectedDayBackgroundColor: '#5C1514',
+              selectedDayTextColor: '#FADAC5',
+              selectedDayBorderColor: '#5C1514',
             }}
           />
           <View style={styles.footer}>
@@ -254,7 +350,7 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
   },
   markedDate: {
-    backgroundColor: '#E9C7AE',
+    backgroundColor: '#e3a578',
     paddingBottom: 10,
   },
   dateText: {
@@ -265,7 +361,7 @@ const styles = StyleSheet.create({
   dateMark: {
     fontSize: 12,
     fontWeight: 'bold',
-    color: '#5C1514',
+    color: '#a34905',
   },
   container: {
     flex: 1,
@@ -281,7 +377,7 @@ const styles = StyleSheet.create({
   footerDot: {
     fontSize: 12,
     fontWeight: 'bold',
-    color: '#5C1514',
+    color: '#a34905',
   },
   footerText: {
     fontSize: 15,
@@ -293,7 +389,7 @@ const styles = StyleSheet.create({
     width: 48,
     overflow: 'hidden',
     alignSelf: 'center',
-    backgroundColor: '#E9C7AE',
+    backgroundColor: '#e3a578',
   },
   unmarkedVstack: {
     width: 48,
