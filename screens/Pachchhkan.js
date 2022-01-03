@@ -18,7 +18,7 @@ export default function Pachchhkan({navigation, route}) {
   const img_url = 'https://app.jinjimaharaj.com/uploads/pachkhan/';
 
   const soundFile = mp3_url + pachkhan.audiofile;
-  var totalduration = 0;
+  var totalduration = pachkhan.duration;
 
   const [playing, setPlaying] = React.useState();
   const [duration, setDuration] = React.useState(totalduration);
@@ -51,6 +51,7 @@ export default function Pachchhkan({navigation, route}) {
         title: pachkhan.title,
         artist: 'Jinji Maharaj',
         artwork: img_url + pachkhan.image,
+        duration: totalduration,
       });
 
       TrackPlayer.getDuration().then(duration => {
@@ -163,7 +164,7 @@ export default function Pachchhkan({navigation, route}) {
               {/* seconds to min convert */}
               {/* {Math.floor(duration / 60)}:{Math.floor(duration % 60)} */}
               {Math.floor(progress.position / 60)}:
-              {Math.floor(progress.position % 60)}/{duration}
+              {Math.floor(progress.position % 60)}/{Math.floor(duration / 60)}:{Math.floor(duration % 60)}
             </Text>
             <TouchableOpacity onPress={muteUnmute}>
               <Image
