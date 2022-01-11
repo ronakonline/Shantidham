@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "247332225235",
+    "project_id": "test-92a9f",
+    "storage_bucket": "test-92a9f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:247332225235:android:c060ad491af3636ec9d426",
+        "android_client_info": {
+          "package_name": "com.shantidham"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "247332225235-cthjmqk4n44brka4s2cl07so3n5f9a1i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyACvpHbN6qCUvCteAb-4bFLIG-VJBSHzF8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "247332225235-cthjmqk4n44brka4s2cl07so3n5f9a1i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
