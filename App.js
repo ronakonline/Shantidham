@@ -26,6 +26,7 @@ import EventsScreen from './screens/Events';
 import ScheduleEventsScreen from './screens/ScheduleEvents';
 import LiveEventScreen from './screens/LiveEvents';
 import SplashScreen from 'react-native-splash-screen';
+import Notification from './screens/Notification';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 
 const Stack = createNativeStackNavigator();
@@ -63,14 +64,16 @@ export default function App() {
                 </TouchableOpacity>
               ),
               headerRight: () => (
-                <Box style={{marginRight: 10}}>
+                <TouchableOpacity style={{marginRight: 10}}
+                  onPress={() => navigation.navigate('Notification')}>
+                
                   <Image
                     source={require('./images/notification.png')}
                     alt="Search"
                     height={8}
                     width={8}
                   />
-                </Box>
+                </TouchableOpacity>
               ),
               //set header background color to blue
               headerStyle: {
@@ -83,6 +86,7 @@ export default function App() {
               options={{headerShown: false}}
             />
             <Stack.Screen name="Home" component={HomeScreen} />
+            <Stack.Screen name="Notification" component={Notification} />
             <Stack.Screen name="Booking" component={BookingScreen} />
             <Stack.Screen name="VideoList" component={VideoListScreen} />
             <Stack.Screen name="Video" component={VideoScreen} />
