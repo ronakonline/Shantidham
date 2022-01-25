@@ -181,7 +181,7 @@ export default function Contactus({navigation}) {
                 </Text>
               </View>
               <VStack style={styles.InfoContainer}>
-                <HStack space={10}>
+                <HStack space={3}>
                   <TouchableOpacity
                     onPress={() =>
                       Linking.openURL('https://www.facebook.com/Jinchandraji/')

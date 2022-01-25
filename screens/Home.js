@@ -141,7 +141,7 @@ const Home = ({navigation}) => {
                 ]}
                 sliderBoxHeight="100%"
                 resizeMethod="scale"
-                resizeMode="contain"
+                resizeMode = "cover"
                 parentWidth={weight}
                 autoplay
                 circleLoop

@@ -27,6 +27,8 @@ import ScheduleEventsScreen from './screens/ScheduleEvents';
 import LiveEventScreen from './screens/LiveEvents';
 import SplashScreen from 'react-native-splash-screen';
 import Notification from './screens/Notification';
+import DvdList from './screens/DvdList';
+import DvdDetail from './screens/DvdDetail';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 
 const Stack = createNativeStackNavigator();
@@ -119,6 +121,8 @@ export default function App() {
               component={ScheduleEventsScreen}
             />
             <Stack.Screen name="LiveEvent" component={LiveEventScreen} />
+            <Stack.Screen name="DvdList" component={DvdList} />
+            <Stack.Screen name="DvdDetail" component={DvdDetail} />
           </Stack.Navigator>
         </NativeBaseProvider>
       </NavigationContainer>

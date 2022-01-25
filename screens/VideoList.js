@@ -58,8 +58,9 @@ export default function VideoList({navigation}) {
             <View
               style={{
                 flex: 1,
+                flexDirection: 'row',
                 alignItems: 'center',
-                justifyContent: 'center',
+                justifyContent: 'space-around',
                 marginTop: 20,
                 marginBottom: 40,
               }}>
@@ -68,6 +69,13 @@ export default function VideoList({navigation}) {
                 style={{height: 50, width: 150, backgroundColor: '#92DCA7'}}>
                 <Text style={{fontSize: 18, fontWeight: 'bold', color: '#000'}}>
                   View More
+                </Text>
+              </Button>
+              <Button
+                onPress={() => navigation.navigate('DvdList')}
+                style={{height: 50, width: 150, backgroundColor: '#92DCA7'}}>
+                <Text style={{fontSize: 18, fontWeight: 'bold', color: '#000'}}>
+                  CD/DVD List
                 </Text>
               </Button>
             </View>
