@@ -118,11 +118,11 @@ export default function Panchang({navigation}) {
                     });
                   }}
                   style={
-                    Object.assign({},dayContent.highlight ? styles.markedDate : styles.dateblock,{borderWidth:2,borderColor:'red'})
+                    Object.assign({},dayContent.highlight ? styles.markedDate : styles.dateblock,{borderWidth:2,borderColor:'red',zIndex: 99,elevation: 99})
                   }>
                   <VStack
                     style={
-                      Object.assign({},dayContent.highlight? styles.markedVstack : styles.unmarkedVstack)
+                      Object.assign({},dayContent.highlight? styles.markedVstack : styles.unmarkedVstack,{padding:3})
                     }
                     space={2}>
                     <View style={styles.dateText}>
@@ -133,7 +133,7 @@ export default function Panchang({navigation}) {
                         style={{
                           textAlign: 'center',
                           fontSize: RFValue(14),
-                          fontWeight: 'bolder',
+                          fontWeight: 'bold',
                           color: state === 'disabled' ? 'gray' : '#5C1514',
                         }}>
                         {date.day}
@@ -185,7 +185,7 @@ export default function Panchang({navigation}) {
                         style={{
                           textAlign: 'center',
                           fontSize: RFValue(14),
-                          fontWeight: 'bolder',
+                          fontWeight: 'bold',
                           color: state === 'disabled' ? 'gray' : '#5C1514',
                         }}>
                         {date.day}
