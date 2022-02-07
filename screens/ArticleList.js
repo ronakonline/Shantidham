@@ -34,7 +34,7 @@ export default function ArticleList({navigation}) {
 
   return (
     <>
-      <HStack style={styles.header}>
+      {/* <HStack style={styles.header}>
         <TouchableOpacity
           style={{position: 'absolute'}}
           onPress={() => navigation.goBack()}>
@@ -43,8 +43,15 @@ export default function ArticleList({navigation}) {
         <View style={{flex: 1, alignItems: 'center', justifyContent: 'center' }}>
           <Text style={styles.text}>Articles</Text>
         </View>
+      </HStack> */}
+      <HStack style={styles.header}>
+        <View style={styles.headerButtonView}>
+          <TouchableOpacity onPress={() => { navigation.pop() }} >
+            <Image source={require('../images/icons/back.png')} style={styles.headerButtonImage} />
+          </TouchableOpacity>
+        </View>
+        <Text style={styles.titleText}>Articles</Text>
       </HStack>
-
       <ScrollView style={{flex: 1, backgroundColor: '#FDD8DD'}}>
         {loading ? (
           <ActivityIndicator size="large" color="#0000ff" />
@@ -89,6 +96,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#FDD8DD',
     borderBottomWidth: 1,
     borderBottomColor: '#F0BCC0',
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
   text: {
     fontSize: 20,
@@ -103,6 +112,11 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#F0BCC0',
     backgroundColor: '#FDD8DD',
+  },
+  headerButtonView: {
+    aspectRatio: 1, height: 30, alignSelf: 'center', position: 'absolute', left: 10  },
+  headerButtonImage: {
+    aspectRatio: 1, height: '100%', padding: 10
   },
   titleText: {
     fontSize: 20,

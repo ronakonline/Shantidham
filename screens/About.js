@@ -14,7 +14,7 @@ export default function About({navigation, route}) {
   const img = route.params.img;
   return (
     <>
-      <HStack style={styles.header}>
+      {/* <HStack style={styles.header}>
         <TouchableOpacity
           style={{position: 'absolute'}}
           onPress={() => navigation.goBack()}>
@@ -23,6 +23,14 @@ export default function About({navigation, route}) {
         <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
           <Text style={styles.text}>About</Text>
         </View>
+      </HStack> */}
+      <HStack style={styles.heading}>
+        <View style={styles.headerButtonView}>
+          <TouchableOpacity onPress={() => { navigation.pop() }} >
+            <Image source={require('../images/icons/back.png')} style={styles.headerButtonImage} />
+          </TouchableOpacity>
+        </View>
+        <Text style={styles.titleText}>About</Text>
       </HStack>
       <View style={styles.container}>
         <TouchableOpacity
@@ -50,17 +58,24 @@ export default function About({navigation, route}) {
 }
 
 const styles = StyleSheet.create({
-  header: {
-    height: 55,
+  heading: {
+    height: 50,
+    flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'center',
     borderBottomWidth: 1,
-    backgroundColor: '#FDD8DD',
     borderBottomColor: '#F0BCC0',
-
+    backgroundColor: '#FDD8DD',
   },
-  text: {
+  headerButtonView: {
+    aspectRatio: 1, height: 30, alignSelf: 'center', position: 'absolute', left: 10  },
+  headerButtonImage: {
+    aspectRatio: 1, height: '100%', padding: 10
+  },
+  titleText: {
     fontSize: 20,
     fontWeight: 'bold',
+    color: '#000',
   },
   container: {
     flex: 1,

@@ -4,6 +4,7 @@ import {
   Text,
   StyleSheet,
   Image,
+  View,
   TouchableOpacity,
   ActivityIndicator,
 } from 'react-native';
@@ -30,6 +31,11 @@ export default function GalleryList({navigation}) {
       <ScrollView style={{flex: 1, backgroundColor: '#D4F1DD'}}>
         <VStack style={{flex: 1, backgroundColor: '#D4F1DD'}}>
           <Box style={styles.heading}>
+            <View style={styles.headerButtonView}>
+              <TouchableOpacity onPress={() => { navigation.pop() }} >
+                <Image source={require('../images/icons/back.png')} style={styles.headerButtonImage} />
+              </TouchableOpacity>
+            </View>
             <Text style={styles.titleText}>Gallery</Text>
           </Box>
 
@@ -75,6 +81,11 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#CBEED6',
     backgroundColor: '#D4F1DD',
+  },
+  headerButtonView: {
+    aspectRatio: 1, height: 30, alignSelf: 'center', position: 'absolute', left: 10  },
+  headerButtonImage: {
+    aspectRatio: 1, height: '100%', padding: 10
   },
   titleText: {
     fontSize: 20,

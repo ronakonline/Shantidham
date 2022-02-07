@@ -54,14 +54,20 @@ import {
     return (
       <>
         <HStack style={styles.header}>
-          <TouchableOpacity
+          <View style={styles.headerButtonView}>
+            <TouchableOpacity onPress={() => { navigation.pop() }} >
+              <Image source={require('../images/icons/back.png')} style={styles.headerButtonImage} />
+            </TouchableOpacity>
+          </View>
+          <Text style={styles.titleText}>CD/DVD {article_index}</Text>
+          {/* <TouchableOpacity
             style={{position: 'absolute'}}
             onPress={() => navigation.goBack()}>
             <ArrowBackIcon />
           </TouchableOpacity>
           <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
             <Text style={styles.text}>CD/DVD {article_index}</Text>
-          </View>
+          </View> */}
         </HStack>
         <ScrollView style={{backgroundColor: '#D4F1DD'}}>
           {loading ? (
@@ -115,6 +121,18 @@ import {
       backgroundColor: '#D4F1DD',
       borderBottomWidth: 1,
       borderBottomColor: '#CBEED6',
+      flexDirection: 'row',
+      justifyContent: 'center',
+    },
+    headerButtonView: {
+      aspectRatio: 1, height: 30, alignSelf: 'center', position: 'absolute', left: 10  },
+    headerButtonImage: {
+      aspectRatio: 1, height: '100%', padding: 10
+    },
+    titleText: {
+      fontSize: 20,
+      fontWeight: 'bold',
+      color: '#000',
     },
     text: {
       fontSize: 20,

@@ -9,6 +9,11 @@ export default function Article({navigation}) {
       <ScrollView style={{flex: 1, backgroundColor: '#FDD8DD'}}>
         <VStack style={{flex: 1, backgroundColor: '#FDD8DD'}}>
           <Box style={styles.heading}>
+            <View style={styles.headerButtonView}>
+              <TouchableOpacity onPress={() => { navigation.pop() }} >
+                <Image source={require('../images/icons/back.png')} style={styles.headerButtonImage} />
+              </TouchableOpacity>
+            </View>
             <Text style={styles.titleText}>Article</Text>
           </Box>
 
@@ -87,6 +92,11 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#F0BCC0',
     backgroundColor: '#FDD8DD',
+  },
+  headerButtonView: {
+    aspectRatio: 1, height: 30, alignSelf: 'center', position: 'absolute', left: 10  },
+  headerButtonImage: {
+    aspectRatio: 1, height: '100%', padding: 10
   },
   titleText: {
     fontSize: 20,

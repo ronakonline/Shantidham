@@ -117,9 +117,8 @@ export default function Pachchhkan({navigation, route}) {
   };
 
   return (
-    <SafeAreaView style={{flex: 1}}>
       <View style={{flex: 1}}>
-        <HStack style={Object.assign({},styles.header,{backgroundColor:PageColor,borderBottomColor:PageColor})}>
+        {/* <HStack style={Object.assign({},styles.header,{backgroundColor:PageColor,borderBottomColor:PageColor})}>
           <TouchableOpacity
             style={{position: 'absolute'}}
             onPress={() => {
@@ -132,6 +131,14 @@ export default function Pachchhkan({navigation, route}) {
             style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
             <Text style={styles.text}>Pachchhkan</Text>
           </View>
+        </HStack> */}
+        <HStack style={Object.assign({},styles.header,{backgroundColor:PageColor,borderBottomColor:PageColor})}>
+          <View style={styles.headerButtonView}>
+            <TouchableOpacity onPress={() => { navigation.pop() }} >
+              <Image source={require('../images/icons/back.png')} style={styles.headerButtonImage} />
+            </TouchableOpacity>
+          </View>
+          <Text style={styles.titleText}>Pachchhkan</Text>
         </HStack>
         <View style={Object.assign({},styles.subheader,{backgroundColor:PageColor,borderBottomColor:PageColor})}>
           <Text style={styles.subheadertext}>{pachkhan.title}</Text>
@@ -179,7 +186,6 @@ export default function Pachchhkan({navigation, route}) {
           </View>
         </View>
       </View>
-    </SafeAreaView>
   );
 }
 
@@ -190,6 +196,27 @@ const styles = StyleSheet.create({
     backgroundColor: '#FDD8DD',
     borderBottomWidth: 1,
     borderBottomColor: '#F0BCC0',
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  heading: {
+    height: 50,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderBottomWidth: 1,
+    borderBottomColor: '#F0BCC0',
+    backgroundColor: '#FDD8DD',
+  },
+  headerButtonView: {
+    aspectRatio: 1, height: 30, alignSelf: 'center', position: 'absolute', left: 10  },
+  headerButtonImage: {
+    aspectRatio: 1, height: '100%', padding: 10
+  },
+  titleText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#000',
   },
   text: {
     fontSize: 20,

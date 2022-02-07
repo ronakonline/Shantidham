@@ -48,7 +48,7 @@ export default function ScheduleEvents({navigation}) {
 
   return (
     <>
-      <HStack style={styles.header}>
+      {/* <HStack style={styles.header}>
         <TouchableOpacity
           style={{position: 'absolute'}}
           onPress={() => navigation.goBack()}>
@@ -57,6 +57,14 @@ export default function ScheduleEvents({navigation}) {
         <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
           <Text style={styles.text}>Schedule Events</Text>
         </View>
+      </HStack> */}
+      <HStack style={styles.heading}>
+        <View style={styles.headerButtonView}>
+          <TouchableOpacity onPress={() => { navigation.pop() }} >
+            <Image source={require('../images/icons/back.png')} style={styles.headerButtonImage} />
+          </TouchableOpacity>
+        </View>
+        <Text style={styles.titleText}>Schedule Events</Text>
       </HStack>
       <ScrollView style={{backgroundColor: '#cecefb'}}>
         {loading ? (
@@ -125,6 +133,27 @@ const styles = StyleSheet.create({
     backgroundColor: '#cecefb',
     borderBottomWidth: 1,
     borderBottomColor: '#A8C4E5',
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  heading: {
+    height: 50,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#cecefb',
+    borderBottomWidth: 1,
+    borderBottomColor: '#A8C4E5',
+  },
+  headerButtonView: {
+    aspectRatio: 1, height: 30, alignSelf: 'center', position: 'absolute', left: 10  },
+  headerButtonImage: {
+    aspectRatio: 1, height: '100%', padding: 10
+  },
+  titleText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#000',
   },
   text: {
     fontSize: 20,

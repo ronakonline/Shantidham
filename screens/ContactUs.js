@@ -26,6 +26,11 @@ export default function Contactus({navigation}) {
       <ScrollView style={{flex: 1, backgroundColor: '#CAE7EF'}}>
         <VStack style={{flex: 1, backgroundColor: '#CAE7EF'}}>
           <Box style={styles.heading}>
+            <View style={styles.headerButtonView}>
+              <TouchableOpacity onPress={() => { navigation.pop() }} >
+                <Image source={require('../images/icons/back.png')} style={styles.headerButtonImage} />
+              </TouchableOpacity>
+            </View>
             <Text style={styles.titleText}>Contact Us</Text>
           </Box>
           <View
@@ -257,6 +262,11 @@ const styles = StyleSheet.create({
     borderBottomColor: '#BBE4DC',
     backgroundColor: '#CAE7EF',
   },
+  headerButtonView: {
+    aspectRatio: 1, height: 30, alignSelf: 'center', position: 'absolute', left: 10  },
+  headerButtonImage: {
+    aspectRatio: 1, height: '100%', padding: 10
+  },
   titleText: {
     fontSize: 20,
     fontWeight: 'bold',
@@ -287,7 +297,7 @@ const styles = StyleSheet.create({
   iconContainer: {
     width: '20%',
     justifyContent: 'center',
-    alignItems: 'auto',
+    // alignItems: 'auto',
     paddingRight: 20,
   },
   icon: {

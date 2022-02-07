@@ -4,6 +4,7 @@ import {
   HStack,
   ArrowBackIcon,
   Button,
+  Image
 } from 'native-base';
 import React from 'react';
 import {StyleSheet, TouchableOpacity} from 'react-native';
@@ -11,7 +12,7 @@ import {StyleSheet, TouchableOpacity} from 'react-native';
 export default function Booking({navigation}) {
   return (
     <>
-      <HStack style={styles.header}>
+      {/* <HStack style={styles.header}>
         <TouchableOpacity
           style={{position: 'absolute'}}
           onPress={() => navigation.goBack()}>
@@ -20,6 +21,14 @@ export default function Booking({navigation}) {
         <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
           <Text style={styles.text}>Booking</Text>
         </View>
+      </HStack> */}
+      <HStack style={styles.header}>
+        <View style={styles.headerButtonView}>
+          <TouchableOpacity onPress={() => { navigation.pop() }} >
+            <Image source={require('../images/icons/back.png')} style={styles.headerButtonImage} />
+          </TouchableOpacity>
+        </View>
+        <Text style={styles.titleText}>Booking</Text>
       </HStack>
       <View style={styles.container}>
         <Text style={styles.Title}>Coming Soon</Text>
@@ -38,6 +47,27 @@ const styles = StyleSheet.create({
     backgroundColor: '#cecefb',
     borderBottomWidth: 1,
     borderBottomColor: '#A8C4E5',
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  heading: {
+    height: 50,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderBottomWidth: 1,
+    borderBottomColor: '#F0BCC0',
+    backgroundColor: '#FDD8DD',
+  },
+  headerButtonView: {
+    aspectRatio: 1, height: 30, alignSelf: 'center', position: 'absolute', left: 10  },
+  headerButtonImage: {
+    aspectRatio: 1, height: '100%', padding: 10
+  },
+  titleText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#000',
   },
   text: {
     fontSize: 20,

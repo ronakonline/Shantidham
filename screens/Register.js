@@ -11,13 +11,13 @@ import {
   KeyboardAvoidingView,
 } from 'native-base';
 import React from 'react';
-import {StyleSheet, TouchableOpacity, View} from 'react-native';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import {RFValue} from 'react-native-responsive-fontsize';
-import {SafeAreaView} from 'react-native-safe-area-context';
+import { RFValue } from 'react-native-responsive-fontsize';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const Register = ({navigation}) => {
+const Register = ({ navigation }) => {
   const [name, setName] = React.useState(null);
   const [phone, setPhone] = React.useState(null);
   const submitform = async () => {
@@ -33,7 +33,7 @@ const Register = ({navigation}) => {
         AsyncStorage.setItem('user_id', random.toString());
         navigation.reset({
           index: 0,
-          routes: [{name: 'Home'}],
+          routes: [{ name: 'Home' }],
         });
       });
     }
@@ -45,7 +45,7 @@ const Register = ({navigation}) => {
       if (value !== null) {
         navigation.reset({
           index: 0,
-          routes: [{name: 'Home'}],
+          routes: [{ name: 'Home' }],
         });
       }
     }
@@ -53,7 +53,7 @@ const Register = ({navigation}) => {
   }, []);
 
   return (
-    <SafeAreaView style={{backgroundColor: 'red', flex: 1}}>
+    <SafeAreaView style={{ backgroundColor: 'white', flex: 1 }} edges={['top']}>
       <View
         style={{
           height: 60,
@@ -81,7 +81,7 @@ const Register = ({navigation}) => {
             <Center>
               <Image
                 source={require('../images/logo.png')}
-                style={{width: 200, height: 200}}
+                style={{ width: 200, height: 200 }}
                 alt="logo"
               />
             </Center>
@@ -117,17 +117,14 @@ const Register = ({navigation}) => {
             </View>
           </Stack>
         </KeyboardAvoidingView>
-        <TouchableOpacity
-          onPress={() => {
-            navigation.navigate('Home');
+        <Box
+          style={{
+            width: '100%',
+            top: 40,
+            alignItems: 'center',
+            justifyContent: 'center',
           }}>
-          <Box
-            style={{
-              width: '100%',
-              top: 40,
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}>
+          <TouchableOpacity onPress={() => { navigation.navigate('Home'); }}>
             <Text
               underline
               bold
@@ -138,8 +135,8 @@ const Register = ({navigation}) => {
               }}>
               Skip
             </Text>
-          </Box>
-        </TouchableOpacity>
+          </TouchableOpacity>
+        </Box>
       </LinearGradient>
     </SafeAreaView>
   );
