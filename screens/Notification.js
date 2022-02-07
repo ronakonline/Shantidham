@@ -93,7 +93,7 @@ export default function Notification({navigation}) {
                             {item.message}
                           </Text>
                         </View>
-                        <View style={{flex: 0.2, marginRight:5}}>
+                        <View style={{flex: 0.2, marginRight:15}}>
                           <Text style={{textAlign: 'right'}}>{item.created_at_new}</Text>
                         </View>
                       </Box>

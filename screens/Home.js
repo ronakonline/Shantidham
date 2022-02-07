@@ -7,6 +7,8 @@ import {
   TouchableOpacity,
   ActivityIndicator,
   Linking,
+  BackHandler,
+  Alert,
 } from 'react-native';
 import {SliderBox} from 'react-native-image-slider-box';
 import {RFValue} from 'react-native-responsive-fontsize';
@@ -28,6 +30,28 @@ const Home = ({navigation}) => {
         .catch(error => console.log(error));
     }
     fetchData();
+
+    const backAction = () => {
+      //check if its Home screen
+      if (navigation.isFocused()) {
+        Alert.alert('Hold on!', 'Are you sure you want to exit?', [
+          {
+            text: 'Cancel',
+            onPress: () => null,
+            style: 'cancel',
+          },
+          {text: 'YES', onPress: () => BackHandler.exitApp()},
+        ]);
+        return true;
+      }
+    };
+
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      backAction,
+    );
+
+    return () => backHandler.remove();
   }, []);
 
   const openLink = () => {
@@ -141,7 +165,7 @@ const Home = ({navigation}) => {
                 ]}
                 sliderBoxHeight="100%"
                 resizeMethod="scale"
-                resizeMode = "cover"
+                resizeMode="cover"
                 parentWidth={weight}
                 autoplay
                 circleLoop

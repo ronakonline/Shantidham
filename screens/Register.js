@@ -11,7 +11,13 @@ import {
   KeyboardAvoidingView,
 } from 'native-base';
 import React from 'react';
-import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import {
+  StyleSheet,
+  TouchableOpacity,
+  View,
+  BackHandler,
+  Alert,
+} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -21,8 +27,6 @@ const Register = ({ navigation }) => {
   const [name, setName] = React.useState(null);
   const [phone, setPhone] = React.useState(null);
   const submitform = async () => {
-    console.log('name', name);
-    console.log('phone', phone);
     if (name == null || phone == null) {
       alert('Enter Details');
     } else {
@@ -30,26 +34,34 @@ const Register = ({ navigation }) => {
         'https://app.jinjimaharaj.com/api/register_user/' + name + '/' + phone,
       ).then(() => {
         const random = Math.floor(Math.random() * 100);
-        AsyncStorage.setItem('user_id', random.toString());
-        navigation.reset({
-          index: 0,
-          routes: [{ name: 'Home' }],
-        });
+        AsyncStorage.setItem('userToken', random.toString());
+        navigation.navigate('Home');
       });
     }
   };
 
   React.useEffect(() => {
-    async function check_user() {
-      const value = await AsyncStorage.getItem('user_id');
-      if (value !== null) {
-        navigation.reset({
-          index: 0,
-          routes: [{ name: 'Home' }],
-        });
+    const backAction = () => {
+      //check if its Home screen
+      if (navigation.isFocused()) {
+        Alert.alert('Hold on!', 'Are you sure you want to exit?', [
+          {
+            text: 'Cancel',
+            onPress: () => null,
+            style: 'cancel',
+          },
+          {text: 'YES', onPress: () => BackHandler.exitApp()},
+        ]);
+        return true;
       }
-    }
-    check_user();
+    };
+
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      backAction,
+    );
+
+    return () => backHandler.remove();
   }, []);
 
   return (

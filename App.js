@@ -1,7 +1,7 @@
 import React from 'react';
 import {NativeBaseProvider, Text, Box, Image} from 'native-base';
 import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {createStackNavigator} from '@react-navigation/stack';
 import {TouchableOpacity} from 'react-native';
 import RegisterScreen from './screens/Register';
 import HomeScreen from './screens/Home';
@@ -30,19 +30,32 @@ import Notification from './screens/Notification';
 import DvdList from './screens/DvdList';
 import DvdDetail from './screens/DvdDetail';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
+import {Badge} from 'native-base';
+import SplashScreenMain from './screens/SplashScreen';
 
-const Stack = createNativeStackNavigator();
+const Stack = createStackNavigator();
 
 export default function App() {
+  const [notificationcount, setNotificationcount] = React.useState(0);
   React.useEffect(() => {
-    SplashScreen.hide();
+    fetch('https://app.jinjimaharaj.com/api/get_notifcation_count')
+      .then(response => response.json())
+      .then(responseJson => {
+        setNotificationcount(responseJson);
+        SplashScreen.hide();
+      })
+      .catch(error => {
+        console.error(error);
+        SplashScreen.hide();
+      });
   }, []);
+
   return (
     <SafeAreaProvider>
       <NavigationContainer>
         <NativeBaseProvider>
           <Stack.Navigator
-            initialRouteName="Register"
+            initialRouteName="SplashScreenMain"
             screenOptions={({navigation}) => ({
               headerTitleAlign: 'center',
               title: 'SHANTIDHAM',
@@ -66,9 +79,22 @@ export default function App() {
                 </TouchableOpacity>
               ),
               headerRight: () => (
-                <TouchableOpacity style={{marginRight: 10}}
+                <TouchableOpacity
+                  style={{marginRight: 10}}
                   onPress={() => navigation.navigate('Notification')}>
-                
+                  <Badge // bg="red.400"
+                    colorScheme="danger"
+                    rounded="full"
+                    mb={-4}
+                    mr={-2}
+                    zIndex={1}
+                    variant="solid"
+                    alignSelf="flex-end"
+                    _text={{
+                      fontSize: 12,
+                    }}>
+                    {notificationcount.total}
+                  </Badge>
                   <Image
                     source={require('./images/notification.png')}
                     alt="Search"
@@ -87,6 +113,11 @@ export default function App() {
               component={RegisterScreen}
               options={{headerShown: false}}
             />
+            <Stack.Screen
+              name="SplashScreenMain"
+              component={SplashScreenMain}
+              options={{headerShown: false}}
+            />
             <Stack.Screen name="Home" component={HomeScreen} />
             <Stack.Screen name="Notification" component={Notification} />
             <Stack.Screen name="Booking" component={BookingScreen} />
@@ -101,10 +132,7 @@ export default function App() {
             <Stack.Screen name="Panchang" component={PanchangScreen} />
             <Stack.Screen name="DayPanchang" component={DayPanchangScreen} />
             <Stack.Screen name="Contactus" component={ContactusScreen} />
-            <Stack.Screen
-              name="Pachchhkan"
-              component={PachchhkanScreen}
-            />
+            <Stack.Screen name="Pachchhkan" component={PachchhkanScreen} />
             <Stack.Screen name="Article" component={ArticleScreen} />
             <Stack.Screen
               name="ArticleDetail"
