@@ -30,7 +30,7 @@ export default function Video({navigation,route}) {
         <Text style={styles.titleText}>{video.title}</Text>
       </View> */}
       <View style={styles.video}>
-        <YoutubePlayer height={220} videoId={videoId}  />
+        <YoutubePlayer webViewStyle={ {opacity:0.99} }  height={220} videoId={videoId}  />
       </View>
       <View>
           <View style={styles.title}>

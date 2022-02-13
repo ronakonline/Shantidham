@@ -1,7 +1,7 @@
 import React from 'react';
 import {NativeBaseProvider, Text, Box, Image} from 'native-base';
 import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {TouchableOpacity} from 'react-native';
 import RegisterScreen from './screens/Register';
 import HomeScreen from './screens/Home';
@@ -32,22 +32,52 @@ import DvdDetail from './screens/DvdDetail';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {Badge} from 'native-base';
 import SplashScreenMain from './screens/SplashScreen';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();
 
 export default function App() {
-  const [notificationcount, setNotificationcount] = React.useState(0);
+  const [notificationcount, setNotificationcount] = React.useState([]);
+  const [noticount, setNoticount] = React.useState(0);
+
+  setCount = async () => {
+    try {
+      const value = await AsyncStorage.getItem('viewed_notification');
+      var count = 0;
+      console.log(notificationcount.ids);
+      console.log(value);
+      if (value !== null) {
+          for(let i=0; i<notificationcount.ids.length; i++){
+            for(let j=0; j<value.length; j++){
+              if(notificationcount.ids[i] == value[j]){
+                count++;
+                break;
+              }
+            }
+          }
+          setNoticount(notificationcount.ids.length - count);
+      }else{
+        setNoticount(notificationcount.ids.length);
+      }
+    } catch (e) {
+      // error reading value
+    }
+  };
+
+
   React.useEffect(() => {
     fetch('https://app.jinjimaharaj.com/api/get_notifcation_count')
       .then(response => response.json())
       .then(responseJson => {
         setNotificationcount(responseJson);
+        setCount();
         SplashScreen.hide();
       })
       .catch(error => {
         console.error(error);
         SplashScreen.hide();
       });
+   
   }, []);
 
   return (
@@ -82,19 +112,21 @@ export default function App() {
                 <TouchableOpacity
                   style={{marginRight: 10}}
                   onPress={() => navigation.navigate('Notification')}>
-                  <Badge // bg="red.400"
-                    colorScheme="danger"
-                    rounded="full"
-                    mb={-4}
-                    mr={-2}
-                    zIndex={1}
-                    variant="solid"
-                    alignSelf="flex-end"
-                    _text={{
-                      fontSize: 12,
-                    }}>
-                    {notificationcount.total}
-                  </Badge>
+                  {noticount > 0 ? (
+                    <Badge // bg="red.400"
+                      colorScheme="danger"
+                      rounded="full"
+                      mb={-4}
+                      mr={-2}
+                      zIndex={1}
+                      variant="solid"
+                      alignSelf="flex-end"
+                      _text={{
+                        fontSize: 12,
+                      }}>
+                      {noticount}
+                    </Badge>
+                  ) : null}
                   <Image
                     source={require('./images/notification.png')}
                     alt="Search"

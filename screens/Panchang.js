@@ -135,7 +135,8 @@ export default function Panchang({navigation}) {
                           fontSize: RFValue(14),
                           fontWeight: 'bold',
                           color: state === 'disabled' ? 'gray' : '#5C1514',
-                          color: 'red'
+                          color: 'red',
+                          marginRight: 3,
                         }}>
                         {date.day}
                       </Text>
@@ -189,6 +190,7 @@ export default function Panchang({navigation}) {
                           fontSize: RFValue(14),
                           fontWeight: 'bold',
                           color: state === 'disabled' ? 'gray' : '#5C1514',
+                          marginRight: 3,
                         }}>
                         {date.day}
                       </Text>

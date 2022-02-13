@@ -34,9 +34,9 @@ const Home = ({navigation}) => {
     const backAction = () => {
       //check if its Home screen
       if (navigation.isFocused()) {
-        Alert.alert('Hold on!', 'Are you sure you want to exit?', [
+        Alert.alert('Shantidham', 'Are you sure to exit from Shantidham?', [
           {
-            text: 'Cancel',
+            text: 'NO',
             onPress: () => null,
             style: 'cancel',
           },

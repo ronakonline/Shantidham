@@ -16,6 +16,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import {RFValue} from 'react-native-responsive-fontsize';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Notification({navigation}) {
   const [data, setData] = React.useState([]);
@@ -65,6 +66,17 @@ export default function Notification({navigation}) {
                     if(item.screenname == null){
 
                     }else{
+                      //check if viewed_notification exists in asyncstorage
+                      AsyncStorage.getItem('viewed_notification').then(value => {
+                        if(value == null){
+                          AsyncStorage.setItem('viewed_notification', JSON.stringify([item.id]));
+                        }else{
+                          var array = JSON.parse(value);
+                          array.push(item.id);
+                          AsyncStorage.setItem('viewed_notification', JSON.stringify(array));
+                        }
+                      });
+
                       console.log(item.screenname);
                       navigation.navigate(item.screenname);
                     }
@@ -78,14 +90,8 @@ export default function Notification({navigation}) {
                         numberOfLines={2}>
                         {item.title}
                       </Text>
-                      <Box
-                        style={{
-                          flex: 1,
-                          flexDirection: 'row',
-                          justifyContent: 'space-between',
-                          flexWrap: 'wrap',
-                        }}>
-                        <View style={{flex: 0.8}}>
+                      <HStack>
+                        <View style={{flex: 0.7}}>
                           <Text
                             style={styles.videoDescription}
                             adjustsFontSizeToFit
@@ -93,10 +99,10 @@ export default function Notification({navigation}) {
                             {item.message}
                           </Text>
                         </View>
-                        <View style={{flex: 0.2, marginRight:15}}>
-                          <Text style={{textAlign: 'right'}}>{item.created_at_new}</Text>
+                        <View style={{flex: 0.3, marginRight:30}}>
+                          <Text style={{textAlign: 'right'}} numberOfLines={1}>{item.created_at_new}</Text>
                         </View>
-                      </Box>
+                      </HStack>
                     </Box>
                   </VStack>
                 </TouchableOpacity>

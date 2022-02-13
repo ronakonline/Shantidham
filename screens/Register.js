@@ -9,6 +9,7 @@ import {
   Box,
   Text,
   KeyboardAvoidingView,
+  HStack,
 } from 'native-base';
 import React from 'react';
 import {
@@ -19,11 +20,11 @@ import {
   Alert,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import { RFValue } from 'react-native-responsive-fontsize';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import {RFValue} from 'react-native-responsive-fontsize';
+import {SafeAreaView} from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const Register = ({ navigation }) => {
+const Register = ({navigation}) => {
   const [name, setName] = React.useState(null);
   const [phone, setPhone] = React.useState(null);
   const submitform = async () => {
@@ -44,9 +45,9 @@ const Register = ({ navigation }) => {
     const backAction = () => {
       //check if its Home screen
       if (navigation.isFocused()) {
-        Alert.alert('Hold on!', 'Are you sure you want to exit?', [
+        Alert.alert('Shantidham', 'Are you sure to exit from Shantidham?', [
           {
-            text: 'Cancel',
+            text: 'NO',
             onPress: () => null,
             style: 'cancel',
           },
@@ -65,7 +66,7 @@ const Register = ({ navigation }) => {
   }, []);
 
   return (
-    <SafeAreaView style={{ backgroundColor: 'white', flex: 1 }} edges={['top']}>
+    <SafeAreaView style={{backgroundColor: 'white', flex: 1}} edges={['top']}>
       <View
         style={{
           height: 60,
@@ -93,7 +94,7 @@ const Register = ({ navigation }) => {
             <Center>
               <Image
                 source={require('../images/logo.png')}
-                style={{ width: 200, height: 200 }}
+                style={{width: 200, height: 200}}
                 alt="logo"
               />
             </Center>
@@ -118,37 +119,29 @@ const Register = ({ navigation }) => {
               value={phone}
               onChangeText={text => setPhone(text)}
             />
-            <View style={styles.LoginbtnContainer}>
-              <Button
-                style={styles.Loginbtn}
-                onPress={() => {
-                  submitform();
-                }}>
-                <Text style={styles.LoginbtnText}>Submit</Text>
-              </Button>
-            </View>
+            <HStack space={6}>
+              <View style={styles.LoginbtnContainer}>
+                <Button
+                  style={styles.Loginbtn}
+                  onPress={() => {
+                    submitform();
+                  }}>
+                  <Text style={styles.LoginbtnText}>Submit</Text>
+                </Button>
+              </View>
+              <View style={styles.LoginbtnContainer}>
+                <Button
+                  style={styles.Loginbtn}
+                  onPress={() => {
+                    navigation.navigate('Home');
+                  }}>
+                  <Text style={styles.LoginbtnText}>Skip</Text>
+                </Button>
+              </View>
+            </HStack>
           </Stack>
         </KeyboardAvoidingView>
-        <Box
-          style={{
-            width: '100%',
-            top: 40,
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}>
-          <TouchableOpacity onPress={() => { navigation.navigate('Home'); }}>
-            <Text
-              underline
-              bold
-              style={{
-                fontSize: RFValue(17),
-                fontFamily: 'Arial',
-                color: '#000',
-              }}>
-              Skip
-            </Text>
-          </TouchableOpacity>
-        </Box>
+       
       </LinearGradient>
     </SafeAreaView>
   );
