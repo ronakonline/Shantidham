@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "247332225235",
-    "project_id": "test-92a9f",
-    "storage_bucket": "test-92a9f.appspot.com"
+    "project_number": "895516358022",
+    "project_id": "shantidham-app",
+    "storage_bucket": "shantidham-app.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:247332225235:android:c060ad491af3636ec9d426",
+        "mobilesdk_app_id": "1:895516358022:android:80fcc5bac8832a6b706807",
         "android_client_info": {
           "package_name": "com.shantidham"
         }
       },
       "oauth_client": [
         {
-          "client_id": "247332225235-cthjmqk4n44brka4s2cl07so3n5f9a1i.apps.googleusercontent.com",
+          "client_id": "895516358022-pr7kmq6s3so4adb3af1qdbg40clcctva.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyACvpHbN6qCUvCteAb-4bFLIG-VJBSHzF8"
+          "current_key": "AIzaSyA804gWBKf1D79g0M7QInFV4DntJVFrXUE"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "247332225235-cthjmqk4n44brka4s2cl07so3n5f9a1i.apps.googleusercontent.com",
+              "client_id": "895516358022-pr7kmq6s3so4adb3af1qdbg40clcctva.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
