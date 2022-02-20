@@ -17,17 +17,40 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash" translatesAutoresizingMaskIntoConstraints="NO" id="vc0-ap-AWj">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="vc0-ap-AWj">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                             </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Wmq-MF-ree">
+                                <rect key="frame" x="30" y="258.66666666666669" width="315" height="295.00000000000006"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="EBY-8d-Dfr">
+                                        <rect key="frame" x="50" y="0.0" width="215" height="215"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="EBY-8d-Dfr" secondAttribute="height" multiplier="1:1" id="ZRm-nh-pIa"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="name" translatesAutoresizingMaskIntoConstraints="NO" id="gtb-RG-TRM">
+                                        <rect key="frame" x="0.0" y="215" width="315" height="80"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="80" id="FuD-ay-qbe"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="EBY-8d-Dfr" secondAttribute="trailing" constant="50" id="QrJ-GM-BRz"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Bcu-3y-fUS"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="vc0-ap-AWj" firstAttribute="trailing" secondItem="Bcu-3y-fUS" secondAttribute="trailing" id="2eU-HU-g4p"/>
+                            <constraint firstItem="Wmq-MF-ree" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="CDh-Pj-BL7"/>
                             <constraint firstAttribute="bottom" secondItem="vc0-ap-AWj" secondAttribute="bottom" id="JQk-DV-ep3"/>
+                            <constraint firstAttribute="trailing" secondItem="Wmq-MF-ree" secondAttribute="trailing" constant="30" id="hfG-dU-a7q"/>
                             <constraint firstItem="vc0-ap-AWj" firstAttribute="leading" secondItem="Bcu-3y-fUS" secondAttribute="leading" id="rS0-PJ-A03"/>
                             <constraint firstItem="vc0-ap-AWj" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="wqG-ix-2XA"/>
+                            <constraint firstItem="Wmq-MF-ree" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="wys-cr-td2"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -37,7 +60,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="splash" width="714" height="1234"/>
+        <image name="background" width="920" height="1568"/>
+        <image name="logo" width="512" height="512"/>
+        <image name="name" width="947" height="140"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -21,8 +21,8 @@ module.exports = async function() {
     TrackPlayer.destroy();
   });
 
-  TrackPlayer.addEventListener('stop', () => {
-    TrackPlayer.destroy();
-    console.log('TrackPlayer stopped');
-    });
+  // TrackPlayer.addEventListener('stop', () => {
+  //   TrackPlayer.destroy();
+  //   console.log('TrackPlayer stopped');
+  //   });
 };

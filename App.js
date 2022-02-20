@@ -1,4 +1,5 @@
 import React from 'react';
+import { Platform } from 'react-native'
 import {NativeBaseProvider, Text, Box, Image} from 'native-base';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -33,6 +34,7 @@ import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {Badge} from 'native-base';
 import SplashScreenMain from './screens/SplashScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import messaging from '@react-native-firebase/messaging';
 
 const Stack = createNativeStackNavigator();
 
@@ -64,6 +66,18 @@ export default function App() {
     }
   };
 
+  const checkToken = async () => {
+    const fcmToken = await messaging().getToken();
+    if (fcmToken) {
+       console.log("RN fcmToken:- ", fcmToken);
+       await fetch(
+        'https://app.jinjimaharaj.com/api/device_token/' + fcmToken +'/'+ Platform.OS +'/',
+        ).then(() => {
+          console.log("FCM Registred successfully")
+          AsyncStorage.setItem('fcmToken', fcmToken);
+        });
+    } 
+  }
 
   React.useEffect(() => {
     fetch('https://app.jinjimaharaj.com/api/get_notifcation_count')
@@ -77,7 +91,7 @@ export default function App() {
         console.error(error);
         SplashScreen.hide();
       });
-   
+    checkToken()
   }, []);
 
   return (

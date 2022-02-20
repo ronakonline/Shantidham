@@ -205,15 +205,15 @@ export default function DayPanchang({navigation, route}) {
               style={styles.tab}
               flex={1}
               alignItems="center"
-              p="3"
-              cursor="pointer">
+              p="3">
               <Pressable
                 onPress={() => {
                   console.log(i);
                   setIndex(i);
                 }}>
                 <Animated.Text
-                  style={{color: '#000', fontWeight: 'bold', fontSize: 18}}>
+                  numberOfLines={1}
+                  style={{color: '#000', fontWeight: 'bold', fontSize: 15}}>
                   {route.title}
                 </Animated.Text>
               </Pressable>

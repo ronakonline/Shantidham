@@ -31,7 +31,7 @@ export default function Pachchhkan({navigation, route}) {
       const result = await ImageColors.getColors(img_url + pachkhan.image);
       switch (result.platform) {
         case 'ios': 
-          setPageColor(result.primary);
+          setPageColor(result.background);
           break;
         case 'android':
           setPageColor(result.average);

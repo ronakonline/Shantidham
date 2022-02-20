@@ -12,6 +12,8 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		7395F6E727BA72A700FCC39B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7395F6E627BA72A600FCC39B /* GoogleService-Info.plist */; };
+		7F074ED9A6E846B8AA2436F7 /* libPods-Shantidham.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A8AED4ABD489CE5D039CD3D1 /* libPods-Shantidham.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -36,6 +38,8 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Shantidham/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Shantidham/main.m; sourceTree = "<group>"; };
 		6AC56682BB894AA4B60371B4 /* Pods-Shantidham.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shantidham.release.xcconfig"; path = "Target Support Files/Pods-Shantidham/Pods-Shantidham.release.xcconfig"; sourceTree = "<group>"; };
+		7395F6E327BA70D200FCC39B /* Shantidham.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Shantidham.entitlements; path = Shantidham/Shantidham.entitlements; sourceTree = "<group>"; };
+		7395F6E627BA72A600FCC39B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		79539F4A9375F91E3704E178 /* libPods-Shantidham-ShantidhamTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Shantidham-ShantidhamTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Shantidham/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8CE00BDE8DE428CBD2200E40 /* Pods-Shantidham-ShantidhamTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shantidham-ShantidhamTests.release.xcconfig"; path = "Target Support Files/Pods-Shantidham-ShantidhamTests/Pods-Shantidham-ShantidhamTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -58,6 +62,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F074ED9A6E846B8AA2436F7 /* libPods-Shantidham.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,8 +89,10 @@
 		13B07FAE1A68108700A75B9A /* Shantidham */ = {
 			isa = PBXGroup;
 			children = (
+				7395F6E327BA70D200FCC39B /* Shantidham.entitlements */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
+				7395F6E627BA72A600FCC39B /* GoogleService-Info.plist */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
@@ -241,6 +248,7 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				7395F6E727BA72A700FCC39B /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -459,9 +467,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CODE_SIGN_ENTITLEMENTS = Shantidham/Shantidham.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1.1;
 				DEVELOPMENT_TEAM = C75CZ6KJ24;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Shantidham/Info.plist;
@@ -476,10 +485,10 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.shantidham;
 				PRODUCT_NAME = Shantidham;
-				PROVISIONING_PROFILE_SPECIFIER = ShantidhamProdProfile;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -490,9 +499,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Shantidham/Shantidham.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 1.1;
 				DEVELOPMENT_TEAM = C75CZ6KJ24;
 				INFOPLIST_FILE = Shantidham/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -508,7 +518,7 @@
 				PRODUCT_NAME = Shantidham;
 				PROVISIONING_PROFILE_SPECIFIER = ShantidhamProdProfile;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;

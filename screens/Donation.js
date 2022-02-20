@@ -12,6 +12,7 @@ import {
 } from 'native-base';
 import React from 'react';
 import {Text, StyleSheet, TouchableOpacity,ActivityIndicator} from 'react-native';
+import {WebView} from 'react-native-webview';
 
 export default function Donation({navigation}) {
   const [loading, setLoading] = React.useState(false);
@@ -79,7 +80,7 @@ export default function Donation({navigation}) {
 
   return (
     <>
-      <ScrollView style={{flex: 1, backgroundColor: '#CAE7EF'}}>
+      <View style={{flex: 1, backgroundColor: '#CAE7EF'}}>
         {loading ? (
           <ActivityIndicator size="large" color="#0000ff" />
         ) : (
@@ -94,7 +95,8 @@ export default function Donation({navigation}) {
             </Box>
 
             <VStack style={styles.content} space={3}>
-              <Select
+              <WebView source={{uri: "https://app.jinjimaharaj.com/donation_data"}} style={{ flex: 1, backgroundColor: '#CAE7EF', }} />
+              {/* <Select
                 minWidth="200"
                 accessibilityLabel="Select"
                 placeholder="Select"
@@ -113,7 +115,6 @@ export default function Donation({navigation}) {
                   
                   />
                 ))}
-                {/* <Select.Item label="UX Research" value="ux" /> */}
               </Select>
               <TextArea
                 style={styles.input}
@@ -161,11 +162,11 @@ export default function Donation({navigation}) {
                 onChange={evt => handleInputChange(evt, 'aadhar')}></Input>
               <Button style={styles.button} onPress={HandleSubmitData}>
                 <Text style={styles.buttonText}>Submit</Text>
-              </Button>
+              </Button> */}
             </VStack>
           </VStack>
         )}
-      </ScrollView>
+      </View>
     </>
   );
 }
@@ -194,8 +195,6 @@ const styles = StyleSheet.create({
   content: {
     flex: 1,
     backgroundColor: '#CAE7EF',
-    padding: 10,
-    paddingTop: 15,
   },
   input: {
     borderRadius: 0,

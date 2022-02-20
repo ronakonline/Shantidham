@@ -18,11 +18,14 @@ import {
   View,
   BackHandler,
   Alert,
+  Platform
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import KeyboardSpacer from 'react-native-keyboard-spacer';
+import { CommonActions } from '@react-navigation/native';
 
 const Register = ({navigation}) => {
   const [name, setName] = React.useState(null);
@@ -36,7 +39,8 @@ const Register = ({navigation}) => {
       ).then(() => {
         const random = Math.floor(Math.random() * 100);
         AsyncStorage.setItem('userToken', random.toString());
-        navigation.navigate('Home');
+        // navigation.navigate('Home');
+        goToHomeScreen()
       });
     }
   };
@@ -65,6 +69,17 @@ const Register = ({navigation}) => {
     return () => backHandler.remove();
   }, []);
 
+  const goToHomeScreen = () => {
+    navigation.dispatch(
+      CommonActions.reset({
+        index: 1,
+        routes: [
+          { name: 'Home' },
+        ]
+      })
+    );
+  }
+
   return (
     <SafeAreaView style={{backgroundColor: 'white', flex: 1}} edges={['top']}>
       <View
@@ -89,7 +104,7 @@ const Register = ({navigation}) => {
       <LinearGradient
         colors={['#FFFFFF', '#E4F6EA', '#D4F1DD']}
         style={styles.container}>
-        <KeyboardAvoidingView>
+
           <Stack space={4} alignItems="center">
             <Center>
               <Image
@@ -115,6 +130,7 @@ const Register = ({navigation}) => {
               placeholder="Phone"
               w="100%"
               size="lg"
+              keyboardType={'phone-pad'}
               style={styles.Input}
               value={phone}
               onChangeText={text => setPhone(text)}
@@ -133,15 +149,14 @@ const Register = ({navigation}) => {
                 <Button
                   style={styles.Loginbtn}
                   onPress={() => {
-                    navigation.navigate('Home');
+                    goToHomeScreen()
                   }}>
                   <Text style={styles.LoginbtnText}>Skip</Text>
                 </Button>
               </View>
             </HStack>
           </Stack>
-        </KeyboardAvoidingView>
-       
+          { Platform.OS == 'ios' ? <KeyboardSpacer /> : <View/>}       
       </LinearGradient>
     </SafeAreaView>
   );
