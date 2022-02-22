@@ -10,6 +10,7 @@ import {
   Text,
   KeyboardAvoidingView,
   HStack,
+  ScrollView
 } from 'native-base';
 import React from 'react';
 import {
@@ -101,63 +102,65 @@ const Register = ({navigation}) => {
           SHANTIDHAM
         </Text>
       </View>
-      <LinearGradient
-        colors={['#FFFFFF', '#E4F6EA', '#D4F1DD']}
-        style={styles.container}>
+      <ScrollView contentContainerStyle={{flexGrow: 1}} keyboardShouldPersistTaps='handled' >
+        <LinearGradient
+          colors={['#FFFFFF', '#E4F6EA', '#D4F1DD']}
+          style={styles.container}>
 
-          <Stack space={4} alignItems="center">
-            <Center>
-              <Image
-                source={require('../images/logo.png')}
-                style={{width: 200, height: 200}}
-                alt="logo"
+            <Stack space={4} alignItems="center">
+              <Center>
+                <Image
+                  source={require('../images/logo.png')}
+                  style={{width: 200, height: 200}}
+                  alt="logo"
+                />
+              </Center>
+              <Center>
+                <Heading style={styles.Loginheading} size="xl">
+                  Registration
+                </Heading>
+              </Center>
+              <Input
+                value={name}
+                placeholder="Name"
+                w="100%"
+                size="lg"
+                style={styles.Input}
+                onChangeText={text => setName(text)}
               />
-            </Center>
-            <Center>
-              <Heading style={styles.Loginheading} size="xl">
-                Registration
-              </Heading>
-            </Center>
-            <Input
-              value={name}
-              placeholder="Name"
-              w="100%"
-              size="lg"
-              style={styles.Input}
-              onChangeText={text => setName(text)}
-            />
-            <Input
-              placeholder="Phone"
-              w="100%"
-              size="lg"
-              keyboardType={'phone-pad'}
-              style={styles.Input}
-              value={phone}
-              onChangeText={text => setPhone(text)}
-            />
-            <HStack space={6}>
-              <View style={styles.LoginbtnContainer}>
-                <Button
-                  style={styles.Loginbtn}
-                  onPress={() => {
-                    submitform();
-                  }}>
-                  <Text style={styles.LoginbtnText}>Submit</Text>
-                </Button>
-              </View>
-              <View style={styles.LoginbtnContainer}>
-                <Button
-                  style={styles.Loginbtn}
-                  onPress={() => {
-                    goToHomeScreen()
-                  }}>
-                  <Text style={styles.LoginbtnText}>Skip</Text>
-                </Button>
-              </View>
-            </HStack>
-          </Stack>
-          { Platform.OS == 'ios' ? <KeyboardSpacer /> : <View/>}       
-      </LinearGradient>
+              <Input
+                placeholder="Phone"
+                w="100%"
+                size="lg"
+                keyboardType={'phone-pad'}
+                style={styles.Input}
+                value={phone}
+                onChangeText={text => setPhone(text)}
+              />
+              <HStack space={6}>
+                <View style={styles.LoginbtnContainer}>
+                  <Button
+                    style={styles.Loginbtn}
+                    onPress={() => {
+                      submitform();
+                    }}>
+                    <Text style={styles.LoginbtnText}>Submit</Text>
+                  </Button>
+                </View>
+                <View style={styles.LoginbtnContainer}>
+                  <Button
+                    style={styles.Loginbtn}
+                    onPress={() => {
+                      goToHomeScreen()
+                    }}>
+                    <Text style={styles.LoginbtnText}>Skip</Text>
+                  </Button>
+                </View>
+              </HStack>
+            </Stack>     
+        </LinearGradient>
+        { Platform.OS == 'ios' ? <KeyboardSpacer /> : <View/>}  
+      </ScrollView>
     </SafeAreaView>
   );
 };

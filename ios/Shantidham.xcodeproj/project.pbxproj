@@ -470,7 +470,7 @@
 				CODE_SIGN_ENTITLEMENTS = Shantidham/Shantidham.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.1;
+				CURRENT_PROJECT_VERSION = 1.2;
 				DEVELOPMENT_TEAM = C75CZ6KJ24;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Shantidham/Info.plist;
@@ -502,7 +502,7 @@
 				CODE_SIGN_ENTITLEMENTS = Shantidham/Shantidham.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1.1;
+				CURRENT_PROJECT_VERSION = 1.2;
 				DEVELOPMENT_TEAM = C75CZ6KJ24;
 				INFOPLIST_FILE = Shantidham/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
