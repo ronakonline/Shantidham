@@ -1,5 +1,5 @@
 import React from 'react';
-import { Platform } from 'react-native'
+import {Platform} from 'react-native';
 import {NativeBaseProvider, Text, Box, Image} from 'native-base';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -48,18 +48,23 @@ export default function App() {
       var count = 0;
       console.log(notificationcount.ids);
       console.log(value);
-      if (value !== null) {
-          for(let i=0; i<notificationcount.ids.length; i++){
-            for(let j=0; j<value.length; j++){
-              if(notificationcount.ids[i] == value[j]){
+      if (notificationcount.ids.length > 0) {
+        if (value !== null) {
+          for (let i = 0; i < notificationcount.ids.length; i++) {
+            for (let j = 0; j < value.length; j++) {
+              if (notificationcount.ids[i] == value[j]) {
                 count++;
                 break;
               }
             }
           }
           setNoticount(notificationcount.ids.length - count);
-      }else{
-        setNoticount(notificationcount.ids.length);
+        } else {
+          setNoticount(notificationcount.ids.length);
+        }
+      } else {
+        //delete viewed_notification from async storage
+        await AsyncStorage.removeItem('viewed_notification');
       }
     } catch (e) {
       // error reading value
@@ -69,15 +74,19 @@ export default function App() {
   const checkToken = async () => {
     const fcmToken = await messaging().getToken();
     if (fcmToken) {
-       console.log("RN fcmToken:- ", fcmToken);
-       await fetch(
-        'https://app.jinjimaharaj.com/api/device_token/' + fcmToken +'/'+ Platform.OS +'/',
-        ).then(() => {
-          console.log("FCM Registred successfully")
-          AsyncStorage.setItem('fcmToken', fcmToken);
-        });
-    } 
-  }
+      //console.log("RN fcmToken:- ", fcmToken , Platform.OS);
+      await fetch(
+        'https://app.jinjimaharaj.com/api/device_token/' +
+          fcmToken +
+          '/' +
+          Platform.OS +
+          '/',
+      ).then(() => {
+        //console.log("FCM Registred successfully")
+        AsyncStorage.setItem('fcmToken', fcmToken);
+      });
+    }
+  };
 
   React.useEffect(() => {
     fetch('https://app.jinjimaharaj.com/api/get_notifcation_count')
@@ -91,7 +100,7 @@ export default function App() {
         console.error(error);
         SplashScreen.hide();
       });
-    checkToken()
+    checkToken();
   }, []);
 
   return (
