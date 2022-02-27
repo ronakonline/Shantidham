@@ -17,6 +17,7 @@ import {
 } from 'react-native';
 import {RFValue} from 'react-native-responsive-fontsize';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Global } from '../App';
 
 export default function Notification({navigation}) {
   const [data, setData] = React.useState([]);
@@ -84,31 +85,15 @@ export default function Notification({navigation}) {
               <VStack style={styles.viewedcontent} key={index} space={1}>
                 <TouchableOpacity
                   onPress={() => {
+                    console.log("Global.unreadCount:- ", Global.unreadCount)
+                    Global.unreadCount = Global.unreadCount - 1;
+                    Global.onNotificationChange(Global.unreadCount);
+                    setRead([...read, item.id])
+                    AsyncStorage.setItem( 'viewed_notification', JSON.stringify([...read, item.id]));
                     if (item.screenname == null) {
+
                     } else {
                       //check if viewed_notification exists in asyncstorage
-                      AsyncStorage.getItem('viewed_notification').then(
-                        value => {
-                          if (value == null) {
-                            AsyncStorage.setItem(
-                              'viewed_notification',
-                              JSON.stringify([item.id]),
-                            );
-                          } else {
-                            var array = JSON.parse(value);
-                            //check if item.id is already in array
-                            var found = array.some(el => el === item.id);
-                            if (!found) {
-                              array.push(item.id);
-                              AsyncStorage.setItem(
-                                'viewed_notification',
-                                JSON.stringify(array),
-                              );
-                            }
-                          }
-                        },
-                      );
-
                       console.log(item.screenname);
                       navigation.navigate(item.screenname);
                     }
@@ -145,30 +130,8 @@ export default function Notification({navigation}) {
                 <TouchableOpacity
                   onPress={() => {
                     if (item.screenname == null) {
-                    } else {
-                      //check if viewed_notification exists in asyncstorage
-                      AsyncStorage.getItem('viewed_notification').then(
-                        value => {
-                          if (value == null) {
-                            AsyncStorage.setItem(
-                              'viewed_notification',
-                              JSON.stringify([item.id]),
-                            );
-                          } else {
-                            var array = JSON.parse(value);
-                            //check if item.id is already in array
-                            var found = array.some(el => el === item.id);
-                            if (!found) {
-                              array.push(item.id);
-                              AsyncStorage.setItem(
-                                'viewed_notification',
-                                JSON.stringify(array),
-                              );
-                            }
-                          }
-                        },
-                      );
 
+                    } else {
                       console.log(item.screenname);
                       navigation.navigate(item.screenname);
                     }

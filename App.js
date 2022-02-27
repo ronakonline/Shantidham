@@ -39,28 +39,23 @@ import messaging from '@react-native-firebase/messaging';
 const Stack = createNativeStackNavigator();
 
 export default function App() {
-  const [notificationcount, setNotificationcount] = React.useState([]);
   const [noticount, setNoticount] = React.useState(0);
 
-  setCount = async () => {
+  Global.onNotificationChange = setNoticount;
+  const setCount = async (notificationcount) => {
     try {
       const value = await AsyncStorage.getItem('viewed_notification');
-      var count = 0;
-      console.log(notificationcount.ids);
-      console.log(value);
+      var count = notificationcount.ids.length;
       if (notificationcount.ids.length > 0) {
         if (value !== null) {
-          for (let i = 0; i < notificationcount.ids.length; i++) {
-            for (let j = 0; j < value.length; j++) {
-              if (notificationcount.ids[i] == value[j]) {
-                count++;
-                break;
-              }
-            }
-          }
-          setNoticount(notificationcount.ids.length - count);
+          var readArr = JSON.parse(value);
+          count = notificationcount.ids.length - readArr.length;
+          console.log("notificationcount.ids.length - readArr.length:- ", count)
+          Global.unreadCount = count;
+          setNoticount(count);
         } else {
-          setNoticount(notificationcount.ids.length);
+          console.log("notificationcount.ids.length:- ", notificationcount.ids.length)
+          setNoticount(count);
         }
       } else {
         //delete viewed_notification from async storage
@@ -92,8 +87,7 @@ export default function App() {
     fetch('https://app.jinjimaharaj.com/api/get_notifcation_count')
       .then(response => response.json())
       .then(responseJson => {
-        setNotificationcount(responseJson);
-        setCount();
+        setCount(responseJson);
         SplashScreen.hide();
       })
       .catch(error => {
@@ -212,3 +206,7 @@ export default function App() {
     </SafeAreaProvider>
   );
 }
+
+export class Global { }
+Global.onNotificationChange = null;
+Global.unreadCount = 0;

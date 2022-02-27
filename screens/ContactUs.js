@@ -12,7 +12,7 @@ import {
   View,
 } from 'native-base';
 import React from 'react';
-import {Text, StyleSheet, TouchableOpacity, Image, Linking} from 'react-native';
+import {Text, StyleSheet, TouchableOpacity, Image, Linking, Platform} from 'react-native';
 import FontAwesome, {
   SolidIcons,
   RegularIcons,
@@ -89,7 +89,11 @@ export default function Contactus({navigation}) {
                     fontWeight: 'bold',
                     color: '#000',
                   }}>
-                  +91 2632 255874 Mob : 93742 55874
+                  <Text onPress={() => {
+                    Linking.openURL(Platform.OS == 'ios' ? 'telprompt:+91 2632 255874' : 'tel:+91 2632 255874' );
+                  }}>+91 2632 255874</Text> Mob : <Text onPress={() => {
+                    Linking.openURL(Platform.OS == 'ios' ? 'telprompt:+91 9374 255874' : 'tel:+91 9374 255874' );
+                  }}>+91 9374 255874</Text>
                 </Text>
               </VStack>
             </HStack>
@@ -114,6 +118,8 @@ export default function Contactus({navigation}) {
                     fontWeight: 'bold',
                     color: '#3030f0',
                     textDecorationLine: 'underline',
+                  }} onPress={() => {
+                    Linking.openURL('mailto:shantidham02@gmail.com');
                   }}>
                   shantidham02@gmail.com
                 </Text>
