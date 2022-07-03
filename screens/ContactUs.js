@@ -91,10 +91,15 @@ export default function Contactus({navigation}) {
                   }}>
                   <Text onPress={() => {
                     Linking.openURL(Platform.OS == 'ios' ? 'telprompt:+91 2632 255874' : 'tel:+91 2632 255874' );
-                  }}>+91 2632 255874</Text> Mob : <Text onPress={() => {
-                    Linking.openURL(Platform.OS == 'ios' ? 'telprompt:+91 9374 255874' : 'tel:+91 9374 255874' );
-                  }}>+91 9374 255874</Text>
+                  }}>Office : +91 2632 255874</Text>
                 </Text>
+                 <Text style={{
+                    fontSize: RFValue(15),
+                    fontWeight: 'bold',
+                    color: '#000',
+                  }} onPress={() => {
+                    Linking.openURL(Platform.OS == 'ios' ? 'telprompt:+91 9374 255874' : 'tel:+91 9374 255874' );
+                  }}>Mobile : +91 9374 255874</Text>
               </VStack>
             </HStack>
             <HStack style={styles.DetailContainer}>

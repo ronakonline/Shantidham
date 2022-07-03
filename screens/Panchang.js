@@ -151,8 +151,8 @@ export default function Panchang({navigation}) {
                         numberOfLines={2}
                         adjustsFontSizeToFit
                         style={{
-                          fontSize: RFValue(14),
-                          lineHeight: RFValue(16),
+                          fontSize: 12,
+                          lineHeight : 18,
                           fontWeight: '600',
                           color: state === 'disabled' ? 'gray' : '#5C1514',
                           color: 'red'
@@ -196,23 +196,18 @@ export default function Panchang({navigation}) {
                       </Text>
                     </View>
 
-                    <View
-                      style={{
-                        flexDirection: 'row',
-                        justifyContent: 'center',
-                      }}>
+                    
                       <Text
                         numberOfLines={2}
                         adjustsFontSizeToFit
                         style={{
-                          fontSize: RFValue(14),
-                          lineHeight: RFValue(16),
+                          fontSize: 12,
+                          lineHeight : 18,
                           fontWeight: '600',
                           color: state === 'disabled' ? 'gray' : '#5C1514',
                         }}>
                         {dayContent.thithi}
                       </Text>
-                    </View>
                   </VStack>
                 </TouchableOpacity>
               );
@@ -255,31 +250,31 @@ export default function Panchang({navigation}) {
               'stylesheet.calendar.header': {
                 dayTextAtIndex0: {
                   color: '#5C1514',
-                  fontSize: RFValue(15),
+                  fontSize: 13,
                 },
                 dayTextAtIndex1: {
                   color: '#5C1514',
-                  fontSize: RFValue(15),
+                  fontSize: 13,
                 },
                 dayTextAtIndex2: {
                   color: '#5C1514',
-                  fontSize: RFValue(15),
+                  fontSize: 13,
                 },
                 dayTextAtIndex3: {
                   color: '#5C1514',
-                  fontSize: RFValue(15),
+                  fontSize: 13,
                 },
                 dayTextAtIndex4: {
                   color: '#5C1514',
-                  fontSize: RFValue(15),
+                  fontSize: 13,
                 },
                 dayTextAtIndex5: {
                   color: '#5C1514',
-                  fontSize: RFValue(15),
+                  fontSize: 13,
                 },
                 dayTextAtIndex6: {
                   color: '#5C1514',
-                  fontSize: RFValue(15),
+                  fontSize: 13,
                 },
               },
               backgroundColor: '#FADAC5',
@@ -298,7 +293,7 @@ export default function Panchang({navigation}) {
               textDayFontWeight: '300',
               textMonthFontWeight: 'bold',
               textDayHeaderFontWeight: '300',
-              textDayFontSize: 14,
+              textDayFontSize: 13,
               textMonthFontSize: 16,
               textDayHeaderFontWeight: 'bold',
               todayBackgroundColor: 'red',

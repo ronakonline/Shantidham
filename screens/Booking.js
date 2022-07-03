@@ -4,10 +4,12 @@ import {
   HStack,
   ArrowBackIcon,
   Button,
-  Image
+  Image,
+  VStack,
 } from 'native-base';
 import React from 'react';
 import {StyleSheet, TouchableOpacity} from 'react-native';
+import {WebView} from 'react-native-webview';
 
 export default function Booking({navigation}) {
   return (
@@ -28,14 +30,15 @@ export default function Booking({navigation}) {
             <Image source={require('../images/icons/back.png')} style={styles.headerButtonImage} />
           </TouchableOpacity>
         </View>
-        <Text style={styles.titleText}>Booking</Text>
+        <Text style={styles.titleText}>Books</Text>
       </HStack>
-      <View style={styles.container}>
-        <Text style={styles.Title}>Coming Soon</Text>
+      <VStack style={styles.content} space={3}>
+      <WebView source={{uri: "https://app.jinjimaharaj.com/api/book"}} style={{ flex: 1, backgroundColor: '#CAE7EF', }} />
+        {/* <Text style={styles.Title}>Coming Soon</Text>
         <Button style={styles.btn} onPress={() => navigation.navigate('Home')}>
           <Text style={styles.btnText}>Back</Text>
-        </Button>
-      </View>
+        </Button> */}
+      </VStack>
     </>
   );
 }
@@ -99,5 +102,9 @@ const styles = StyleSheet.create({
   btnText: {
     fontSize: 20,
     color: '#ffffff',
+  },
+  content: {
+    flex: 1,
+    backgroundColor: '#cecefb',
   },
 });

@@ -296,11 +296,11 @@ const Home = ({navigation}) => {
             })}
             onPress={() => navigation.navigate('Booking')}>
             <Image
-              source={require('../images/online-booking.png')}
+              source={require('../images/book.png')}
               style={styles.icon}
               alt="main-Image"
             />
-            <Text style={styles.menuHeading}>Booking</Text>
+            <Text style={styles.menuHeading}>Book</Text>
           </TouchableOpacity>
         </VStack>
       </HStack>
