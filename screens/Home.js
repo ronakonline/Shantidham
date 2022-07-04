@@ -300,7 +300,7 @@ const Home = ({navigation}) => {
               style={styles.icon}
               alt="main-Image"
             />
-            <Text style={styles.menuHeading}>Book</Text>
+            <Text style={styles.menuHeading}>Books</Text>
           </TouchableOpacity>
         </VStack>
       </HStack>

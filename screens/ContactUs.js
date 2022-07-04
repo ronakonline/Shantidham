@@ -12,7 +12,14 @@ import {
   View,
 } from 'native-base';
 import React from 'react';
-import {Text, StyleSheet, TouchableOpacity, Image, Linking, Platform} from 'react-native';
+import {
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+  Linking,
+  Platform,
+} from 'react-native';
 import FontAwesome, {
   SolidIcons,
   RegularIcons,
@@ -27,8 +34,14 @@ export default function Contactus({navigation}) {
         <VStack style={{flex: 1, backgroundColor: '#CAE7EF'}}>
           <Box style={styles.heading}>
             <View style={styles.headerButtonView}>
-              <TouchableOpacity onPress={() => { navigation.pop() }} >
-                <Image source={require('../images/icons/back.png')} style={styles.headerButtonImage} />
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.pop();
+                }}>
+                <Image
+                  source={require('../images/icons/back.png')}
+                  style={styles.headerButtonImage}
+                />
               </TouchableOpacity>
             </View>
             <Text style={styles.titleText}>Contact Us</Text>
@@ -67,8 +80,23 @@ export default function Contactus({navigation}) {
                     fontWeight: 'bold',
                     color: '#000',
                   }}>
-                  Shantidham Aradhana Kendra, Tithal {'\n'}Valsad 396001
-                  Gujarat, India
+                  Shantidham Aradhana Kendra,
+                </Text>
+                <Text
+                  style={{
+                    fontSize: RFValue(16),
+                    fontWeight: 'bold',
+                    color: '#000',
+                  }}>
+                  Tithal, Valsad 396001,
+                </Text>
+                <Text
+                  style={{
+                    fontSize: RFValue(16),
+                    fontWeight: 'bold',
+                    color: '#000',
+                  }}>
+                  Gujarat, India.
                 </Text>
               </VStack>
             </HStack>
@@ -89,17 +117,32 @@ export default function Contactus({navigation}) {
                     fontWeight: 'bold',
                     color: '#000',
                   }}>
-                  <Text onPress={() => {
-                    Linking.openURL(Platform.OS == 'ios' ? 'telprompt:+91 2632 255874' : 'tel:+91 2632 255874' );
-                  }}>Office : +91 2632 255874</Text>
+                  <Text
+                    onPress={() => {
+                      Linking.openURL(
+                        Platform.OS == 'ios'
+                          ? 'telprompt:+91 2632 255874'
+                          : 'tel:+91 2632 255874',
+                      );
+                    }}>
+                    Office : +91 2632 255874
+                  </Text>
                 </Text>
-                 <Text style={{
+                <Text
+                  style={{
                     fontSize: RFValue(15),
                     fontWeight: 'bold',
                     color: '#000',
-                  }} onPress={() => {
-                    Linking.openURL(Platform.OS == 'ios' ? 'telprompt:+91 9374 255874' : 'tel:+91 9374 255874' );
-                  }}>Mobile : +91 9374 255874</Text>
+                  }}
+                  onPress={() => {
+                    Linking.openURL(
+                      Platform.OS == 'ios'
+                        ? 'telprompt:+91 9374 255874'
+                        : 'tel:+91 9374 255874',
+                    );
+                  }}>
+                  Mobile : +91 9374 255874
+                </Text>
               </VStack>
             </HStack>
             <HStack style={styles.DetailContainer}>
@@ -123,7 +166,8 @@ export default function Contactus({navigation}) {
                     fontWeight: 'bold',
                     color: '#3030f0',
                     textDecorationLine: 'underline',
-                  }} onPress={() => {
+                  }}
+                  onPress={() => {
                     Linking.openURL('mailto:shantidham02@gmail.com');
                   }}>
                   shantidham02@gmail.com
@@ -283,9 +327,16 @@ const styles = StyleSheet.create({
     backgroundColor: '#CAE7EF',
   },
   headerButtonView: {
-    aspectRatio: 1, height: 30, alignSelf: 'center', position: 'absolute', left: 10  },
+    aspectRatio: 1,
+    height: 30,
+    alignSelf: 'center',
+    position: 'absolute',
+    left: 10,
+  },
   headerButtonImage: {
-    aspectRatio: 1, height: '100%', padding: 10
+    aspectRatio: 1,
+    height: '100%',
+    padding: 10,
   },
   titleText: {
     fontSize: 20,
