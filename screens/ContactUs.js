@@ -19,6 +19,7 @@ import {
   Image,
   Linking,
   Platform,
+  ActivityIndicator,
 } from 'react-native';
 import FontAwesome, {
   SolidIcons,
@@ -26,290 +27,330 @@ import FontAwesome, {
   BrandIcons,
 } from 'react-native-fontawesome';
 import {RFPercentage, RFValue} from 'react-native-responsive-fontsize';
+import {useEffect, useState} from 'react';
 
 export default function Contactus({navigation}) {
+  const [data, setData] = React.useState([]);
+  const [loading, setLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    fetch('https://app.jinjimaharaj.com/api/settings')
+      .then(response => response.json())
+      .then(responseJson => {
+        setData(responseJson);
+        setLoading(false);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }, []);
   return (
     <>
       <ScrollView style={{flex: 1, backgroundColor: '#CAE7EF'}}>
-        <VStack style={{flex: 1, backgroundColor: '#CAE7EF'}}>
-          <Box style={styles.heading}>
-            <View style={styles.headerButtonView}>
-              <TouchableOpacity
-                onPress={() => {
-                  navigation.pop();
+        {loading ? (
+          <ActivityIndicator></ActivityIndicator>
+        ) : (
+          <>
+            <VStack style={{flex: 1, backgroundColor: '#CAE7EF'}}>
+              <Box style={styles.heading}>
+                <View style={styles.headerButtonView}>
+                  <TouchableOpacity
+                    onPress={() => {
+                      navigation.pop();
+                    }}>
+                    <Image
+                      source={require('../images/icons/back.png')}
+                      style={styles.headerButtonImage}
+                    />
+                  </TouchableOpacity>
+                </View>
+                <Text style={styles.titleText}>Contact Us</Text>
+              </Box>
+              <View
+                style={{
+                  flex: 1,
+                  width: '100%',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  marginTop: 20,
                 }}>
-                <Image
-                  source={require('../images/icons/back.png')}
-                  style={styles.headerButtonImage}
-                />
-              </TouchableOpacity>
-            </View>
-            <Text style={styles.titleText}>Contact Us</Text>
-          </Box>
-          <View
-            style={{
-              flex: 1,
-              width: '100%',
-              justifyContent: 'center',
-              alignItems: 'center',
-              marginTop: 20,
-            }}>
-            <Text style={{fontSize: 20, fontWeight: 'bold', color: '#000'}}>
-              Prerna Prakashan Trust, Valsad
-            </Text>
-          </View>
-          <View style={styles.content}>
-            <HStack style={styles.DetailContainer}>
-              <View style={styles.iconContainer}>
-                {/* <Text style={styles.icon}>
+                <Text style={{fontSize: 20, fontWeight: 'bold', color: '#000'}}>
+                  {data?.title}
+                </Text>
+              </View>
+              <View style={styles.content}>
+                <HStack style={styles.DetailContainer}>
+                  <View style={styles.iconContainer}>
+                    {/* <Text style={styles.icon}>
                   <FontAwesome
                     icon={SolidIcons.locationArrow}
                     style={{fontSize: 24}}
                   />
                 </Text> */}
-                <Image
-                  source={require('../images/icons/location.png')}
-                  style={{width: 32, height: 32}}
-                  alt="map"
-                />
-              </View>
-              <VStack style={styles.InfoContainer}>
-                <Text
-                  style={{
-                    fontSize: RFValue(16),
-                    fontWeight: 'bold',
-                    color: '#000',
-                  }}>
-                  Shantidham Aradhana Kendra,
-                </Text>
-                <Text
-                  style={{
-                    fontSize: RFValue(16),
-                    fontWeight: 'bold',
-                    color: '#000',
-                  }}>
-                  Tithal, Valsad 396001,
-                </Text>
-                <Text
-                  style={{
-                    fontSize: RFValue(16),
-                    fontWeight: 'bold',
-                    color: '#000',
-                  }}>
-                  Gujarat, India.
-                </Text>
-              </VStack>
-            </HStack>
+                    <Image
+                      source={require('../images/icons/location.png')}
+                      style={{width: 32, height: 32}}
+                      alt="map"
+                    />
+                  </View>
+                  <VStack style={styles.InfoContainer}>
+                    <Text
+                      style={{
+                        fontSize: RFValue(16),
+                        fontWeight: 'bold',
+                        color: '#000',
+                      }}>
+                        {data?.address_1}
+                    </Text>
+                    <Text
+                      style={{
+                        fontSize: RFValue(16),
+                        fontWeight: 'bold',
+                        color: '#000',
+                      }}>
+                     {data?.address_2}
+                    </Text>
+                    <Text
+                      style={{
+                        fontSize: RFValue(16),
+                        fontWeight: 'bold',
+                        color: '#000',
+                      }}>
+                      {data?.address_3}
+                    </Text>
+                  </VStack>
+                </HStack>
 
-            <HStack style={styles.DetailContainer}>
-              <View style={styles.iconContainer}>
-                {/* <FontAwesome icon={SolidIcons.phone} style={{fontSize: 24}} /> */}
-                <Image
-                  source={require('../images/icons/phone.png')}
-                  style={{width: 32, height: 32}}
-                  alt="map"
-                />
-              </View>
-              <VStack style={styles.InfoContainer}>
-                <Text
-                  style={{
-                    fontSize: RFValue(15),
-                    fontWeight: 'bold',
-                    color: '#000',
-                  }}>
-                  <Text
-                    onPress={() => {
-                      Linking.openURL(
-                        Platform.OS == 'ios'
-                          ? 'telprompt:+91 2632 255874'
-                          : 'tel:+91 2632 255874',
-                      );
-                    }}>
-                    Office : +91 2632 255874
-                  </Text>
-                </Text>
-                <Text
-                  style={{
-                    fontSize: RFValue(15),
-                    fontWeight: 'bold',
-                    color: '#000',
-                  }}
-                  onPress={() => {
-                    Linking.openURL(
-                      Platform.OS == 'ios'
-                        ? 'telprompt:+91 9374 255874'
-                        : 'tel:+91 9374 255874',
-                    );
-                  }}>
-                  Mobile : +91 9374 255874
-                </Text>
-              </VStack>
-            </HStack>
-            <HStack style={styles.DetailContainer}>
-              <View style={styles.iconContainer}>
-                {/* <Text style={styles.icon}>
+                <HStack style={styles.DetailContainer}>
+                  <View style={styles.iconContainer}>
+                    {/* <FontAwesome icon={SolidIcons.phone} style={{fontSize: 24}} /> */}
+                    <Image
+                      source={require('../images/icons/phone.png')}
+                      style={{width: 32, height: 32}}
+                      alt="map"
+                    />
+                  </View>
+                  <VStack style={styles.InfoContainer}>
+                    <Text
+                      style={{
+                        fontSize: RFValue(15),
+                        fontWeight: 'bold',
+                        color: '#000',
+                      }}>
+                      <Text
+                        onPress={() => {
+                          Linking.openURL(
+                            Platform.OS == 'ios'
+                              ? 'telprompt:'+data?.office
+                              : 'tel:'+data?.office,
+                          );
+                        }}>
+                        Office : {data?.office}
+                      </Text>
+                    </Text>
+                    <Text
+                      style={{
+                        fontSize: RFValue(15),
+                        fontWeight: 'bold',
+                        color: '#000',
+                      }}
+                      onPress={() => {
+                        Linking.openURL(
+                          Platform.OS == 'ios'
+                            ? 'telprompt:'+data?.mobile
+                            : 'tel:'+data?.mobile,
+                        );
+                      }}>
+                      Mobile : {data?.mobile}
+                    </Text>
+                  </VStack>
+                </HStack>
+                <HStack style={styles.DetailContainer}>
+                  <View style={styles.iconContainer}>
+                    {/* <Text style={styles.icon}>
                   <FontAwesome
                     icon={SolidIcons.envelope}
                     style={{fontSize: 24}}
                   />
                 </Text> */}
-                <Image
-                  source={require('../images/icons/mail.png')}
-                  style={{width: 32, height: 32}}
-                  alt="map"
-                />
-              </View>
-              <VStack style={styles.InfoContainer}>
-                <Text
-                  style={{
-                    fontSize: 16,
-                    fontWeight: 'bold',
-                    color: '#3030f0',
-                    textDecorationLine: 'underline',
-                  }}
-                  onPress={() => {
-                    Linking.openURL('mailto:shantidham02@gmail.com');
-                  }}>
-                  shantidham02@gmail.com
-                </Text>
-              </VStack>
-            </HStack>
-            <HStack style={styles.DetailContainer}>
-              <View style={styles.iconContainer}>
-                {/* <Text style={styles.icon}>
+                    <Image
+                      source={require('../images/icons/mail.png')}
+                      style={{width: 32, height: 32}}
+                      alt="map"
+                    />
+                  </View>
+                  <VStack style={styles.InfoContainer}>
+                    <Text
+                      style={{
+                        fontSize: 16,
+                        fontWeight: 'bold',
+                        color: '#3030f0',
+                        textDecorationLine: 'underline',
+                      }}
+                      onPress={() => {
+                        Linking.openURL('mailto:'+data?.email);
+                      }}>
+                      {data?.email}
+                    </Text>
+                  </VStack>
+                </HStack>
+                <HStack style={styles.DetailContainer}>
+                  <View style={styles.iconContainer}>
+                    {/* <Text style={styles.icon}>
                   <FontAwesome icon={SolidIcons.globe} style={{fontSize: 24}} />
                 </Text> */}
-                <Image
-                  source={require('../images/icons/globe.png')}
-                  style={{width: 32, height: 32}}
-                  alt="map"
-                />
-              </View>
-              <VStack style={styles.InfoContainer}>
-                <TouchableOpacity
-                  onPress={() => Linking.openURL('https://jinjimaharaj.com/')}>
-                  <Text
-                    style={{
-                      fontSize: 16,
-                      fontWeight: 'bold',
-                      color: '#3030f0',
-                      textDecorationLine: 'underline',
-                    }}>
-                    https://jinjimaharaj.com/
-                  </Text>
-                </TouchableOpacity>
-              </VStack>
-            </HStack>
-            <HStack style={styles.DetailContainer}>
-              <View style={styles.iconContainer}>
-                {/* <Text style={styles.icon}>
+                    <Image
+                      source={require('../images/icons/globe.png')}
+                      style={{width: 32, height: 32}}
+                      alt="map"
+                    />
+                  </View>
+                  <VStack style={styles.InfoContainer}>
+                    <TouchableOpacity
+                      onPress={() =>
+                        Linking.openURL(data?.website)
+                      }>
+                      <Text
+                        style={{
+                          fontSize: 16,
+                          fontWeight: 'bold',
+                          color: '#3030f0',
+                          textDecorationLine: 'underline',
+                        }}>
+                          {data?.website_title}
+                      </Text>
+                    </TouchableOpacity>
+                  </VStack>
+                </HStack>
+                <HStack style={styles.DetailContainer}>
+                  <View style={styles.iconContainer}>
+                    {/* <Text style={styles.icon}>
                   <FontAwesome
                     icon={RegularIcons.clock}
                     style={{fontSize: 24}}
                   />
                 </Text> */}
+                    <Image
+                      source={require('../images/icons/clock.png')}
+                      style={{width: 32, height: 32}}
+                      alt="map"
+                    />
+                  </View>
+                  <VStack style={styles.InfoContainer}>
+                    <HStack>
+                      <Text
+                        style={{
+                          fontSize: 16,
+                          fontWeight: 'bold',
+                          fontFamily: 'Arial',
+                          color: '#000',
+                        }}>
+                        Monday - Sunday
+                      </Text>
+                    </HStack>
+                    <Text
+                      style={{
+                        fontSize: 16,
+                        fontWeight: 'bold',
+                        fontFamily: 'Arial',
+                        color: '#000',
+                      }}>
+                      {data?.work_time_1} {'\n'}{data?.work_time_2}
+                    </Text>
+                  </VStack>
+                </HStack>
+                <HStack style={styles.DetailContainer}>
+                  <View
+                    style={{paddingLeft: 80, paddingRight: 20, marginLeft: 0}}>
+                    <Text
+                      style={{
+                        fontSize: 20,
+                        fontWeight: 'bold',
+                        fontFamily: 'Arial',
+                        color: '#000',
+                      }}>
+                      Follow Us -
+                    </Text>
+                  </View>
+                  <VStack style={styles.InfoContainer}>
+                    <HStack space={3}>
+                      <TouchableOpacity
+                        onPress={() =>
+                          Linking.openURL(
+                            data?.facebook
+                          )
+                        }>
+                        <Image
+                          source={{uri:'https://jinjimaharaj.com/frontend/img/003-facebook.png'}}
+                          style={{width: 48, height: 48}}
+                          alt="map"
+                        />
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                        onPress={() =>
+                          Linking.openURL(
+                            data?.intsagram
+                          )
+                        }>
+                        <Image
+                          source={{uri:'https://jinjimaharaj.com/frontend/img/002-instagram.png'}}
+                          style={{width: 48, height: 48}}
+                          alt="map"
+                        />
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                        onPress={() =>
+                          Linking.openURL(
+                            data?.youtube
+                          )
+                        }>
+                        <Image
+                          source={{uri:'https://jinjimaharaj.com/frontend/img/001-youtube.png'}}
+                          style={{width: 48, height: 48}}
+                          alt="map"
+                        />
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                        onPress={() =>
+                          Linking.openURL(
+                            data?.twitter
+                          )
+                        }>
+                        <Image
+                          source={{uri:'https://jinjimaharaj.com/frontend/img/003-twitter.png'}}
+                          style={{width: 48, height: 48}}
+                          alt="map"
+                        />
+                      </TouchableOpacity>
+                    </HStack>
+                  </VStack>
+                </HStack>
+              </View>
+            </VStack>
+            <View
+              style={{
+                flex: 1,
+                height: 200,
+                width: '100%',
+                paddingHorizontal: 20,
+                marginTop: 20,
+                marginBottom: 20,
+              }}>
+              <TouchableOpacity
+                onPress={() =>
+                  Linking.openURL(
+                   data?.map_img_click
+                  )
+                }>
                 <Image
-                  source={require('../images/icons/clock.png')}
-                  style={{width: 32, height: 32}}
+                  source={require('../images/map.png')}
+                  style={{width: '100%', height: '100%'}}
                   alt="map"
                 />
-              </View>
-              <VStack style={styles.InfoContainer}>
-                <HStack>
-                  <Text
-                    style={{
-                      fontSize: 16,
-                      fontWeight: 'bold',
-                      fontFamily: 'Arial',
-                      color: '#000',
-                    }}>
-                    Monday - Sunday
-                  </Text>
-                </HStack>
-                <Text
-                  style={{
-                    fontSize: 16,
-                    fontWeight: 'bold',
-                    fontFamily: 'Arial',
-                    color: '#000',
-                  }}>
-                  8:30 AM to 1:00 PM {'\n'}3:00 PM to 8:00 PM
-                </Text>
-              </VStack>
-            </HStack>
-            <HStack style={styles.DetailContainer}>
-              <View style={{paddingLeft: 80, paddingRight: 20, marginLeft: 42}}>
-                <Text
-                  style={{
-                    fontSize: 20,
-                    fontWeight: 'bold',
-                    fontFamily: 'Arial',
-                    color: '#000',
-                  }}>
-                  Follow Us -
-                </Text>
-              </View>
-              <VStack style={styles.InfoContainer}>
-                <HStack space={3}>
-                  <TouchableOpacity
-                    onPress={() =>
-                      Linking.openURL('https://www.facebook.com/Jinchandraji/')
-                    }>
-                    <Image
-                      source={require('../images/icons/facebook.png')}
-                      style={{width: 48, height: 48}}
-                      alt="map"
-                    />
-                  </TouchableOpacity>
-                  <TouchableOpacity
-                    onPress={() =>
-                      Linking.openURL('https://www.instagram.com/jinjimaharaj/')
-                    }>
-                    <Image
-                      source={require('../images/icons/instagram.png')}
-                      style={{width: 48, height: 48}}
-                      alt="map"
-                    />
-                  </TouchableOpacity>
-                  <TouchableOpacity
-                    onPress={() =>
-                      Linking.openURL(
-                        'https://www.youtube.com/channel/UCTWUaWuTK7GJyJiWbUofm3g',
-                      )
-                    }>
-                    <Image
-                      source={require('../images/icons/youtube.png')}
-                      style={{width: 48, height: 48}}
-                      alt="map"
-                    />
-                  </TouchableOpacity>
-                </HStack>
-              </VStack>
-            </HStack>
-          </View>
-        </VStack>
-        <View
-          style={{
-            flex: 1,
-            height: 200,
-            width: '100%',
-            paddingHorizontal: 20,
-            marginTop: 20,
-            marginBottom: 20,
-          }}>
-          <TouchableOpacity
-            onPress={() =>
-              Linking.openURL(
-                'https://www.google.com/maps/place/Shantidham+Aradhana+Kendra/@20.590862,72.8986753,17z/data=!3m1!4b1!4m5!3m4!1s0x3be0c2b36f9b4309:0x4f120a9c8d0dd5e7!8m2!3d20.5909633!4d72.9008661',
-              )
-            }>
-            <Image
-              source={require('../images/map.png')}
-              style={{width: '100%', height: '100%'}}
-              alt="map"
-            />
-          </TouchableOpacity>
-        </View>
+              </TouchableOpacity>
+            </View>
+          </>
+        )}
       </ScrollView>
     </>
   );
