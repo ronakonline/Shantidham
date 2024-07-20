@@ -5,8 +5,9 @@ import {Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import ImageView from 'react-native-image-viewing';
 
 export default function Gallery({navigation, route}) {
-  const img_url = 'https://app.jinjimaharaj.com/uploads/gallery/';
+  const img_url = 'https://app.jinjimaharaj.com/';
   const cat_id = route.params.cat_id;
+  const name = route.params.name;
   const [currentImageIndex, setImageIndex] = useState(0);
   const [images, setImages] = useState([]);
   const [visible, setIsVisible] = useState(false);
@@ -22,13 +23,13 @@ export default function Gallery({navigation, route}) {
   const onRequestClose = () => setIsVisible(false);
 
   React.useEffect(() => {
-    fetch('https://app.jinjimaharaj.com/api/img_gallery/' + cat_id)
+    fetch('https://app.jinjimaharaj.com/api/img_gallery_new/' + cat_id)
       .then(response => response.json())
       .then(responseJson => {
         setData(responseJson);
         setImages(
           responseJson.map(item => ({
-            uri: img_url + item.image,
+            uri: img_url + item.image_web,
           })),
         );
         setLoading(false);
@@ -57,7 +58,7 @@ export default function Gallery({navigation, route}) {
                 <Image source={require('../images/icons/back.png')} style={styles.headerButtonImage} />
               </TouchableOpacity>
             </View>
-            <Text style={styles.titleText}>Gallery</Text>
+            <Text style={styles.titleText}>{name ? name.length > 20 ? name.slice(0,20)+"..." : name : "Gallery"}</Text>
           </HStack>
           {/* <HStack style={styles.header}>
             <TouchableOpacity

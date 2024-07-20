@@ -1,9 +1,17 @@
 import React from 'react';
-import {ScrollView, Text, View, VStack} from 'native-base';
+import {CloseIcon, Radio, ScrollView, Text, View, VStack} from 'native-base';
 import {Calendar} from 'react-native-calendars';
 import {ActivityIndicator, StyleSheet, TouchableOpacity} from 'react-native';
 import {RFPercentage, RFValue} from 'react-native-responsive-fontsize';
-
+import {
+  Button,
+  Modal,
+  FormControl,
+  Input,
+  Center,
+  NativeBaseProvider,
+} from 'native-base';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 export default function Panchang({navigation}) {
   const [data, setData] = React.useState({});
   const [loading, setLoading] = React.useState(true);
@@ -26,9 +34,24 @@ export default function Panchang({navigation}) {
   var thithiString = '';
   var dayContent = {};
 
-  const FetchMonthData = (month, year) => {
+  const [cities, setCities] = React.useState([]);
+
+  const FetchMonthData = async(month, year) => {
+    //await AsyncStorage.removeItem('panchang_city');
     var url =
-      'https://app.jinjimaharaj.com/api/get_month_data/' + month + '/' + year;
+      'https://app.jinjimaharaj.com/api/get_month_data_with_city/' + month + '/' + year;
+    const city = await AsyncStorage.getItem('panchang_city');
+    if(city){
+      console.log("value",city)
+      //setValue(city)
+      var city_obj = JSON.parse(city);
+      setSelectedCity(city_obj)
+      setValue(city_obj.id);
+      url += "/" + city_obj.id
+    }else{
+      url += "/1"
+    }
+    console.log("url",url);
     fetch(url)
       .then(response => response.json())
       .then(responseJson => {
@@ -36,6 +59,18 @@ export default function Panchang({navigation}) {
         setHeader1(responseJson[0].heading2);
         setHeader2(responseJson[0].heading3);
         setLoading(false);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  };
+
+  const FetchCities = (month, year) => {
+    var url = 'https://app.jinjimaharaj.com/api/cities';
+    fetch(url)
+      .then(response => response.json())
+      .then(responseJson => {
+        setCities(responseJson);
       })
       .catch(error => {
         console.error(error);
@@ -50,6 +85,7 @@ export default function Panchang({navigation}) {
     }
     setCurrentMonth(TodayYear + '-' + TodayMonth + '-' + TodayDate);
     FetchMonthData(Month, TodayYear);
+    FetchCities();
   }, []);
 
   const getdateinfo = (dd, mm, yyyy) => {
@@ -67,6 +103,7 @@ export default function Panchang({navigation}) {
         event: foundData.festival != '' ? true : false,
         headeing1: foundData.heading2,
         headeing2: foundData.heading3,
+        color : foundData.colorcode
       };
 
       if (
@@ -87,17 +124,96 @@ export default function Panchang({navigation}) {
       };
     }
   };
+  const [value, setValue] = React.useState(1);
+  const [selectedCity,setSelectedCity] = React.useState({id:1,name:"Mumbai"})
+  const [showModal, setShowModal] = React.useState(false);
 
+  const storeCity = async() => {
+    console.log("value city",value);
+    var city_obj = cities.find(el => el.id == value);
+    console.log("city",city_obj);
+    await  AsyncStorage.setItem('panchang_city', JSON.stringify(city_obj));
+    setSelectedCity(city_obj);
+    setShowModal(false);
+    var Month = TodayMonth;
+    //if month starts with 0, remove 0
+    if (Month.charAt(0) == '0') {
+      Month = Month.substring(1);
+    }
+    FetchMonthData(Month, TodayYear);
+  }
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.headerText}>Panchang</Text>
-        <Text style={styles.headerText}>Mumbai</Text>
+        <TouchableOpacity
+          onPress={() => {
+            setShowModal(true);
+          }}>
+          <Text
+            style={{
+              ...styles.headerText,
+              color: 'blue',
+              textDecorationStyle: 'solid',
+              textDecorationLine: 'underline',
+            }}>
+            {selectedCity.name}
+          </Text>
+        </TouchableOpacity>
       </View>
       <View style={styles.subHeader}>
         <Text style={styles.subHeaderText}>{header2}</Text>
         <Text style={styles.subHeaderText}>{header1}</Text>
       </View>
+
+      <Modal
+        isOpen={showModal}
+        onClose={() => setShowModal(false)}
+        backdropVisible={true}>
+        <Modal.Content maxWidth="400px">
+          <Modal.CloseButton />
+          <Modal.Header>Select City</Modal.Header>
+          <Modal.Body>
+            <Radio.Group
+              name="myRadioGroup"
+              accessibilityLabel="favorite number"
+              value={value}
+              onChange={nextValue => {
+                console.log("value",nextValue);
+                setValue(nextValue);
+              }}>
+              {cities.length > 0 ? (
+                cities.map(el => (
+                  <Radio value={el.id} my={2}>
+                    {el.name}
+                  </Radio>
+                ))
+              ) : (
+                <Text>No Cities Available</Text>
+              )}
+            </Radio.Group>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button.Group space={2}>
+              <Button
+                variant="ghost"
+                colorScheme="blueGray"
+                onPress={() => {
+                  setShowModal(false);
+                }}>
+                Close
+              </Button>
+              <Button
+                onPress={() => {
+                  storeCity();
+                }}>
+                Save
+              </Button>
+            </Button.Group>
+          </Modal.Footer>
+        </Modal.Content>
+      </Modal>
+
       {loading ? (
         <ActivityIndicator size="large" color="#0000ff" />
       ) : (
@@ -117,14 +233,19 @@ export default function Panchang({navigation}) {
                       data: data,
                     });
                   }}
-                  style={
-                    Object.assign({},dayContent.highlight ? styles.markedDate : styles.dateblock)
-                  }>
+                  style={Object.assign(
+                    {},
+                    dayContent.highlight ? styles.markedDate : styles.dateblock,
+                    dayContent.highlight ? {backgroundColor:"red"} : {backgroundColor:"black"}
+                  )}>
                   <VStack
-                    style={
-                      Object.assign({},dayContent.highlight? styles.markedVstack : styles.unmarkedVstack)
-                    }
-                    space={2}>
+                    style={Object.assign(
+                      {},
+                      dayContent.highlight
+                        ? styles.markedVstack
+                        : styles.unmarkedVstack,
+                    )}
+                    space={0}>
                     <View style={styles.dateText}>
                       <Text style={styles.dateMark}>
                         {dayContent.event ? '\u2B24' : ''}
@@ -152,10 +273,10 @@ export default function Panchang({navigation}) {
                         adjustsFontSizeToFit
                         style={{
                           fontSize: 12,
-                          lineHeight : 18,
+                          lineHeight: 18,
                           fontWeight: '600',
                           color: state === 'disabled' ? 'gray' : '#5C1514',
-                          color: 'red'
+                          color: 'red',
                         }}>
                         {dayContent.thithi}
                       </Text>
@@ -171,15 +292,16 @@ export default function Panchang({navigation}) {
                     });
                   }}
                   style={
-                    dayContent.highlight ? styles.markedDate : styles.dateblock
+                    dayContent.highlight ? {...styles.markedDate,backgroundColor:dayContent.color? dayContent.color : "#e3a578"} : styles.dateblock
+                   
                   }>
                   <VStack
                     style={
                       dayContent.highlight
-                        ? styles.markedVstack
+                        ? {...styles.markedVstack,backgroundColor:dayContent.color? dayContent.color : "#e3a578"}
                         : styles.unmarkedVstack
                     }
-                    space={2}>
+                    space={0}>
                     <View style={styles.dateText}>
                       <Text style={styles.dateMark}>
                         {dayContent.event ? '\u2B24' : ''}
@@ -196,18 +318,23 @@ export default function Panchang({navigation}) {
                       </Text>
                     </View>
 
-                    
+                    <View style={{flex: 1}}>
                       <Text
-                        numberOfLines={2}
-                        adjustsFontSizeToFit
+                        numberOfLines={3}
+                        //adjustsFontSizeToFit
+                        // minimumFontScale={0.2}
+                        //allowFontScaling
                         style={{
+                          flex: 1,
+                          textAlign: 'left',
                           fontSize: 12,
-                          lineHeight : 18,
+                          lineHeight: 18,
                           fontWeight: '600',
                           color: state === 'disabled' ? 'gray' : '#5C1514',
                         }}>
                         {dayContent.thithi}
                       </Text>
+                    </View>
                   </VStack>
                 </TouchableOpacity>
               );
@@ -345,23 +472,28 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   dateblock: {
+    flex: 1,
     backgroundColor: '#FADAC5',
-    paddingBottom: 10,
+    //backgroundColor:"red",
+    //paddingBottom: 10,
   },
   markedDate: {
-    backgroundColor: '#e3a578',
-    paddingBottom: 10,
+    flex: 1,
+   // backgroundColor: '#e3a578',
+    //backgroundColor:"red",
+    // paddingBottom: 10,
   },
   dateText: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    //backgroundColor:"red"
   },
   dateMark: {
     fontSize: 12,
     fontWeight: 'bold',
     color: '#a34905',
-    marginLeft:2,
+    marginLeft: 2,
   },
   container: {
     flex: 1,
@@ -386,15 +518,19 @@ const styles = StyleSheet.create({
     color: '#5C1514',
   },
   markedVstack: {
-    width: 48,
-    overflow: 'hidden',
-    alignSelf: 'center',
+    padding: 5,
+    flex: 1,
+    //width:48,
+    // overflow: 'hidden',
+    // alignSelf: 'center',
     backgroundColor: '#e3a578',
   },
   unmarkedVstack: {
-    width: 48,
-    overflow: 'hidden',
-    alignSelf: 'center',
+    padding: 5,
+    flex: 1,
+    //width: 48,
+    // overflow: 'hidden',
+    // alignSelf: 'center',
     backgroundColor: '#FADAC5',
   },
 });

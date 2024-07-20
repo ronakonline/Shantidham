@@ -173,7 +173,7 @@ const Home = ({navigation}) => {
             )}
           </View>
           <Box
-            style={Object.assign({}, styles.MenuBox)}
+            //style={Object.assign({}, styles.MenuBox)}
             style={{
               flex: 2,
               borderWidth: 1,

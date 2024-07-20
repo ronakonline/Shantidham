@@ -6,6 +6,8 @@ import {
   Animated,
   Pressable,
   FlatList,
+  TouchableOpacity,
+  Image,
 } from 'react-native';
 import {TabView, SceneMap} from 'react-native-tab-view';
 import {Box} from 'native-base';
@@ -138,7 +140,11 @@ export default function DayPanchang({navigation, route}) {
           <Text>Fetching data...</Text>
         ) : daychogadiya.length > 0 ? (
           daychogadiya.map((item, index) => (
-            <View style={Object.assign({}, styles.chogadiyadata,{ backgroundColor: item.colorcode })} key={index}>
+            <View
+              style={Object.assign({}, styles.chogadiyadata, {
+                backgroundColor: item.colorcode,
+              })}
+              key={index}>
               <Text style={styles.chogadiyaheadingText}>{item.name}</Text>
               <Text style={styles.chogadiyaheadingText}>{item.time}</Text>
             </View>
@@ -146,14 +152,19 @@ export default function DayPanchang({navigation, route}) {
         ) : (
           <Text>No Day Choghdiya Found!</Text>
         )}
-         <View style={Object.assign({},styles.chogadiyaheading,{marginTop:20})}>
+        <View
+          style={Object.assign({}, styles.chogadiyaheading, {marginTop: 20})}>
           <Text style={styles.chogadiyaheadingText}>Night Choghdiya</Text>
         </View>
         {loading ? (
           <Text>Fetching data...</Text>
         ) : nightchogadiya.length > 0 ? (
           nightchogadiya.map((item, index) => (
-            <View style={Object.assign({}, styles.chogadiyadata,{ backgroundColor: item.colorcode })} key={index}>
+            <View
+              style={Object.assign({}, styles.chogadiyadata, {
+                backgroundColor: item.colorcode,
+              })}
+              key={index}>
               <Text style={styles.chogadiyaheadingText}>{item.name}</Text>
               <Text style={styles.chogadiyaheadingText}>{item.time}</Text>
             </View>
@@ -226,7 +237,20 @@ export default function DayPanchang({navigation, route}) {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
+      <View style={{flexDirection:"row",alignItems:"center", gap:10}}>
+        <View style={styles.headerButtonView}>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.pop();
+            }}>
+            <Image
+              source={require('../images/icons/back.png')}
+              style={styles.headerButtonImage}
+            />
+          </TouchableOpacity>
+        </View>
         <Text style={styles.headerText}>Panchang</Text>
+        </View> 
         <Text style={styles.headerText}>Mumbai</Text>
       </View>
       <View style={styles.subheader}>
@@ -290,6 +314,15 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#F7E6DF',
   },
+  headerButtonView: {
+    aspectRatio: 1,
+    height: 30
+  },
+  headerButtonImage: {
+    aspectRatio: 1,
+    height: '100%',
+    padding: 10,
+  },
   list: {
     padding: 10,
     backgroundColor: '#F5DAC9',
@@ -335,6 +368,7 @@ const styles = StyleSheet.create({
   },
   header: {
     flexDirection: 'row',
+    alignItems:"center",
     justifyContent: 'space-between',
     padding: 10,
     borderBottomWidth: 1,
