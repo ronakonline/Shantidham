@@ -10,9 +10,11 @@ import {
   Image,
 } from 'react-native';
 import {TabView, SceneMap} from 'react-native-tab-view';
-import {Box} from 'native-base';
+import {Box,Modal} from 'native-base';
+import {ChevronDownIcon,Radio,Button} from 'native-base';
 import CalendarStrip from 'react-native-calendar-strip';
 import moment from 'moment';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function DayPanchang({navigation, route}) {
   const currentDate = route.params.date;
@@ -75,10 +77,15 @@ export default function DayPanchang({navigation, route}) {
   const [currentyy, setCurrentyy] = React.useState(moment(date).format('YYYY'));
 
   const [loading, setLoading] = React.useState(true);
+  const [value, setValue] = React.useState(1);
+  const [selectedCity,setSelectedCity] = React.useState({id:1,name:"Mumbai"})
+  const [showModal, setShowModal] = React.useState(false);
+  const [cities, setCities] = React.useState([]);
   var data = 0;
 
   React.useEffect(() => {
     getdata(currentdd, currentmm, currentyy);
+    FetchCities();
   }, []);
 
   const getdata = async (dd, mm, yy) => {
@@ -88,13 +95,23 @@ export default function DayPanchang({navigation, route}) {
     if (mm.charAt(0) == '0') {
       mm = mm.substring(1);
     }
+
+    var url = "https://app.jinjimaharaj.com/api/get_day_data_new/"+dd+"/"+mm+"/"+yy
+
+    const city = await AsyncStorage.getItem('panchang_city');
+    if(city){
+      console.log("value",city)
+      //setValue(city)
+      var city_obj = JSON.parse(city);
+      setSelectedCity(city_obj)
+      setValue(city_obj.id);
+      url += "/" + city_obj.id
+    }else{
+      url += "/1"
+    }
+    console.log("newURL",url);
     fetch(
-      'https://app.jinjimaharaj.com/api/get_day_data/' +
-        dd +
-        '/' +
-        mm +
-        '/' +
-        yy,
+    url
     )
       .then(response => response.json())
       .then(json => {
@@ -108,6 +125,34 @@ export default function DayPanchang({navigation, route}) {
         setLoading(false);
       });
   };
+
+  const FetchCities = () => {
+    var url = 'https://app.jinjimaharaj.com/api/cities';
+    fetch(url)
+      .then(response => response.json())
+      .then(responseJson => {
+        setCities(responseJson);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  };
+
+  const storeCity = async() => {
+    console.log("value city",value);
+    var city_obj = cities.find(el => el.id == value);
+    console.log("city",city_obj);
+    await  AsyncStorage.setItem('panchang_city', JSON.stringify(city_obj));
+    setSelectedCity(city_obj);
+    setShowModal(false);
+    getdata(currentdd, currentmm, currentyy);
+    // var Month = TodayMonth;
+    // //if month starts with 0, remove 0
+    // if (Month.charAt(0) == '0') {
+    //   Month = Month.substring(1);
+    // }
+    // FetchMonthData(Month, TodayYear);
+  }
 
   const FirstRoute = () => (
     <View styles={styles.panchangContainer}>
@@ -251,12 +296,75 @@ export default function DayPanchang({navigation, route}) {
         </View>
         <Text style={styles.headerText}>Panchang</Text>
         </View> 
-        <Text style={styles.headerText}>Mumbai</Text>
+        <TouchableOpacity
+          onPress={() => {
+            setShowModal(true);
+          }}>
+          <View style={{flex:1,flexDirection:"row" , alignItems:"center",gap:4}}>
+          <Text
+            style={{
+              ...styles.headerText,
+              color: 'blue',
+              textDecorationStyle: 'solid',
+              textDecorationLine: 'underline',
+            }}>
+            {selectedCity.name}
+          </Text>
+          <ChevronDownIcon color="blue" size="5"/>
+          </View>
+        </TouchableOpacity>
       </View>
       <View style={styles.subheader}>
         <Text style={styles.subheaderText}>{heading}</Text>
         <Text style={styles.subheaderText}>{heading2}</Text>
       </View>
+      <Modal
+        isOpen={showModal}
+        onClose={() => setShowModal(false)}
+        backdropVisible={true}>
+        <Modal.Content maxWidth="400px">
+          <Modal.CloseButton />
+          <Modal.Header>Select City</Modal.Header>
+          <Modal.Body>
+            <Radio.Group
+              name="myRadioGroup"
+              accessibilityLabel="favorite number"
+              value={value}
+              onChange={nextValue => {
+                console.log("value",nextValue);
+                setValue(nextValue);
+              }}>
+              {cities.length > 0 ? (
+                cities.map(el => (
+                  <Radio value={el.id} my={2}>
+                    {el.name}
+                  </Radio>
+                ))
+              ) : (
+                <Text>No Cities Available</Text>
+              )}
+            </Radio.Group>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button.Group space={2}>
+              <Button
+                variant="ghost"
+                colorScheme="blueGray"
+                onPress={() => {
+                  setShowModal(false);
+                }}>
+                Close
+              </Button>
+              <Button
+                onPress={() => {
+                  storeCity();
+                }}>
+                Save
+              </Button>
+            </Button.Group>
+          </Modal.Footer>
+        </Modal.Content>
+      </Modal>
       <CalendarStrip
         style={{
           height: 110,

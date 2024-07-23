@@ -27,7 +27,6 @@
     "react-native": "^0.71.0",
     "react-native-calendar-strip": "^2.2.5",
     "react-native-calendars": "^1.198.0",
-    "react-native-fbsdk": "git+https://github.com/facebook/react-native-fbsdk.git",
     "react-native-fontawesome": "^7.0.0",
     "react-native-image-colors": "^1.5.0",
     "react-native-image-slider-box": "^1.1.12",

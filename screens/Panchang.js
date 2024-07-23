@@ -1,5 +1,5 @@
 import React from 'react';
-import {CloseIcon, Radio, ScrollView, Text, View, VStack} from 'native-base';
+import {ChevronDownIcon, CloseIcon, Radio, ScrollView, Text, View, VStack} from 'native-base';
 import {Calendar} from 'react-native-calendars';
 import {ActivityIndicator, StyleSheet, TouchableOpacity} from 'react-native';
 import {RFPercentage, RFValue} from 'react-native-responsive-fontsize';
@@ -150,6 +150,7 @@ export default function Panchang({navigation}) {
           onPress={() => {
             setShowModal(true);
           }}>
+          <View style={{flex:1,flexDirection:"row" , alignItems:"center",gap:4}}>
           <Text
             style={{
               ...styles.headerText,
@@ -159,6 +160,8 @@ export default function Panchang({navigation}) {
             }}>
             {selectedCity.name}
           </Text>
+          <ChevronDownIcon color="blue" size="5"/>
+          </View>
         </TouchableOpacity>
       </View>
       <View style={styles.subHeader}>
@@ -235,14 +238,13 @@ export default function Panchang({navigation}) {
                   }}
                   style={Object.assign(
                     {},
-                    dayContent.highlight ? styles.markedDate : styles.dateblock,
-                    dayContent.highlight ? {backgroundColor:"red"} : {backgroundColor:"black"}
+                    dayContent.highlight ?  {...styles.markedDate,backgroundColor:dayContent.color? dayContent.color : "#e3a578"} : styles.dateblock
                   )}>
                   <VStack
                     style={Object.assign(
                       {},
                       dayContent.highlight
-                        ? styles.markedVstack
+                        ? {...styles.markedVstack,backgroundColor:dayContent.color? dayContent.color : "#e3a578"}
                         : styles.unmarkedVstack,
                     )}
                     space={0}>
@@ -265,14 +267,20 @@ export default function Panchang({navigation}) {
 
                     <View
                       style={{
+                        flex:1,
+                        flexGrow: 1,
                         flexDirection: 'row',
                         justifyContent: 'center',
+                       // backgroundColor:"blue"
                       }}>
                       <Text
                         numberOfLines={2}
                         adjustsFontSizeToFit
                         style={{
-                          fontSize: 12,
+                          flex: 1,
+                          flexShrink:1,
+                          textAlign: 'left',
+                          fontSize: RFValue(10),
                           lineHeight: 18,
                           fontWeight: '600',
                           color: state === 'disabled' ? 'gray' : '#5C1514',
@@ -320,14 +328,15 @@ export default function Panchang({navigation}) {
 
                     <View style={{flex: 1}}>
                       <Text
-                        numberOfLines={3}
-                        //adjustsFontSizeToFit
+                        numberOfLines={2}
+                        adjustsFontSizeToFit
                         // minimumFontScale={0.2}
                         //allowFontScaling
                         style={{
                           flex: 1,
+                          flexShrink:1,
                           textAlign: 'left',
-                          fontSize: 12,
+                          fontSize: RFValue(10),
                           lineHeight: 18,
                           fontWeight: '600',
                           color: state === 'disabled' ? 'gray' : '#5C1514',
@@ -518,7 +527,7 @@ const styles = StyleSheet.create({
     color: '#5C1514',
   },
   markedVstack: {
-    padding: 5,
+    paddingVertical:5,
     flex: 1,
     //width:48,
     // overflow: 'hidden',
@@ -526,7 +535,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#e3a578',
   },
   unmarkedVstack: {
-    padding: 5,
+    paddingVertical:5,
     flex: 1,
     //width: 48,
     // overflow: 'hidden',

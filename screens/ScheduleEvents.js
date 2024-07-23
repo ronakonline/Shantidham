@@ -16,6 +16,7 @@ export default function ScheduleEvents({navigation}) {
   const img_url = 'https://app.jinjimaharaj.com/public/uploads/events/';
   const [data, setData] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
+  const [imgLoader,setImgLoader] = React.useState(true);
   const [visible, setIsVisible] = React.useState(false);
   const [currentImageIndex, setImageIndex] = React.useState(0);
   const [images, setImages] = React.useState([]);
@@ -107,8 +108,12 @@ export default function ScheduleEvents({navigation}) {
                     backgroundColor: '#cecefb',
                   }}
                   alt="about image"
-                />
+                  onLoadEnd={()=>{
+                    setImgLoader(false);
+                  }}
+                /> 
               </TouchableOpacity>
+              <ActivityIndicator size="large" color="#0000ff" animating={imgLoader}/>
             </View>
           ))
         )}
