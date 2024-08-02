@@ -154,13 +154,13 @@ export default function Panchang({navigation}) {
           <Text
             style={{
               ...styles.headerText,
-              color: 'blue',
+              color: '#1F75FE',
               textDecorationStyle: 'solid',
               textDecorationLine: 'underline',
             }}>
             {selectedCity.name}
           </Text>
-          <ChevronDownIcon color="blue" size="5"/>
+          <ChevronDownIcon color="#1F75FE" size="5"/>
           </View>
         </TouchableOpacity>
       </View>
@@ -253,6 +253,7 @@ export default function Panchang({navigation}) {
                         {dayContent.event ? '\u2B24' : ''}
                       </Text>
                       <Text
+                      allowFontScaling={false}
                         style={{
                           textAlign: 'center',
                           fontSize: RFValue(14),
@@ -274,6 +275,7 @@ export default function Panchang({navigation}) {
                        // backgroundColor:"blue"
                       }}>
                       <Text
+                      allowFontScaling={false}
                         numberOfLines={2}
                         adjustsFontSizeToFit
                         style={{
@@ -315,6 +317,7 @@ export default function Panchang({navigation}) {
                         {dayContent.event ? '\u2B24' : ''}
                       </Text>
                       <Text
+                      allowFontScaling={false}
                         style={{
                           textAlign: 'center',
                           fontSize: RFValue(14),
@@ -328,6 +331,7 @@ export default function Panchang({navigation}) {
 
                     <View style={{flex: 1}}>
                       <Text
+                      allowFontScaling={false}
                         numberOfLines={2}
                         adjustsFontSizeToFit
                         // minimumFontScale={0.2}

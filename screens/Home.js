@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 import {SliderBox} from 'react-native-image-slider-box';
 import {RFValue} from 'react-native-responsive-fontsize';
+import ImageView from 'react-native-image-viewing';
 
 const Home = ({navigation}) => {
   const [weight, setWeight] = React.useState(0);
@@ -19,12 +20,23 @@ const Home = ({navigation}) => {
   const [loading, setLoading] = React.useState(true);
   const img_url = 'https://app.jinjimaharaj.com/uploads/dash_slider/';
 
+  const [sliderImages, setSliderImages] = React.useState([]);
+  const [images, setImages] = React.useState([]);
+
   React.useEffect(() => {
     async function fetchData() {
       fetch('https://app.jinjimaharaj.com/api/dashboard')
         .then(response => response.json())
         .then(responseJson => {
           setData(responseJson);
+          console.log("data",responseJson);
+          var images = responseJson.sliders.map(el => {
+            return {
+              thumbnail: img_url + el.thumbnail,
+              uri: img_url + el.main_image,
+            };
+          });
+          setSliderImages(images);
           setLoading(false);
         })
         .catch(error => console.log(error));
@@ -58,8 +70,25 @@ const Home = ({navigation}) => {
     Linking.openURL(data.button_link);
   };
 
+  const [currentImageIndex, setImageIndex] = React.useState(0);
+  const [visible, setIsVisible] = React.useState(false);
+
+  const onSelect = ( index) => {
+    //console.log("select Index",index,sliderImages);
+    setImageIndex(index);
+    setIsVisible(true);
+  };
   return (
     <View style={styles.container}>
+              <ImageView
+            key={currentImageIndex}
+            images={sliderImages}
+            imageIndex={currentImageIndex}
+            visible={visible}
+            swipeToCloseEnabled={false}
+            doubleTapToZoomEnabled={true}
+            onRequestClose={() => setIsVisible(false)}
+          />
       <HStack style={{flex: 1}}>
         <VStack style={{flex: 1}}>
           <TouchableOpacity
@@ -157,18 +186,18 @@ const Home = ({navigation}) => {
             {loading ? (
               <ActivityIndicator size="large" color="#0000ff" />
             ) : (
+           
               <SliderBox
-                images={[
-                  img_url + data.slider1,
-                  img_url + data.slider2,
-                  img_url + data.slider3,
-                ]}
+                images={sliderImages.map(el => el.thumbnail)}
                 sliderBoxHeight="100%"
                 resizeMethod="scale"
                 resizeMode="cover"
                 parentWidth={weight}
                 autoplay
                 circleLoop
+                onCurrentImagePressed={(index) => {
+                  onSelect(index)
+                }}
               />
             )}
           </View>

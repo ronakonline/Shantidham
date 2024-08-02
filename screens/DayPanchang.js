@@ -10,8 +10,8 @@ import {
   Image,
 } from 'react-native';
 import {TabView, SceneMap} from 'react-native-tab-view';
-import {Box,Modal} from 'native-base';
-import {ChevronDownIcon,Radio,Button} from 'native-base';
+import {Box, Modal} from 'native-base';
+import {ChevronDownIcon, Radio, Button} from 'native-base';
 import CalendarStrip from 'react-native-calendar-strip';
 import moment from 'moment';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -78,9 +78,13 @@ export default function DayPanchang({navigation, route}) {
 
   const [loading, setLoading] = React.useState(true);
   const [value, setValue] = React.useState(1);
-  const [selectedCity,setSelectedCity] = React.useState({id:1,name:"Mumbai"})
+  const [selectedCity, setSelectedCity] = React.useState({
+    id: 1,
+    name: 'Mumbai',
+  });
   const [showModal, setShowModal] = React.useState(false);
   const [cities, setCities] = React.useState([]);
+  const [showBtn, setShowBtn] = React.useState(false);
   var data = 0;
 
   React.useEffect(() => {
@@ -96,26 +100,33 @@ export default function DayPanchang({navigation, route}) {
       mm = mm.substring(1);
     }
 
-    var url = "https://app.jinjimaharaj.com/api/get_day_data_new/"+dd+"/"+mm+"/"+yy
+    var url =
+      'https://app.jinjimaharaj.com/api/get_day_data_new/' +
+      dd +
+      '/' +
+      mm +
+      '/' +
+      yy;
 
     const city = await AsyncStorage.getItem('panchang_city');
-    if(city){
-      console.log("value",city)
+    if (city) {
+      console.log('value', city);
       //setValue(city)
       var city_obj = JSON.parse(city);
-      setSelectedCity(city_obj)
+      setSelectedCity(city_obj);
       setValue(city_obj.id);
-      url += "/" + city_obj.id
-    }else{
-      url += "/1"
+      url += '/' + city_obj.id;
+    } else {
+      url += '/1';
     }
-    console.log("newURL",url);
-    fetch(
-    url
-    )
+    console.log('newURL', url);
+    fetch(url)
       .then(response => response.json())
       .then(json => {
         data = json;
+        if (json.isDisplyPB) {
+          setShowBtn(true);
+        }
         setPanchang(json.panchang);
         setDaychogadiya(json.chogdiyaDay);
         setNightchogadiya(json.chogdiyaNight);
@@ -138,11 +149,11 @@ export default function DayPanchang({navigation, route}) {
       });
   };
 
-  const storeCity = async() => {
-    console.log("value city",value);
+  const storeCity = async () => {
+    console.log('value city', value);
     var city_obj = cities.find(el => el.id == value);
-    console.log("city",city_obj);
-    await  AsyncStorage.setItem('panchang_city', JSON.stringify(city_obj));
+    console.log('city', city_obj);
+    await AsyncStorage.setItem('panchang_city', JSON.stringify(city_obj));
     setSelectedCity(city_obj);
     setShowModal(false);
     getdata(currentdd, currentmm, currentyy);
@@ -152,10 +163,10 @@ export default function DayPanchang({navigation, route}) {
     //   Month = Month.substring(1);
     // }
     // FetchMonthData(Month, TodayYear);
-  }
+  };
 
   const FirstRoute = () => (
-    <View styles={styles.panchangContainer}>
+    <ScrollView nestedScrollEnabled={true} styles={styles.panchangContainer}>
       {loading ? (
         <Text>Fetching data...</Text>
       ) : panchang.length > 0 ? (
@@ -172,12 +183,12 @@ export default function DayPanchang({navigation, route}) {
       ) : (
         <Text>No Panchang Found!</Text>
       )}
-    </View>
+    </ScrollView>
   );
 
   const SecondRoute = () => (
     <>
-      <ScrollView style={{flex: 1}}>
+      <ScrollView nestedScrollEnabled={true} style={{flex: 1}}>
         <View style={styles.chogadiyaheading}>
           <Text style={styles.chogadiyaheadingText}>Day Choghdiya</Text>
         </View>
@@ -280,37 +291,43 @@ export default function DayPanchang({navigation, route}) {
     );
   };
   return (
-    <View style={styles.container}>
+    <ScrollView nestedScrollEnabled={true} style={styles.container}>
       <View style={styles.header}>
-      <View style={{flexDirection:"row",alignItems:"center", gap:10}}>
-        <View style={styles.headerButtonView}>
-          <TouchableOpacity
-            onPress={() => {
-              navigation.pop();
-            }}>
-            <Image
-              source={require('../images/icons/back.png')}
-              style={styles.headerButtonImage}
-            />
-          </TouchableOpacity>
+        <View style={{flexDirection: 'row', alignItems: 'center', gap: 10}}>
+          <View style={styles.headerButtonView}>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.pop();
+              }}>
+              <Image
+                source={require('../images/icons/back.png')}
+                style={styles.headerButtonImage}
+              />
+            </TouchableOpacity>
+          </View>
+          <Text style={styles.headerText}>Panchang</Text>
         </View>
-        <Text style={styles.headerText}>Panchang</Text>
-        </View> 
         <TouchableOpacity
           onPress={() => {
             setShowModal(true);
           }}>
-          <View style={{flex:1,flexDirection:"row" , alignItems:"center",gap:4}}>
-          <Text
+          <View
             style={{
-              ...styles.headerText,
-              color: 'blue',
-              textDecorationStyle: 'solid',
-              textDecorationLine: 'underline',
+              flex: 1,
+              flexDirection: 'row',
+              alignItems: 'center',
+              gap: 4,
             }}>
-            {selectedCity.name}
-          </Text>
-          <ChevronDownIcon color="blue" size="5"/>
+            <Text
+              style={{
+                ...styles.headerText,
+                color: 'blue',
+                textDecorationStyle: 'solid',
+                textDecorationLine: 'underline',
+              }}>
+              {selectedCity.name}
+            </Text>
+            <ChevronDownIcon color="blue" size="5" />
           </View>
         </TouchableOpacity>
       </View>
@@ -331,7 +348,7 @@ export default function DayPanchang({navigation, route}) {
               accessibilityLabel="favorite number"
               value={value}
               onChange={nextValue => {
-                console.log("value",nextValue);
+                console.log('value', nextValue);
                 setValue(nextValue);
               }}>
               {cities.length > 0 ? (
@@ -405,15 +422,52 @@ export default function DayPanchang({navigation, route}) {
           );
         }}
       />
-      <TabView
-        navigationState={{index, routes}}
-        renderScene={renderScene}
-        renderTabBar={renderTabBar}
-        onIndexChange={setIndex}
-        initialLayout={initialLayout}
-        style={styles.tabView}
-      />
-    </View>
+      <View style={{flex: 1, flexGrow: 1}}>
+        <TabView
+          navigationState={{index, routes}}
+          renderScene={renderScene}
+          renderTabBar={renderTabBar}
+          onIndexChange={setIndex}
+          initialLayout={initialLayout}
+          style={styles.tabView}
+        />
+      </View>
+
+      {showBtn && (
+        <View style={{marginTop: 20, paddingHorizontal: 40 , flex:1 ,flexDirection:"column",justifyContent:"flex-end"}}>
+          <TouchableOpacity
+            style={{
+              backgroundColor: '#f6c29f',
+              flex: 1,
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'center',
+              padding: 5,
+              borderRadius: 10,
+              gap: 4,
+            }}
+            onPress={() => navigation.navigate('PachchhkanList')}>
+            <Image
+              source={require('../images/pray-black.png')}
+              style={{
+                height: 34,
+                width: 34,
+              }}
+              alt="main-Image"
+            />
+            <Text
+              adjustsFontSizeToFit
+              numberOfLines={1}
+              style={{
+                fontSize: 16,
+                fontWeight: 600,
+              }}>
+              Pachchhkan
+            </Text>
+          </TouchableOpacity>
+        </View>
+      )}
+    </ScrollView>
   );
 }
 
@@ -424,7 +478,7 @@ const styles = StyleSheet.create({
   },
   headerButtonView: {
     aspectRatio: 1,
-    height: 30
+    height: 30,
   },
   headerButtonImage: {
     aspectRatio: 1,
@@ -451,6 +505,7 @@ const styles = StyleSheet.create({
   },
   panchangContainer: {
     flex: 1,
+    flexGrow: 1,
     backgroundColor: '#F7E6DF',
     color: '#000',
   },
@@ -476,7 +531,7 @@ const styles = StyleSheet.create({
   },
   header: {
     flexDirection: 'row',
-    alignItems:"center",
+    alignItems: 'center',
     justifyContent: 'space-between',
     padding: 10,
     borderBottomWidth: 1,
@@ -508,6 +563,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     borderWidth: 1,
     borderColor: '#F1CBBC',
+    minHeight: 400,
   },
   tab: {
     borderWidth: 1,
