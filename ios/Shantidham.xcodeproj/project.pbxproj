@@ -12,6 +12,8 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		445780992C5D0EC800B3A4D4 /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 4416A2532C5CF4D100952A2F /* main.jsbundle */; };
+		4457809A2C5D101D00B3A4D4 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 4416A2552C5CF79400952A2F /* assets */; };
 		7395F6E727BA72A700FCC39B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7395F6E627BA72A600FCC39B /* GoogleService-Info.plist */; };
 		7F074ED9A6E846B8AA2436F7 /* libPods-Shantidham.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A8AED4ABD489CE5D039CD3D1 /* libPods-Shantidham.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
@@ -37,6 +39,8 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Shantidham/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Shantidham/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Shantidham/main.m; sourceTree = "<group>"; };
+		4416A2532C5CF4D100952A2F /* main.jsbundle */ = {isa = PBXFileReference; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
+		4416A2552C5CF79400952A2F /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = assets; sourceTree = "<group>"; };
 		6AC56682BB894AA4B60371B4 /* Pods-Shantidham.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shantidham.release.xcconfig"; path = "Target Support Files/Pods-Shantidham/Pods-Shantidham.release.xcconfig"; sourceTree = "<group>"; };
 		7395F6E327BA70D200FCC39B /* Shantidham.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Shantidham.entitlements; path = Shantidham/Shantidham.entitlements; sourceTree = "<group>"; };
 		7395F6E627BA72A600FCC39B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -132,6 +136,8 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				4416A2552C5CF79400952A2F /* assets */,
+				4416A2532C5CF4D100952A2F /* main.jsbundle */,
 				13B07FAE1A68108700A75B9A /* Shantidham */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* ShantidhamTests */,
@@ -247,6 +253,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4457809A2C5D101D00B3A4D4 /* assets in Resources */,
+				445780992C5D0EC800B3A4D4 /* main.jsbundle in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				7395F6E727BA72A700FCC39B /* GoogleService-Info.plist in Resources */,
@@ -269,7 +277,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "set -e\n\nexport NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
+			shellScript = "cd $PROJECT_DIR/..\nexport NODE_BINARY=node\n./node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
 		03D137A4DF7CB4055BE0A09B /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -476,7 +484,7 @@
 				CODE_SIGN_ENTITLEMENTS = Shantidham/Shantidham.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.2;
+				CURRENT_PROJECT_VERSION = 1.6;
 				DEVELOPMENT_TEAM = C75CZ6KJ24;
 				ENABLE_BITCODE = NO;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
@@ -486,7 +494,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.6;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -511,7 +519,7 @@
 				CODE_SIGN_ENTITLEMENTS = Shantidham/Shantidham.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.2;
+				CURRENT_PROJECT_VERSION = 1.6;
 				DEVELOPMENT_TEAM = C75CZ6KJ24;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				INFOPLIST_FILE = Shantidham/Info.plist;
@@ -520,7 +528,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.6;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
