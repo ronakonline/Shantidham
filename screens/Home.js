@@ -9,6 +9,7 @@ import {
   Linking,
   BackHandler,
   Alert,
+  Platform,
 } from 'react-native';
 import {SliderBox} from 'react-native-image-slider-box';
 import {RFValue} from 'react-native-responsive-fontsize';
@@ -22,6 +23,7 @@ const Home = ({navigation}) => {
 
   const [sliderImages, setSliderImages] = React.useState([]);
   const [images, setImages] = React.useState([]);
+  const [showDonation, setShowDonation] = React.useState(false);
 
   React.useEffect(() => {
     async function fetchData() {
@@ -29,7 +31,7 @@ const Home = ({navigation}) => {
         .then(response => response.json())
         .then(responseJson => {
           setData(responseJson);
-          console.log("data",responseJson);
+          console.log('data', responseJson);
           var images = responseJson.sliders.map(el => {
             return {
               thumbnail: img_url + el.thumbnail,
@@ -38,6 +40,15 @@ const Home = ({navigation}) => {
           });
           setSliderImages(images);
           setLoading(false);
+          if (Platform.OS === 'android') {
+            if (responseJson.donation_android) {
+              setShowDonation(true);
+            }
+          } else {
+            if (responseJson.donation_ios) {
+              setShowDonation(true);
+            }
+          }
         })
         .catch(error => console.log(error));
     }
@@ -73,22 +84,22 @@ const Home = ({navigation}) => {
   const [currentImageIndex, setImageIndex] = React.useState(0);
   const [visible, setIsVisible] = React.useState(false);
 
-  const onSelect = ( index) => {
+  const onSelect = index => {
     //console.log("select Index",index,sliderImages);
     setImageIndex(index);
     setIsVisible(true);
   };
   return (
     <View style={styles.container}>
-              <ImageView
-            key={currentImageIndex}
-            images={sliderImages}
-            imageIndex={currentImageIndex}
-            visible={visible}
-            swipeToCloseEnabled={false}
-            doubleTapToZoomEnabled={true}
-            onRequestClose={() => setIsVisible(false)}
-          />
+      <ImageView
+        key={currentImageIndex}
+        images={sliderImages}
+        imageIndex={currentImageIndex}
+        visible={visible}
+        swipeToCloseEnabled={false}
+        doubleTapToZoomEnabled={true}
+        onRequestClose={() => setIsVisible(false)}
+      />
       <HStack style={{flex: 1}}>
         <VStack style={{flex: 1}}>
           <TouchableOpacity
@@ -127,7 +138,11 @@ const Home = ({navigation}) => {
             style={Object.assign({}, styles.MenuBox, {
               backgroundColor: '#92dca8',
             })}
-            onPress={() => navigation.navigate('GalleryList')}>
+            onPress={() =>
+              navigation.navigate('GalleryList', {
+                newGallery: false,
+              })
+            }>
             <Image
               source={require('../images/image-gallery.png')}
               style={styles.icon}
@@ -144,9 +159,21 @@ const Home = ({navigation}) => {
             style={Object.assign({}, styles.MenuBox, {
               backgroundColor: '#7bc4d7',
             })}
-            onPress={() => navigation.navigate('Donation')}>
+            onPress={() => {
+              if (showDonation) {
+                navigation.navigate('Donation');
+              } else {
+                navigation.navigate('GalleryList', {
+                  newGallery: true,
+                });
+              }
+            }}>
             <Image
-              source={require('../images/donation.png')}
+              source={
+                showDonation
+                  ? require('../images/donation.png')
+                  : require('../images/property.png')
+              }
               style={styles.icon}
               alt="main-Image"
             />
@@ -154,7 +181,7 @@ const Home = ({navigation}) => {
               adjustsFontSizeToFit
               numberOfLines={1}
               style={styles.menuHeading}>
-              Donation
+              {showDonation ? 'Donation' : 'Atithi Gruh'}
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
@@ -186,7 +213,6 @@ const Home = ({navigation}) => {
             {loading ? (
               <ActivityIndicator size="large" color="#0000ff" />
             ) : (
-           
               <SliderBox
                 images={sliderImages.map(el => el.thumbnail)}
                 sliderBoxHeight="100%"
@@ -195,8 +221,8 @@ const Home = ({navigation}) => {
                 parentWidth={weight}
                 autoplay
                 circleLoop
-                onCurrentImagePressed={(index) => {
-                  onSelect(index)
+                onCurrentImagePressed={index => {
+                  onSelect(index);
                 }}
               />
             )}
